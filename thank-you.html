@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신청 완료 | 퓨처워크랩</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="common.css?v=1777173836">
+<style>
+  .thankyou { padding: 200px 0 120px; text-align: center; min-height: 70vh; display: flex; align-items: center; }
+  .thankyou .check-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--n900); color: var(--n0); display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 24px; }
+  .thankyou h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+  .thankyou .desc { font-size: 18px; color: var(--n500); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .thankyou .next-steps { display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto 40px; text-align: left; }
+  .thankyou .next-step { display: flex; gap: 12px; align-items: center; padding: 16px; border-radius: 8px; background: var(--n50); }
+  .thankyou .next-step .num { width: 24px; height: 24px; border-radius: 6px; background: var(--n900); color: var(--n0); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+  .thankyou .next-step span { font-size: 14px; color: var(--n700); }
+  .thankyou .cta-row { display: flex; gap: 16px; justify-content: center; }
+</style>
+</head>
+<body>
+<div id="header"></div>
+
+<section class="thankyou">
+  <div class="container">
+    <div class="check-icon">✓</div>
+    <h1>신청이 완료되었습니다</h1>
+    <p class="desc">영업일 1일 내 담당자가 연락드리겠습니다.<br>빠른 상담을 원하시면 050-6779-9071로 전화해주세요.</p>
+    <div class="next-steps">
+      <div class="next-step"><span class="num">1</span><span>담당자 배정 (영업일 1일 내)</span></div>
+      <div class="next-step"><span class="num">2</span><span>15분 전화 상담 — 업종별 AI 적용 방향 논의</span></div>
+      <div class="next-step"><span class="num">3</span><span>맞춤 PoC 제안서 발송</span></div>
+    </div>
+    <div class="cta-row">
+      <a href="solutions-subsidy-guide.html" class="btn btn-solid">지원사업 가이드 보기</a>
+      <a href="index.html" class="btn btn-outlined">홈으로 돌아가기</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer"></div>
+
+<script src="common.js?v=1777173836"></script>
+<script>
+  document.getElementById('header').innerHTML = getNavHTML();
+  document.getElementById('footer').innerHTML = getFooterHTML();
+  initCommon();
+</script>
+</body>
+</html>

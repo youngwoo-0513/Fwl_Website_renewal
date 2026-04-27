@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>페이지를 찾을 수 없습니다 | 퓨처워크랩</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="common.css?v=1777173836">
+<style>
+  .error-page {
+    min-height: 70vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 20px 80px;
+  }
+  .error-code {
+    font-size: 120px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--n900) 0%, var(--n400) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+  }
+  .error-title { font-size: 24px; font-weight: 700; color: var(--n900); margin-bottom: 12px; }
+  .error-desc { font-size: 16px; color: var(--n500); margin-bottom: 32px; }
+  .error-actions { display: flex; gap: 12px; justify-content: center; }
+</style>
+</head>
+<body>
+<div id="page-nav"></div>
+
+<section class="error-page">
+  <div>
+    <div class="error-code">404</div>
+    <h1 class="error-title">페이지를 찾을 수 없습니다</h1>
+    <p class="error-desc">요청하신 페이지가 존재하지 않거나 이동되었습니다.</p>
+    <div class="error-actions">
+      <a href="index.html" class="btn btn-solid">홈으로 돌아가기</a>
+      <a href="contact.html" class="btn btn-outlined">문의하기</a>
+    </div>
+  </div>
+</section>
+
+<div id="page-footer"></div>
+<script src="common.js?v=1777173836"></script>
+<script>
+document.getElementById("page-nav").innerHTML = getNavHTML();
+document.getElementById("page-footer").innerHTML = getFooterHTML();
+initCommon();
+updateThemeIcon();
+</script>
+</body>
+</html>

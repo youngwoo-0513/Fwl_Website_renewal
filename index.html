@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AX Flow | 제조 AI 에이전트 플랫폼 - ERP·MES·각종문서·암묵지 등 통합 자동화 | FutureWorkLab</title>
+<meta name="description" content="제조업 AI 도입의 새로운 기준. ERP·MES·Excel·PDF·수기문서·암묵지를 연결해 AI가 직접 처리. 스마트공장 지원사업 연계 가능.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AX Flow | 제조 AI 에이전트 플랫폼 | FutureWorkLab">
+<meta property="og:description" content="제조업 AI 도입의 새로운 기준. ERP·MES·Excel·PDF·수기문서·암묵지를 연결해 AI가 직접 처리. 스마트공장 지원사업 연계 가능.">
+<meta property="og:url" content="https://futureworklab.co.kr/">
+<meta property="og:image" content="https://futureworklab.co.kr/images/og-image.png">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="FutureWorkLab">
+<meta property="og:image:alt" content="FutureWorkLab — Operating layer for manufacturing AI">
+<meta name="keywords" content="제조 AI, 스마트공장 지원사업, AX Flow, 공장 자동화, MES ERP 연동, 배치기록 자동화, 품질 불량 분석, Manufacturing OS, Ontology AI">
+<meta name="author" content="FutureWorkLab">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AX Flow | 제조 AI 에이전트 플랫폼 | FutureWorkLab">
+<meta name="twitter:description" content="제조업 AI 도입의 새로운 기준. ERP·MES·Excel·PDF·수기문서·암묵지를 연결해 AI가 직접 처리.">
+<meta name="twitter:image" content="https://futureworklab.co.kr/images/og-image.png">
+<meta name="twitter:image:alt" content="FutureWorkLab — Operating layer for manufacturing AI">
+<link rel="canonical" href="https://futureworklab.co.kr/">
+<script src="https://unpkg.com/lucide@1.11.0/dist/umd/lucide.min.js" integrity="sha384-7PArHXNzg1s/WgbAH9xkBpx4T6MJ0jPAxaEM9yld+zvdFEjSf+wzzv0hDnem/6rw" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="common.css?v=1777173836">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --n0: #FFFFFF; --n50: #F9F9FB; --n75: #EDEDF3; --n100: #E8E8EE;
+    --n200: #DADAE0; --n300: #C7C7CC; --n400: #AEAEB2; --n500: #8E8E93;
+    --n600: #636366; --n700: #48484A; --n800: #3A3A3C; --n900: #1D1D1F;
+    --green: #00E29E; --green-bg: #E6FFF5; --violet: #6F36FF;
+    --error: #F04438; --success: #15B79E;
+    --shadow-100: 0 2px 20px rgba(0,0,0,0.06);
+    --shadow-200: 0 2px 30px rgba(0,0,0,0.10);
+  }
+
+  body {
+    font-family: 'Outfit', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--n900); background: var(--n0);
+    line-height: 1.5; overflow-x: hidden;
+  }
+
+  /* Typography */
+  .h700-48 { font-size: 48px; font-weight: 700; line-height: 1.4; }
+  .h700-40 { font-size: 40px; font-weight: 700; line-height: 1.4; }
+  .h700-28 { font-size: 28px; font-weight: 700; line-height: 1.4; }
+  .h700-24 { font-size: 24px; font-weight: 700; line-height: 1.4; }
+  .h700-20 { font-size: 20px; font-weight: 700; line-height: 1.4; }
+  .t600-18 { font-size: 18px; font-weight: 600; line-height: 1.4; }
+  .t600-16 { font-size: 16px; font-weight: 600; line-height: 1.5; }
+  .l500-16 { font-size: 16px; font-weight: 500; line-height: 1.5; }
+  .l500-14 { font-size: 14px; font-weight: 500; line-height: 1.5; }
+  .l500-12 { font-size: 12px; font-weight: 500; line-height: 1.5; }
+  .b400-16 { font-size: 16px; font-weight: 400; line-height: 1.5; }
+  .b400-14 { font-size: 14px; font-weight: 400; line-height: 1.5; }
+
+  /* Layout */
+  .section { padding: 80px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .text-center { text-align: center; }
+  .section-label { color: var(--n400); letter-spacing: 0.5px; margin-bottom: 12px; text-transform: uppercase; }
+  .section-title { margin-bottom: 16px; }
+  .section-desc { color: var(--n500); max-width: 720px; margin: 0 auto; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+    border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer;
+    transition: all 0.2s ease; text-decoration: none; border: none; }
+  .btn-solid { background: var(--n900); color: var(--n0); }
+  .btn-solid:hover { background: var(--n700); transform: translateY(-1px); box-shadow: var(--shadow-200); }
+  .btn-outlined { background: var(--n0); color: var(--n900); border: 1.5px solid var(--n200); }
+  .btn-outlined:hover { background: var(--n50); border-color: var(--n300); }
+  .btn-green { background: var(--green); color: var(--n900); font-weight: 600; }
+  .btn-green:hover { filter: brightness(1.05); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,226,158,0.3); }
+
+  /* Animations */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+
+  /* Banner styles from common.css */
+
+  /* NAV: common.css 기본 스타일 사용 (이전 다크 히어로용 커스텀 블록 제거됨) */
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 200px 0 120px;
+    background-color: #EAEAEE;
+    background-image: url('images/hero-bg-robot.png');
+    background-size: contain;  /* 원본 크롭 없이 fit (contain) */
+    background-position: right center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 다크 그라디언트 오버레이 제거됨 */
+  .hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 180px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.4) 30%, rgba(255,255,255,0.85) 70%, var(--n0) 100%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    mask-image: linear-gradient(to bottom, transparent, black);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+    pointer-events: none;
+  }
+  .hero .container { position: relative; z-index: 2; }
+
+  /* Traction — 배경에 그린 꺾은선 그래프 애니메이션 */
+  .traction { position: relative; overflow: hidden; }
+  .traction .container { position: relative; z-index: 2; }
+  .stats-chart-bg {
+    position: absolute; right: 0; bottom: 0;
+    width: 58%; height: 72%;
+    pointer-events: none; z-index: 0;
+    opacity: 0.85;
+  }
+  .stats-chart-bg svg { width: 100%; height: 100%; }
+  .stats-chart-bg .chart-line {
+    fill: none; stroke: #00E29E; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
+    filter: drop-shadow(0 0 6px rgba(0,226,158,0.6));
+    stroke-dasharray: 2000; stroke-dashoffset: 2000;
+    animation: drawLine 3s ease-out forwards;
+  }
+  .stats-chart-bg .chart-area {
+    fill: url(#greenGradient);
+    opacity: 0;
+    animation: fadeInArea 1.2s ease-out 2.2s forwards;
+  }
+  @keyframes drawLine { to { stroke-dashoffset: 0; } }
+  @keyframes fadeInArea { to { opacity: 0.25; } }
+
+  /* 히어로 라이트화 이후 — 상단 래퍼는 히어로 배경과 동일한 stone 톤 */
+  .dark-gradient-zone {
+    background: #EAEAEE;
+  }
+
+  /* 다크모드에서도 이 구간은 라이트모드 배경/색상 고정 */
+  html.dark .dark-gradient-zone {
+    background: linear-gradient(to bottom, #1D1D1F 0%, #1D1D1F 30%, #09090B 42%, #09090B 100%);
+  }
+  html.dark .dark-gradient-zone .hero {
+    background-color: #EAEAEE;
+    background-image: url('images/hero-bg-robot.png');
+    background-size: contain;
+    background-position: right center;
+    background-repeat: no-repeat;
+  }
+  html.dark .dark-gradient-zone .hero::after {
+    background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.4) 30%, rgba(255,255,255,0.85) 70%, #FFFFFF 100%);
+  }
+  html.dark .dark-gradient-zone .hero h1 { color: #1A1A1A; }
+  html.dark .dark-gradient-zone .hero .subheadline { color: #4A4A4A; }
+  html.dark .dark-gradient-zone .hero .badge { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); }
+  html.dark .dark-gradient-zone .hero .badge .l500-14 { color: #1A1A1A !important; }
+  html.dark .dark-gradient-zone .hero .stats-box { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+  html.dark .dark-gradient-zone .hero .stats-box .stat-value { color: #1A1A1A; }
+  html.dark .dark-gradient-zone .hero .stats-box .stat-label { color: rgba(0,0,0,0.5); }
+  html.dark .dark-gradient-zone .hero .stats-box .divider { background: rgba(0,0,0,0.12); }
+  html.dark .dark-gradient-zone .hero .btn-solid { background: #FFFFFF !important; color: #1D1D1F !important; border-color: #DADAE0 !important; }
+  html.dark .dark-gradient-zone .hero .btn-solid[style*="background:#000000"] { background: #000000 !important; color: #FFFFFF !important; border-color: #000000 !important; }
+  html.dark .dark-gradient-zone .hero .btn-outlined { color: #1A1A1A; border-color: rgba(0,0,0,0.2); }
+  html.dark .dark-gradient-zone .traction { background: #18181B; border: none; }
+  html.dark .dark-gradient-zone .traction-item .value { color: #FFFFFF; }
+  html.dark .dark-gradient-zone .traction-item .label { color: rgba(255,255,255,0.55); }
+  html.dark .dark-gradient-zone .traction-grid .divider { background: rgba(255,255,255,0.12); }
+  /* Problem 섹션 - 다크모드: 다크 bg + 화이트 텍스트 */
+  html.dark .dark-gradient-zone .problem { background: #09090B; }
+  html.dark .dark-gradient-zone .problem .section-label { color: rgba(255,255,255,0.4); }
+  html.dark .dark-gradient-zone .problem .section-title { color: #FFFFFF; }
+  html.dark .dark-gradient-zone .problem .section-desc,
+  html.dark .dark-gradient-zone .problem .subtitle { color: rgba(255,255,255,0.6); }
+  html.dark .dark-gradient-zone .pain-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
+  html.dark .dark-gradient-zone .pain-card .card-title { color: #FFFFFF; }
+  html.dark .dark-gradient-zone .pain-card .card-desc { color: rgba(255,255,255,0.7); }
+  html.dark .dark-gradient-zone .pain-card .icon-circle { background: rgba(255,255,255,0.08); color: #FFFFFF; }
+  html.dark .dark-gradient-zone .problem .btn-outlined { color: #1D1D1F !important; border-color: #FFFFFF !important; background: #FFFFFF !important; }
+  html.dark .dark-gradient-zone .problem .btn-outlined:hover { background: #F4F4F5 !important; border-color: #F4F4F5 !important; }
+
+  /* Core Features 섹션 - 다크모드: 다크 bg + 화이트 텍스트 */
+  html.dark .dark-gradient-zone .core-features { background: #09090B; }
+  html.dark .dark-gradient-zone .core-features .section-label { color: rgba(255,255,255,0.4); }
+  html.dark .dark-gradient-zone .core-features .section-title { color: #FFFFFF; }
+  html.dark .dark-gradient-zone .core-features .section-desc { color: rgba(255,255,255,0.6); }
+  html.dark .dark-gradient-zone .feature-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
+  html.dark .dark-gradient-zone .feature-card .icon-circle { background: rgba(255,255,255,0.08); color: #FFFFFF; }
+  html.dark .dark-gradient-zone .feature-card .feature-name { color: rgba(255,255,255,0.6); }
+  html.dark .dark-gradient-zone .feature-card .feature-headline { color: #FFFFFF; }
+  html.dark .dark-gradient-zone .feature-card .feature-desc { color: rgba(255,255,255,0.65); }
+  html.dark .dark-gradient-zone .feature-card .metric-badge { background: rgba(255,255,255,0.1); color: #FFFFFF; }
+  /* Core Features 강조 CTA: 화이트 필 */
+  html.dark .dark-gradient-zone .core-features .btn-solid,
+  html.dark .dark-gradient-zone .core-features .btn-outlined { background: #FFFFFF !important; color: #1D1D1F !important; border-color: #FFFFFF !important; }
+  html.dark .dark-gradient-zone .core-features .btn-solid:hover,
+  html.dark .dark-gradient-zone .core-features .btn-outlined:hover { background: #F4F4F5 !important; border-color: #F4F4F5 !important; }
+
+  /* FAQ 섹션 강조 CTA: 화이트 필 (bg가 다크일 때) */
+  html.dark .faq-section .btn-outlined,
+  html.dark .faq-section .btn-solid { background: #FFFFFF !important; color: #1D1D1F !important; border-color: #FFFFFF !important; }
+  html.dark .faq-section .btn-outlined:hover,
+  html.dark .faq-section .btn-solid:hover { background: #F4F4F5 !important; border-color: #F4F4F5 !important; }
+  .hero .container { position: relative; z-index: 1; }
+  .hero h1 { color: #1A1A1A; margin-bottom: 20px; }
+  .hero .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 999px;
+    background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.08);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    margin-bottom: 32px;
+  }
+  .hero .badge .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #1A1A1A;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.3); }
+  }
+  .hero .subheadline { color: #4A4A4A; max-width: 720px; margin: 0 auto 40px 0; }
+  .stats-box {
+    display: inline-flex; align-items: center; gap: 56px;
+    padding: 36px 64px; border-radius: 16px;
+    background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.08);
+    margin-bottom: 48px;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .stats-box .stat { text-align: center; }
+  .stats-box .stat-value { color: #1A1A1A; font-size: 40px; font-weight: 700; line-height: 1.2; }
+  .stats-box .stat-label { color: rgba(0,0,0,0.5); margin-top: 8px; }
+  .stats-box .divider { width: 1px; height: 56px; background: rgba(0,0,0,0.12); }
+  .hero .cta-row { display: flex; gap: 16px; justify-content: flex-start; margin-bottom: 48px; }
+  .hero .btn-solid { background: var(--n0); color: var(--n900); border: 1.5px solid var(--n200); }
+  .hero .btn-solid:hover { background: var(--n75); border-color: var(--n300); }
+  .hero .btn-outlined { background: transparent; color: #1A1A1A; border-color: rgba(0,0,0,0.2); }
+  .hero .btn-outlined:hover { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.3); }
+
+  /* ===== TRACTION ===== */
+  .traction {
+    background: #F4F4F5;
+    padding: 40px 0;
+    margin-top: -60px;
+    position: relative; z-index: 3;
+    border-top: none;
+    border-bottom: none;
+  }
+  .traction-grid { display: flex; align-items: center; justify-content: center; gap: 48px; }
+  .traction-grid .divider { width: 1px; height: 56px; background: var(--n200); }
+  .traction-item { text-align: center; }
+  .traction-item .value { color: var(--n900); }
+  .traction-item .label { color: var(--n500); margin-top: 4px; }
+
+  /* ===== PROBLEM ===== */
+  .problem { background: #FFFFFF; }
+  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 48px 0 40px; }
+  .pain-card {
+    padding: 28px; border-radius: 12px;
+    background: var(--n50);
+    border: 1px solid var(--n100); transition: all 0.3s ease;
+  }
+  .pain-card:hover { border-color: var(--n200); box-shadow: 0 4px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+  .pain-card .card-top {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  }
+  .pain-card .icon-circle {
+    width: 40px; height: 40px; border-radius: 20px; background: var(--n100);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--n600); flex-shrink: 0;
+  }
+  .pain-card .card-title { color: var(--n900); }
+  .pain-card .card-desc {
+    color: var(--n500);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; line-height: 1.6;
+  }
+  .problem .section-label { color: var(--n400); }
+  .problem .section-title { color: var(--n900); }
+  .problem .section-desc { color: var(--n500); }
+  .problem .subtitle { color: var(--n500); max-width: 800px; margin: 0 auto 24px; }
+  .problem .btn-outlined { background: transparent; color: var(--n900); border-color: var(--n200); }
+  .problem .btn-outlined:hover { background: var(--n50); border-color: var(--n300); }
+
+  /* ===== CORE FEATURES ===== */
+  .core-features { background: #FFFFFF; }
+  .core-features .section-label { color: var(--n400); }
+  .core-features .section-title { color: var(--n900); }
+  .core-features .section-desc { color: var(--n500); }
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 48px 0 40px; }
+  .feature-card {
+    padding: 32px 28px; border-radius: 16px;
+    background: var(--n50);
+    border: 1px solid var(--n100); transition: all 0.3s ease; cursor: pointer;
+  }
+  .feature-card:hover { border-color: var(--n200); box-shadow: var(--shadow-200); background: var(--n0); }
+  .feature-card .top-row {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+  }
+  .feature-card .icon-circle {
+    width: 40px; height: 40px; border-radius: 20px; background: var(--n50);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    color: var(--n600);
+  }
+  .feature-card .feature-name { color: var(--n600); }
+  .feature-card .metric-badge {
+    margin-left: auto; padding: 4px 10px; border-radius: 999px;
+    background: var(--n75); color: var(--n600); flex-shrink: 0;
+  }
+  .feature-card .feature-headline { margin-bottom: 12px; }
+  .feature-card .feature-desc { color: var(--n500); }
+
+  /* ===== SOLUTION TABLE ===== */
+  .solution { background: #1D1D1F; }
+  .solution .section-label { color: rgba(255,255,255,0.4); }
+  .solution .section-title { color: #FFFFFF; }
+  .solution .section-desc { color: rgba(255,255,255,0.5); }
+  .solution-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;
+    margin: 48px 0 40px;
+  }
+  .solution-table th {
+    background: rgba(255,255,255,0.08); padding: 16px 24px; text-align: center;
+    font-weight: 600; font-size: 16px; color: rgba(255,255,255,0.6);
+  }
+  .solution-table td { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; color: rgba(255,255,255,0.7); }
+  .solution-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+  .solution-table .after { color: #FFFFFF; font-weight: 600; }
+
+  /* ===== COMPARISON TABLE ===== */
+  .comparison { background: #1D1D1F; }
+  .comparison .section-label { color: rgba(255,255,255,0.4); }
+  .comparison .section-title { color: #FFFFFF; }
+  .comparison .section-desc { color: rgba(255,255,255,0.5); }
+  .comparison-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;
+    margin: 48px 0;
+  }
+  .comparison-table th {
+    background: rgba(255,255,255,0.08); padding: 16px 24px; text-align: center;
+    font-weight: 600; font-size: 16px; color: rgba(255,255,255,0.6);
+  }
+  .comparison-table th:last-child { background: #FFFFFF; color: #1D1D1F; }
+  .comparison-table td { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; color: rgba(255,255,255,0.7); }
+  .comparison-table td:last-child { background: rgba(255,255,255,0.05); }
+  .comparison-table .neg { color: rgba(255,255,255,0.35); }
+  .comparison-table .pos { color: #FFFFFF; font-weight: 500; }
+
+  /* ===== INTEGRATION HUB ===== */
+  .integration { background: var(--n0); }
+  .hub-container { position: relative; width: 500px; height: 500px; margin: 48px auto 32px; }
+  .hub-ring {
+    position: absolute; border-radius: 50%; border: 1.5px solid;
+    transition: all 0.3s ease;
+  }
+  .hub-ring:hover { border-width: 2px; }
+  .ring-3 { width: 480px; height: 480px; top: 10px; left: 10px; border-color: rgba(0,0,0,0.25); }
+  .ring-2 { width: 340px; height: 340px; top: 80px; left: 80px; border-color: rgba(0,0,0,0.5); }
+  .ring-1 { width: 200px; height: 200px; top: 150px; left: 150px; border-color: rgba(0,0,0,0.8); }
+  /* Ring별 라벨 테두리 색상 매칭 */
+  .hub-label.label-ring-1 { border-color: rgba(0,0,0,0.8); }
+  .hub-label.label-ring-2 { border-color: rgba(0,0,0,0.5); }
+  .hub-label.label-ring-3 { border-color: rgba(0,0,0,0.25); }
+  /* 다크모드: 링/라벨 테두리를 화이트로 반전 */
+  html.dark .ring-3 { border-color: rgba(255,255,255,0.25); }
+  html.dark .ring-2 { border-color: rgba(255,255,255,0.5); }
+  html.dark .ring-1 { border-color: rgba(255,255,255,0.8); }
+  html.dark .hub-label.label-ring-1 { border-color: rgba(255,255,255,0.8); }
+  html.dark .hub-label.label-ring-2 { border-color: rgba(255,255,255,0.5); }
+  html.dark .hub-label.label-ring-3 { border-color: rgba(255,255,255,0.25); }
+  .hub-center {
+    position: absolute; width: 100px; height: 100px; top: 200px; left: 200px;
+    border-radius: 50%; background: var(--n900); display: flex;
+    align-items: center; justify-content: center; color: var(--n0);
+    font-size: 14px; font-weight: 600;
+    animation: hubGlow 3s infinite;
+  }
+  @keyframes hubGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(0,0,0,0.15); }
+    50% { box-shadow: 0 0 40px rgba(0,0,0,0.25); }
+  }
+  .hub-label {
+    position: absolute; font-size: 12px; color: var(--n600);
+    padding: 4px 10px; border-radius: 6px; background: var(--n0);
+    border: 1px solid var(--n100); white-space: nowrap;
+    transition: all 0.2s ease;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .hub-label:hover { background: var(--n900); color: var(--n0); border-color: var(--n900); }
+  .legend-row { display: flex; gap: 32px; justify-content: center; margin-bottom: 24px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; color: var(--n500); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .legend-dot.lv-1 { background: rgba(0,0,0,0.8); }
+  .legend-dot.lv-2 { background: rgba(0,0,0,0.5); }
+  .legend-dot.lv-3 { background: rgba(0,0,0,0.25); }
+  html.dark .legend-dot.lv-1 { background: rgba(255,255,255,0.8); }
+  html.dark .legend-dot.lv-2 { background: rgba(255,255,255,0.5); }
+  html.dark .legend-dot.lv-3 { background: rgba(255,255,255,0.25); }
+  .integration .support-text { color: var(--n500); max-width: 800px; margin: 0 auto; }
+
+  /* ===== SOCIAL PROOF ===== */
+  .social-proof { background: var(--n50); }
+  .cases-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 48px 0 32px; }
+  .case-card {
+    padding: 28px 24px; border-radius: 12px; background: var(--n0);
+    border: 1px solid var(--n100); transition: all 0.3s ease;
+  }
+  .case-card:hover { box-shadow: var(--shadow-100); transform: translateY(-2px); }
+  .case-card .case-title { margin-bottom: 12px; }
+  .case-card .case-desc { color: var(--n500); margin-bottom: 16px; }
+  .case-card .metric-row { display: flex; align-items: center; gap: 12px; }
+  .case-card .metric-badge {
+    padding: 6px 12px; border-radius: 999px; background: var(--n900); color: var(--n0);
+  }
+  .case-card .metric-detail { color: var(--n500); }
+  .testimonials-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+  .testimonials-row-extra { grid-template-columns: repeat(2, 1fr); max-width: calc((100% - 40px) * 2 / 3); margin-left: auto; margin-right: auto; }
+  @media (max-width: 768px) {
+    .testimonials-row-extra { grid-template-columns: 1fr; max-width: none; }
+  }
+  .testimonial-card {
+    padding: 28px 24px; border-radius: 12px; background: var(--n0);
+    border: 1px solid var(--n100); transition: all 0.3s ease;
+    display: flex; flex-direction: column;
+  }
+  .testimonial-card:hover { box-shadow: var(--shadow-100); }
+  .testimonial-card .quote { color: var(--n600); margin-bottom: 20px; font-style: italic; flex: 1; }
+  .testimonial-card .author-row { display: flex; align-items: center; gap: 12px; }
+  .testimonial-card .avatar {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--n600);
+    color: var(--n0); display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 500; flex-shrink: 0;
+  }
+  .testimonial-card .author-role { color: var(--n900); }
+  .testimonial-card .author-company { color: var(--n500); }
+
+  /* ===== FAQ ===== */
+  .faq-section { background: var(--n0); }
+  .faq-list {
+    max-width: 800px; margin: 48px auto 40px;
+    border: 1px solid var(--n100); border-radius: 12px; overflow: hidden;
+  }
+  .faq-item { border-top: 1px solid var(--n100); }
+  .faq-item:first-child { border-top: none; }
+  .faq-question {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 24px; cursor: pointer; transition: background 0.2s ease;
+    user-select: none;
+  }
+  .faq-question:hover { background: var(--n50); }
+  .faq-question .chevron {
+    font-size: 20px; color: var(--n500); transition: transform 0.3s ease;
+    flex-shrink: 0; margin-left: 16px;
+  }
+  .faq-item.open .chevron { transform: rotate(180deg); }
+  .faq-answer {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 24px;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 300px; padding: 0 24px 20px;
+  }
+  .faq-answer p { color: var(--n500); }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta { background: var(--n900); padding: 80px 0; }
+  .final-cta h2 { color: var(--n0); margin-bottom: 16px; }
+  .final-cta .subtitle { color: var(--n400); margin-bottom: 40px; }
+  .lead-form {
+    max-width: 480px; margin: 0 auto 32px; padding: 32px;
+    background: var(--n0); border-radius: 16px;
+  }
+  .lead-form h3 { font-size: 24px; font-weight: 700; color: var(--n900); margin-bottom: 4px; }
+  .lead-form .form-sub { font-size: 14px; color: var(--n500); margin-bottom: 24px; }
+  .lead-form .step-indicator { display: flex; gap: 8px; margin-bottom: 24px; }
+  .lead-form .step-dot { flex: 1; height: 4px; border-radius: 2px; background: var(--n100); }
+  .lead-form .step-dot.active { background: var(--n900); }
+  .form-step { display: none; }
+  .form-step.active { display: block; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; color: var(--n600); margin-bottom: 6px; font-size: 14px; font-weight: 500; }
+  .form-group input, .form-group select {
+    width: 100%; padding: 12px 14px; border-radius: 8px;
+    background: var(--n0); border: 1px solid var(--n200);
+    color: var(--n900); font-size: 14px; font-family: inherit;
+    transition: border-color 0.2s ease;
+  }
+  .form-group input::placeholder { color: var(--n400); }
+  .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--n900); box-shadow: 0 0 0 2px rgba(29,29,31,0.08); }
+  .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23636366' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+  .lead-form .btn-submit { width: 100%; justify-content: center; padding: 14px 24px; margin-top: 8px;
+    background: var(--n900); color: var(--n0); font-weight: 600; border: none; border-radius: 8px;
+    font-size: 16px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; }
+  .lead-form .btn-submit:hover { background: var(--n700); }
+  .trust-badges { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; }
+  .trust-badge { display: flex; align-items: center; gap: 6px; color: var(--n500); }
+  .trust-badge .check { color: var(--n0); }
+  .final-cta .micro { color: var(--n500); }
+
+  /* ===== FLOATING CTA ===== */
+  .floating-cta {
+    position: fixed; bottom: 32px; right: 32px;
+    padding: 14px 24px; border-radius: 999px;
+    background: var(--n900); color: var(--n0);
+    font-size: 16px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    display: flex; align-items: center; gap: 8px;
+    transform: translateY(100px); opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1000; border: none;
+  }
+  .floating-cta.show { transform: translateY(0); opacity: 1; }
+  .floating-cta:hover { box-shadow: 0 6px 30px rgba(0,0,0,0.3); transform: translateY(-2px) !important; }
+  .floating-cta .pulse-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--n0);
+    animation: pulse 2s infinite;
+  }
+
+  /* Counter animation */
+  .counter { display: inline-block; }
+
+  @media (max-width: 768px) {
+    /* Typography */
+    .h700-48 { font-size: 28px; }
+    .h700-40 { font-size: 24px; }
+    .h700-28 { font-size: 20px; }
+    .h700-24 { font-size: 18px; }
+    .b400-16 { font-size: 14px; }
+    .l500-16 { font-size: 14px; }
+    .l500-14 { font-size: 13px; }
+
+    /* Hero */
+    .hero { padding: 240px 0 80px; }
+    .hero .subheadline { font-size: 14px; margin-bottom: 24px; }
+    .hero .badge { margin-bottom: 20px; padding: 6px 12px; font-size: 12px; }
+    .hero .cta-row { flex-direction: column; align-items: center; }
+    /* Stats box */
+    .stats-box { flex-direction: column; gap: 16px; padding: 24px 20px; margin-bottom: 32px; }
+    .stats-box .divider { width: 48px; height: 1px; }
+    .stats-box .stat-value { font-size: 28px; }
+
+    /* Traction */
+    .traction { padding: 24px 0; }
+    .traction-grid { flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .traction-grid .divider { display: none; }
+
+    /* Grids to single column */
+    .cards-grid, .feature-grid { grid-template-columns: 1fr; }
+    .cases-row, .testimonials-row { grid-template-columns: 1fr; }
+
+    /* Container padding */
+    .container { padding: 0 20px; }
+
+    /* Section padding */
+    .section { padding: 48px 0; }
+
+    /* Solution + Comparison tables: scrollable */
+    .solution-table, .comparison-table { font-size: 13px; display: block; overflow-x: auto !important; overflow: visible; -webkit-overflow-scrolling: touch; min-width: 0; border-radius: 0; }
+    .comparison-table th, .comparison-table td,
+    .solution-table th, .solution-table td { padding: 10px 12px; font-size: 13px; }
+
+    /* Hub container */
+    .hub-container { width: 300px; height: 300px; margin: 56px auto 32px; }
+    .ring-3 { width: 280px; height: 280px; top: 10px; left: 10px; }
+    .ring-2 { width: 190px; height: 190px; top: 55px; left: 55px; }
+    .ring-1 { width: 110px; height: 110px; top: 95px; left: 95px; }
+    .hub-center { width: 56px; height: 56px; top: 122px; left: 122px; font-size: 10px; }
+    .hub-label { font-size: 10px; padding: 3px 7px; }
+    .hub-label i { width: 11px !important; height: 11px !important; }
+    /* Hide crowded labels on mobile */
+    .hl-scada, .hl-plm, .hl-doc, .hl-image, .hl-brain { display: none !important; }
+    /* Ring 1 — 4 cardinal */
+    .hl-mes  { top: auto !important; bottom: auto !important; left: 50% !important; right: auto !important; transform: translate(-50%, -50%); top: 95px !important; }
+    .hl-erp  { top: auto !important; bottom: auto !important; left: auto !important; right: 50% !important; transform: translate(50%, -50%); top: 205px !important; }
+    .hl-qms  { top: 50% !important; bottom: auto !important; left: auto !important; right: 95px !important; transform: translate(50%, -50%); }
+    .hl-wms  { top: 50% !important; bottom: auto !important; right: auto !important; left: 95px !important; transform: translate(-50%, -50%); }
+    /* Ring 2 — 3 evenly */
+    .hl-excel { top: 55px !important; left: 50% !important; right: auto !important; transform: translateX(-50%); }
+    .hl-pdf   { top: auto !important; bottom: 55px !important; right: 60px !important; left: auto !important; }
+    .hl-katok { top: auto !important; bottom: 55px !important; left: 60px !important; right: auto !important; }
+    /* Ring 3 — 3 outer */
+    .hl-photo { top: 10px !important; right: 30px !important; left: auto !important; }
+    .hl-mic   { top: auto !important; bottom: 10px !important; right: 30px !important; left: auto !important; }
+    .hl-video { top: auto !important; bottom: 10px !important; left: 30px !important; right: auto !important; }
+
+    /* Hero stats — keep horizontal on mobile */
+    .stats-box { flex-direction: row !important; gap: 8px !important; padding: 16px 8px !important; }
+    .stats-box .stat { flex: 1; min-width: 0; }
+    .stats-box .stat-value { font-size: 22px !important; }
+    .stats-box .stat-label { font-size: 10px !important; }
+    .stats-box .divider { display: block !important; width: 1px; height: 36px; background: rgba(255,255,255,0.15); }
+
+    /* FAQ */
+    .faq-question { padding: 16px 16px; font-size: 14px; }
+    .faq-answer { padding: 0 16px; }
+    .faq-item.open .faq-answer { padding: 0 16px 16px; }
+
+    /* Final CTA / Lead form */
+    .final-cta { padding: 48px 0; }
+    .lead-form { padding: 24px 20px; margin: 0 auto 24px; }
+    .lead-form h3 { font-size: 20px; }
+    .trust-badges { flex-direction: column; gap: 8px; align-items: center; }
+
+    /* Legend */
+    .legend-row { flex-wrap: wrap; gap: 16px; }
+
+    /* Break tags: handled in common.css */
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><svg class="logo-light" width="674" height="62" viewBox="0 0 674 62" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_20_2276)"><path d="M44.1489 10.4704H18.0248C16.67 10.4704 15.4183 10.8081 14.2549 11.4837C13.0915 12.1592 12.1638 13.0549 11.5011 14.2004C10.8237 15.3311 10.485 16.6087 10.485 18.0038V62.0294H0V18.136C0 14.8759 0.809937 11.8655 2.44454 9.10469C4.07914 6.34391 6.28806 4.12648 9.05657 2.48176C11.8251 0.822359 14.8439 0 18.1131 0H44.1489V10.4704ZM42.5143 36.3453H15.0796V25.8896H42.5143V36.3453Z" fill="#036D85"/><path d="M89.2254 60.4874C88.1799 61.5007 86.9429 62 85.4997 62H66.6208C64.0291 62 61.6287 61.3685 59.4345 60.1056C57.2256 58.8427 55.4879 57.1099 54.2214 54.9071C52.955 52.7044 52.3218 50.3254 52.3218 47.7409V15.5073H62.8215V47.9024C62.8215 48.5779 62.9835 49.1947 63.3222 49.7674C63.6609 50.3401 64.1027 50.7807 64.677 51.089C65.2513 51.3974 65.8698 51.559 66.5472 51.559H80.2278V15.5073H90.8011V56.7428C90.8011 58.2406 90.2857 59.4888 89.2402 60.5021L89.2254 60.4874Z" fill="#072C4A"/><path d="M98.5474 15.5074H123.258V25.9778H98.5474V15.5074ZM110.593 60.0323C108.473 58.7106 106.765 56.9778 105.498 54.8044C104.232 52.6311 103.598 50.2374 103.598 47.5941V2.32031H114.083V47.8878C114.083 48.5633 114.245 49.1801 114.584 49.7528C114.923 50.3255 115.365 50.7661 115.909 51.0745C116.454 51.3828 117.058 51.5444 117.736 51.5444H123.405V62.0001H117.574C115.026 62.0001 112.699 61.3393 110.579 60.0176L110.593 60.0323Z" fill="#072C4A"/><path d="M170.057 60.4874C169.012 61.5007 167.775 62 166.332 62H147.453C144.861 62 142.461 61.3685 140.267 60.1056C138.058 58.8427 136.32 57.1099 135.053 54.9071C133.787 52.7044 133.154 50.3254 133.154 47.7409V15.5073H143.654V47.9024C143.654 48.5779 143.816 49.1947 144.154 49.7674C144.493 50.3401 144.935 50.7807 145.509 51.089C146.083 51.3974 146.702 51.559 147.379 51.559H161.06V15.5073H171.633V56.7428C171.633 58.2406 171.118 59.4888 170.072 60.5021L170.057 60.4874Z" fill="#072C4A"/><path d="M185.166 22.4827C186.433 20.3681 188.17 18.6793 190.379 17.4017C192.574 16.1388 194.974 15.5073 197.566 15.5073H213.264V25.9777H197.566C196.888 25.9777 196.255 26.1246 195.666 26.4476C195.077 26.756 194.606 27.1966 194.267 27.7693C193.928 28.342 193.766 28.9588 193.766 29.6343V62.0294H183.267V29.5609C183.267 26.9763 183.9 24.6267 185.166 22.5121V22.4827Z" fill="#072C4A"/><path d="M226.709 60.0616C224.529 58.7694 222.806 57.0365 221.54 54.8631C220.273 52.6898 219.64 50.3108 219.64 47.7262V29.7518C219.64 27.1673 220.273 24.7883 221.54 22.6149C222.806 20.4416 224.529 18.7087 226.709 17.4164C228.888 16.1242 231.274 15.478 233.866 15.478H248.165C250.756 15.478 253.142 16.1242 255.322 17.4164C257.501 18.7087 259.224 20.4709 260.49 22.6884C261.757 24.9058 262.39 27.3141 262.39 29.8987C262.39 32.4832 261.757 35.0091 260.49 37.1824C259.224 39.3558 257.501 41.0886 255.322 42.3809C253.142 43.6732 250.756 44.3193 248.165 44.3193H234.558V33.7755H248.238C249.269 33.7755 250.138 33.4084 250.845 32.6595C251.537 31.9105 251.89 31.0001 251.89 29.9134C251.89 29.2379 251.714 28.5917 251.39 27.9749C251.051 27.3582 250.594 26.8589 250.035 26.5064C249.461 26.1393 248.872 25.9631 248.253 25.9631H233.718C233.1 25.9631 232.496 26.11 231.936 26.433C231.362 26.7414 230.92 27.182 230.611 27.7547C230.302 28.3274 230.14 28.9442 230.14 29.6197V47.9172C230.14 48.5927 230.287 49.2094 230.611 49.7821C230.92 50.3549 231.362 50.7954 231.936 51.1038C232.511 51.4122 233.1 51.5737 233.718 51.5737H259.209V62.0294H233.866C231.274 62.0294 228.888 61.3833 226.709 60.091V60.0616Z" fill="#072C4A"/><path d="M326.552 54.9071C325.285 57.1099 323.548 58.828 321.339 60.1056C319.13 61.3685 316.744 62 314.153 62H277.543C275.982 62 274.687 61.5007 273.656 60.4874C272.61 59.4742 272.095 58.2259 272.095 56.7281V15.5073H282.594V51.5443H295.023V15.5073H305.523V51.5443H314.315C314.992 51.5443 315.61 51.3827 316.185 51.045C316.759 50.7072 317.201 50.2667 317.51 49.7233C317.819 49.18 317.981 48.5779 317.981 47.9024V15.5073H328.481V47.7555C328.481 50.3401 327.848 52.7338 326.581 54.9218L326.552 54.9071Z" fill="#036D85"/><path d="M374.971 17.4751C377.18 18.7968 378.932 20.5443 380.258 22.7471C381.583 24.9498 382.231 27.2847 382.231 29.7665V47.9024C382.231 50.3842 381.568 52.6897 380.258 54.8337C378.932 56.9778 377.18 58.7106 374.971 60.0322C372.762 61.3539 370.421 62.0147 367.932 62.0147H354.413C351.925 62.0147 349.583 61.3539 347.374 60.0322C345.165 58.7106 343.413 56.9778 342.088 54.8337C340.762 52.6897 340.1 50.3695 340.1 47.9024V29.7665C340.1 27.2847 340.762 24.9498 342.088 22.7471C343.413 20.5443 345.165 18.7968 347.374 17.4751C349.583 16.1535 351.925 15.4927 354.413 15.4927H367.932C370.421 15.4927 372.762 16.1535 374.971 17.4751ZM352.587 26.5064C351.984 26.8735 351.512 27.3435 351.144 27.9455C350.776 28.5329 350.599 29.1497 350.599 29.7665V47.9024C350.599 48.5192 350.776 49.1213 351.144 49.6793C351.512 50.252 351.984 50.7073 352.587 51.0303C353.176 51.3681 353.795 51.5296 354.413 51.5296H367.932C368.55 51.5296 369.169 51.3681 369.758 51.0303C370.347 50.6926 370.833 50.252 371.201 49.6793C371.569 49.1066 371.746 48.5192 371.746 47.9024V29.7665C371.746 29.1497 371.569 28.5329 371.201 27.9455C370.833 27.3581 370.362 26.8735 369.758 26.5064C369.154 26.1393 368.55 25.9631 367.932 25.9631H354.413C353.795 25.9631 353.176 26.1393 352.587 26.5064Z" fill="#072C4A"/><path d="M393.703 22.4827C394.969 20.3681 396.707 18.6793 398.916 17.4017C401.11 16.1388 403.51 15.5073 406.102 15.5073H421.8V25.9777H406.102C405.425 25.9777 404.792 26.1246 404.203 26.4476C403.614 26.756 403.142 27.1966 402.804 27.7693C402.465 28.342 402.303 28.9588 402.303 29.6343V62.0294H391.803V29.5609C391.803 26.9763 392.436 24.6267 393.703 22.5121V22.4827Z" fill="#072C4A"/><path d="M431.52 0H442.019V62H431.52V0ZM443.565 38.2544C443.565 37.0943 443.845 36.1251 444.42 35.3468L459.499 15.5073H472.016L452.269 42.1606V34.4069L473.18 62L460.28 61.9266L444.42 41.3089C443.845 40.4278 443.565 39.4145 443.565 38.2544Z" fill="#072C4A"/><path d="M513.205 56.2729L508.463 51.5443H546.31V62H507.992C506.49 62 505.238 61.486 504.222 60.4434C503.206 59.4154 502.706 58.1232 502.706 56.5666V0H513.205V56.2729Z" fill="#036D85"/><path d="M559.21 60.0617C557.03 58.7694 555.307 57.0219 554.041 54.8338C552.774 52.6311 552.141 50.2227 552.141 47.5941C552.141 44.9655 552.774 42.5425 554.041 40.3397C555.307 38.137 557.045 36.4042 559.254 35.1119C561.463 33.8196 563.848 33.1735 566.44 33.1735H579.959V43.7173H566.278C565.292 43.7173 564.437 44.0991 563.716 44.848C562.994 45.597 562.626 46.5074 562.626 47.5941C562.626 48.2696 562.788 48.9158 563.127 49.5325C563.465 50.1493 563.907 50.6486 564.482 51.001C565.056 51.3682 565.645 51.5444 566.263 51.5444H580.798C581.417 51.5444 582.02 51.3828 582.58 51.0745C583.154 50.7661 583.596 50.3255 583.905 49.7528C584.215 49.18 584.377 48.5633 584.377 47.8878V29.5903C584.377 28.9148 584.215 28.2981 583.905 27.7253C583.596 27.1526 583.154 26.7121 582.58 26.4037C582.006 26.0953 581.417 25.9338 580.798 25.9338H560.049V15.4634H580.651C583.243 15.4634 585.643 16.1095 587.837 17.4018C590.046 18.6941 591.769 20.4269 593.05 22.6003C594.317 24.7737 594.95 27.1526 594.95 29.7372V47.7116C594.95 50.2962 594.317 52.6898 593.05 54.8779C591.784 57.0806 590.046 58.7988 587.837 60.0764C585.628 61.3393 583.243 61.9707 580.651 61.9707H566.425C563.789 61.9707 561.374 61.3246 559.195 60.0323L559.21 60.0617Z" fill="#072C4A"/><path d="M617.614 49.7968C617.952 50.3401 618.394 50.766 618.968 51.0744C619.543 51.3828 620.161 51.5443 620.839 51.5443H633.974C634.652 51.5443 635.27 51.3828 635.845 51.0744C636.419 50.766 636.861 50.3401 637.17 49.7968C637.479 49.2534 637.641 48.6513 637.641 47.9758V29.5315C637.641 28.856 637.479 28.2539 637.17 27.7106C636.861 27.1672 636.419 26.7414 635.845 26.433C635.27 26.1246 634.652 25.9631 633.974 25.9631H621.619V15.4927H633.901C636.492 15.4927 638.878 16.1388 641.058 17.4311C643.237 18.7234 644.975 20.4709 646.271 22.6589C647.567 24.8617 648.214 27.2406 648.214 29.8252V47.6528C648.214 50.2373 647.567 52.631 646.271 54.819C644.975 57.0218 643.237 58.7546 641.058 60.0469C638.878 61.3392 636.492 61.9853 633.901 61.9853H620.927C618.276 61.9853 615.876 61.3392 613.696 60.0469C611.517 58.7546 609.794 57.0071 608.528 54.819C607.261 52.6163 606.628 50.2373 606.628 47.6528V0H617.113V47.9758C617.113 48.6513 617.275 49.2534 617.614 49.7968Z" fill="#072C4A"/><path d="M660.246 53.1303C660.246 56.9191 663.323 59.9882 667.123 59.9882C670.922 59.9882 674 56.9191 674 53.1303C674 49.3416 670.922 46.2725 667.123 46.2725C663.323 46.2725 660.246 49.3416 660.246 53.1303Z" fill="#072C4A"/></g><defs><clipPath id="clip0_20_2276"><rect width="674" height="62" fill="white"/></clipPath></defs></svg><svg class="logo-dark" width="707" height="118" viewBox="0 0 707 118" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M70.9963 38.8466H45.8679C44.5771 38.8466 43.3723 39.1935 42.2536 39.8004C41.1348 40.4941 40.2743 41.3612 39.5858 42.4018C38.8974 43.529 38.6392 44.743 38.6392 46.1303V88.9655H28.4846V46.217C28.4846 43.0087 29.2591 40.1473 30.8081 37.4592C32.3571 34.7712 34.5085 32.6034 37.1763 31.0426C39.844 29.3951 42.7699 28.6147 45.8679 28.6147H70.9963V38.8466ZM69.4473 64.0795H43.0281V53.8476H69.4473V64.0795Z" fill="#A3E4F4"/><path d="M114.454 87.578C113.422 88.5318 112.217 89.0521 110.84 89.0521H92.6823C90.1867 89.0521 87.8632 88.4451 85.7118 87.2312C83.5604 86.0172 81.9253 84.283 80.7205 82.2019C79.5157 80.0342 78.9133 77.7797 78.9133 75.1784V43.7891H89.0679V75.3518C89.0679 76.0455 89.24 76.6524 89.5843 77.1727C89.9285 77.693 90.3588 78.1265 90.8751 78.4734C91.3914 78.7335 91.9938 78.9069 92.6823 78.9069H105.849V43.7891H116.003V83.9362C116.003 85.4102 115.487 86.6242 114.541 87.578H114.454Z" fill="white"/><path d="M123.49 43.7893H147.328V54.0211H123.49V43.7893ZM135.022 87.1446C132.957 85.844 131.322 84.1965 130.117 82.0287C128.912 79.9477 128.31 77.6065 128.31 75.0051V30.9561H138.464V75.352C138.464 76.0457 138.636 76.6526 138.981 77.1729C139.325 77.6932 139.755 78.1267 140.271 78.4736C140.788 78.7337 141.39 78.9071 141.993 78.9071H147.5V89.139H141.906C139.497 89.139 137.173 88.532 135.194 87.2314L135.022 87.1446Z" fill="white"/><path d="M192.335 87.578C191.302 88.5318 190.098 89.0521 188.721 89.0521H170.563C168.067 89.0521 165.744 88.4451 163.592 87.2312C161.441 86.0172 159.806 84.283 158.601 82.2019C157.396 80.0342 156.794 77.7797 156.794 75.1784V43.7891H166.949V75.3518C166.949 76.0455 167.121 76.6524 167.465 77.1727C167.809 77.693 168.239 78.1265 168.756 78.4734C169.272 78.7335 169.874 78.9069 170.563 78.9069H183.729V43.7891H193.884V83.9362C193.884 85.4102 193.368 86.6242 192.421 87.578H192.335Z" fill="white"/><path d="M206.965 50.5525C208.17 48.4714 209.891 46.8239 211.956 45.61C214.107 44.396 216.345 43.7891 218.927 43.7891H234.072V54.0209H218.927C218.238 54.0209 217.636 54.1944 217.119 54.4545C216.517 54.7146 216.087 55.1482 215.742 55.7551C215.398 56.2754 215.226 56.8824 215.226 57.5761V89.1388H205.072V57.4894C205.072 54.9748 205.674 52.7203 206.879 50.6392L206.965 50.5525Z" fill="white"/><path d="M246.981 87.1445C244.915 85.9305 243.194 84.1963 241.99 82.1152C240.785 80.0342 240.182 77.693 240.182 75.1784V57.6628C240.182 55.1482 240.785 52.807 241.99 50.7259C243.194 48.6449 244.915 46.9106 246.981 45.6967C249.046 44.4827 251.37 43.7891 253.865 43.7891H267.634C270.13 43.7891 272.453 44.396 274.519 45.6967C276.584 46.9974 278.305 48.6449 279.51 50.8126C280.715 52.9804 281.317 55.3216 281.317 57.8362C281.317 60.3508 280.715 62.7787 279.51 64.9465C278.305 67.0275 276.67 68.7618 274.519 69.9757C272.453 71.2764 270.13 71.8834 267.634 71.8834H254.554V61.6515H267.72C268.753 61.6515 269.527 61.3046 270.216 60.5242C270.904 59.8306 271.249 58.8767 271.249 57.8362C271.249 57.1425 271.076 56.5355 270.732 55.9286C270.388 55.3216 269.958 54.888 269.441 54.4545C268.925 54.1076 268.323 53.9342 267.72 53.9342H253.693C253.091 53.9342 252.488 54.1076 251.972 54.3678C251.456 54.6279 251.025 55.0615 250.681 55.6684C250.337 56.1887 250.251 56.7957 250.251 57.4894V75.2651C250.251 75.9588 250.423 76.5657 250.681 77.086C250.939 77.6063 251.37 78.0398 251.972 78.3867C252.488 78.6468 253.091 78.8202 253.693 78.8202H278.219V89.0521H253.779C251.284 89.0521 248.96 88.4451 246.895 87.1445H246.981Z" fill="white"/><path d="M343.191 82.1155C341.987 84.2833 340.266 85.9308 338.2 87.1447C336.049 88.3587 333.725 88.9657 331.23 88.9657H295.947C294.484 88.9657 293.193 88.4454 292.16 87.4916C291.128 86.5378 290.697 85.3238 290.697 83.8497V43.7026H300.852V78.8205H312.814V43.7026H322.968V78.8205H331.402C332.09 78.8205 332.607 78.6471 333.209 78.3002C333.725 77.9534 334.156 77.5198 334.5 76.9996C334.758 76.4793 334.93 75.8723 334.93 75.2654V43.7026H345.085V75.0919C345.085 77.6066 344.482 79.9478 343.277 82.1155H343.191Z" fill="#A3E4F4"/><path d="M389.834 45.6967C391.985 46.9974 393.62 48.7316 394.911 50.8126C396.202 52.9804 396.804 55.2349 396.804 57.6628V75.3518C396.804 77.7797 396.202 80.0342 394.911 82.1152C393.62 84.1963 391.899 85.9305 389.834 87.1445C387.682 88.4451 385.445 89.0521 383.035 89.0521H370.041C367.631 89.0521 365.394 88.4451 363.242 87.1445C361.091 85.8438 359.456 84.1963 358.165 82.1152C356.874 80.0342 356.272 77.7797 356.272 75.3518V57.6628C356.272 55.2349 356.874 52.9804 358.165 50.8126C359.456 48.6449 361.177 46.9974 363.242 45.6967C365.394 44.396 367.631 43.7891 370.041 43.7891H383.035C385.445 43.7891 387.682 44.396 389.834 45.6967ZM368.32 54.4545C367.717 54.8013 367.287 55.2349 366.943 55.8419C366.598 56.4488 366.426 56.9691 366.426 57.5761V75.2651C366.426 75.8721 366.598 76.479 366.943 76.9993C367.287 77.5196 367.717 77.9531 368.32 78.3C368.922 78.6468 369.438 78.8202 370.041 78.8202H383.035C383.638 78.8202 384.24 78.6468 384.756 78.3C385.359 77.9531 385.789 77.5196 386.133 76.9993C386.477 76.479 386.649 75.8721 386.649 75.2651V57.5761C386.649 56.9691 386.477 56.3621 386.133 55.8419C385.789 55.2349 385.359 54.8013 384.756 54.4545C384.154 54.1076 383.551 53.9342 383.035 53.9342H370.041C369.438 53.9342 368.836 54.1076 368.32 54.4545Z" fill="white"/><path d="M407.905 50.5525C409.11 48.4714 410.831 46.8239 412.897 45.61C415.048 44.396 417.286 43.7891 419.867 43.7891H435.013V54.0209H419.867C419.179 54.0209 418.576 54.1944 418.06 54.4545C417.458 54.7146 417.027 55.1482 416.683 55.7551C416.339 56.2754 416.167 56.8824 416.167 57.5761V89.1388H406.012V57.4894C406.012 54.9748 406.615 52.7203 407.819 50.6392L407.905 50.5525Z" fill="white"/><path d="M444.393 28.7017H454.548V89.0524H444.393V28.7017ZM456.011 65.9006C456.011 64.7733 456.269 63.8195 456.871 63.0391L471.415 43.7026H483.462L464.444 69.6292V62.0853L484.581 88.9657H472.103L456.785 68.8488C456.269 67.9817 455.925 67.0278 455.925 65.9006H456.011Z" fill="white"/><path d="M523.134 83.5029L518.573 78.9072H555.061V89.1391H518.143C516.68 89.1391 515.476 88.6188 514.529 87.665C513.582 86.6245 513.066 85.4105 513.066 83.8497V28.7017H523.221V83.5029H523.134Z" fill="#A3E4F4"/><path d="M567.453 87.1445C565.388 85.9305 563.667 84.1963 562.462 82.0285C561.257 79.8607 560.655 77.5196 560.655 75.0049C560.655 72.4903 561.257 70.0624 562.462 67.9814C563.667 65.8136 565.388 64.1661 567.453 62.8654C569.605 61.5648 571.928 60.9578 574.424 60.9578H587.418V71.1897H574.252C573.305 71.1897 572.444 71.5365 571.756 72.3169C571.068 73.0106 570.723 73.9644 570.723 75.0049C570.723 75.6986 570.895 76.3056 571.24 76.9126C571.584 77.5196 572.014 77.9531 572.53 78.3867C573.047 78.7335 573.649 78.9069 574.252 78.9069H588.279C588.881 78.9069 589.484 78.7335 590 78.4734C590.516 78.2132 590.946 77.7797 591.291 77.1727C591.549 76.6524 591.721 76.0455 591.721 75.3518V57.5761C591.721 56.8824 591.549 56.3621 591.291 55.7551C591.033 55.2349 590.602 54.8013 590 54.4545C589.484 54.1076 588.881 54.0209 588.279 54.0209H568.314V43.7891H588.193C590.688 43.7891 593.012 44.396 595.163 45.6967C597.315 46.9974 598.95 48.6449 600.154 50.7259C601.359 52.807 601.962 55.1482 601.962 57.6628V75.1784C601.962 77.693 601.359 80.0342 600.154 82.2019C598.95 84.3697 597.229 86.0172 595.163 87.2312C593.012 88.4451 590.688 89.0521 588.193 89.0521H574.51C571.928 89.0521 569.605 88.4451 567.539 87.1445H567.453Z" fill="white"/><path d="M623.734 77.173C624.078 77.6933 624.508 78.1268 625.024 78.3869C625.541 78.6471 626.143 78.8205 626.832 78.8205H639.482C640.17 78.8205 640.687 78.6471 641.289 78.3869C641.805 78.1268 642.236 77.6933 642.58 77.173C642.924 76.6527 643.01 76.0457 643.01 75.4388V57.4896C643.01 56.796 642.838 56.2757 642.58 55.7554C642.322 55.2352 641.891 54.8016 641.289 54.5415C640.773 54.1946 640.17 54.1079 639.482 54.1079H627.606V43.876H639.482C641.978 43.876 644.301 44.483 646.366 45.7837C648.432 47.0843 650.153 48.7319 651.358 50.8996C652.562 53.0674 653.251 55.4086 653.251 57.9232V75.2654C653.251 77.78 652.649 80.1212 651.358 82.2889C650.067 84.4567 648.432 86.1042 646.366 87.4049C644.301 88.7055 641.978 89.3125 639.482 89.3125H627.004C624.422 89.3125 622.099 88.7055 620.033 87.4049C617.968 86.1909 616.247 84.4567 615.042 82.2889C613.837 80.1212 613.235 77.8667 613.235 75.2654V28.7017H623.389V75.4388C623.389 76.1325 623.562 76.6527 623.906 77.173H623.734Z" fill="white"/><path d="M664.782 80.3813C664.782 84.1099 667.708 87.0581 671.409 87.0581C675.109 87.0581 678.035 84.1099 678.035 80.3813C678.035 76.6528 675.109 73.7046 671.409 73.7046C667.708 73.7046 664.782 76.6528 664.782 80.3813Z" fill="white"/></svg></a>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <i data-lucide="menu" style="width:24px;height:24px"></i>
+    </button>
+    <div class="nav-links">
+      <a href="product-ax-flow.html" data-page="product">제품</a>
+      <a href="solutions-subsidy-guide.html" data-page="solutions">지원사업</a>
+      <div class="nav-dropdown">
+        <a href="resources.html" data-page="resources" class="nav-dropdown-toggle">리소스 <i data-lucide="chevron-down" class="nav-caret"></i></a>
+        <div class="nav-dropdown-menu">
+          <a href="resources.html?category=case-study">고객사례</a>
+          <a href="resources.html?category=blog">블로그</a>
+        </div>
+      </div>
+      <a href="contact.html" data-page="company">문의하기</a>
+      <a href="demo.html" class="nav-cta">데모 신청하기</a>
+      <button class="theme-toggle" aria-label="테마 변경"></button>
+    </div>
+  </div>
+</nav>
+
+<!-- DARK GRADIENT ZONE: Hero → Traction → Problem → CoreFeature -->
+<div class="dark-gradient-zone">
+
+<!-- HERO -->
+<section class="hero section">
+  <div class="container" style="text-align:left">
+    <div class="fade-up">
+      <div class="badge">
+        <span class="dot"></span>
+        <span class="l500-14" style="color:#1A1A1A">2026 스마트공장 지원사업 — AI 도입비 50% 지원</span>
+      </div>
+    </div>
+    <h1 class="h700-48 fade-up stagger-1">불량 분석 6시간, 배치기록 수백 시간<br>아직 사람이 다 하고 계십니까?</h1>
+    <p class="b400-16 subheadline fade-up stagger-2">AX Flow는 "대답하는 AI"가 아니라, 공장 안의 일을 실제로 끝내는 온톨로지 AI입니다.<br>스마트공장 지원사업으로 도입 비용의 최대 50%를 절감하세요.</p>
+    <div class="stats-box fade-up stagger-2">
+      <div class="stat">
+        <div class="h700-28 stat-value"><span class="counter" data-target="95">0</span>%</div>
+        <div class="l500-12 stat-label">스케줄링 시간 단축</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stat">
+        <div class="h700-28 stat-value"><span class="counter" data-target="90">0</span>%</div>
+        <div class="l500-12 stat-label">불량 분석 시간 단축</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stat">
+        <div class="h700-28 stat-value"><span class="counter" data-target="50">0</span>%</div>
+        <div class="l500-12 stat-label">정부 지원사업 비용 절감</div>
+      </div>
+    </div>
+    <div class="cta-row fade-up stagger-3">
+      <a href="product-ax-flow.html" class="btn btn-solid">AX Flow 알아보기</a>
+      <a href="solutions-subsidy-guide.html" class="btn btn-solid" style="background:#000000;color:#FFFFFF;border-color:#000000">도입비 50% 지원받기</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- TRACTION -->
+<section class="traction">
+<div class="container">
+    <div class="traction-grid">
+      <div class="traction-item fade-up">
+        <div class="h700-28 value"><span class="counter" data-target="14">0</span></div>
+        <div class="l500-12 label">PoC 수행 기업</div>
+      </div>
+      <div class="divider"></div>
+      <div class="traction-item fade-up stagger-1">
+        <div class="h700-28 value"><span class="counter" data-target="89">0</span>%</div>
+        <div class="l500-12 label">평균 생산성 향상</div>
+      </div>
+      <div class="divider"></div>
+      <div class="traction-item fade-up stagger-2">
+        <div class="h700-28 value">3억+</div>
+        <div class="l500-12 label">고객 절감 효과</div>
+      </div>
+      <div class="divider"></div>
+      <div class="traction-item fade-up stagger-3">
+        <div class="h700-28 value">2주</div>
+        <div class="l500-12 label">PoC 완료 기간</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem section">
+  <div class="container text-center">
+    <p class="l500-12 section-label fade-up">Pain Points</p>
+    <h2 class="h700-40 section-title fade-up stagger-1">제조 현장에서 반복되는 2가지 문제</h2>
+    <p class="b400-16 section-desc fade-up stagger-2">핵심 인력이 데이터 핸들링에 묶여 있고, AI를 도입해도 PoC에서 끝납니다.</p>
+    <div class="cards-grid">
+      <div class="pain-card fade-up">
+        <div class="card-top">
+          <div class="icon-circle"><i data-lucide="clock" style="width:20px;height:20px"></i></div>
+          <div class="t600-18 card-title">불량 원인 분석에 4~6시간</div>
+        </div>
+        <p class="b400-14 card-desc">MES 로그인, ERP 교차확인, 과거사례 수동검색, 보고서 초안… 숙련자가 반나절을 쏟습니다.</p>
+      </div>
+      <div class="pain-card fade-up stagger-1">
+        <div class="card-top">
+          <div class="icon-circle"><i data-lucide="clipboard-check" style="width:20px;height:20px"></i></div>
+          <div class="t600-18 card-title">배치기록 수기 작성에 수백 시간</div>
+        </div>
+        <p class="b400-14 card-desc">월간 배치기록을 사람이 직접 씁니다. 제약/GMP 환경에선 규제 변경 시 영향 SOP까지 수일이 소요됩니다.</p>
+      </div>
+      <div class="pain-card fade-up stagger-2">
+        <div class="card-top">
+          <div class="icon-circle"><i data-lucide="alert-triangle" style="width:20px;height:20px"></i></div>
+          <div class="t600-18 card-title">제조 AI 프로젝트 76%가 PoC에서 끝남</div>
+        </div>
+        <p class="b400-14 card-desc">3~6개월 PoC 후 모델이 바뀌면 재구축. 쌓인 자산 없이 검증만 반복하다 평균 13.7개월 후 폐기됩니다.</p>
+      </div>
+      <div class="pain-card fade-up stagger-3">
+        <div class="card-top">
+          <div class="icon-circle"><i data-lucide="users" style="width:20px;height:20px"></i></div>
+          <div class="t600-18 card-title">숙련자 퇴직 = 조직 지식 단절</div>
+        </div>
+        <p class="b400-14 card-desc">조직 지식의 90%는 암묵지. 제조업 평균연령 44세, 은퇴 러시가 시작되면 복구가 불가능합니다.</p>
+      </div>
+    </div>
+    <p class="b400-16 subtitle">시간도 잃고, 투자도 잃는 구조. "더 좋은 AI"가 아니라 "운영에 올라가는 구조"가 필요합니다.</p>
+    <a href="product-ax-flow.html" class="btn btn-outlined">AX Flow로 해결하는 방법 보기 →</a>
+  </div>
+</section>
+
+<!-- CORE FEATURES -->
+<section class="core-features section" id="features">
+  <div class="container text-center">
+    <p class="l500-12 section-label fade-up">Core Platform</p>
+    <h2 class="h700-40 section-title fade-up stagger-1">같은 사람, 같은 현장.<br>바뀌는 건 일하는 방식뿐.</h2>
+    <p class="b400-16 section-desc fade-up stagger-2">AX Flow 4대 핵심 기능 — Chatting · Library · Agent · Governance</p>
+    <div class="feature-grid">
+      <div class="feature-card fade-up">
+        <div class="top-row">
+          <div class="icon-circle"><i data-lucide="message-square" style="width:20px;height:20px"></i></div>
+          <span class="l500-14 feature-name">Chatting — 현장 질의응답</span>
+          <span class="l500-12 metric-badge">95% 단축</span>
+        </div>
+        <div class="h700-24 feature-headline" style="text-align:left">긴급 오더 들어왔을 때,<br>자재·라인·설비 현황을 한 번에 파악합니다</div>
+        <p class="b400-14 feature-desc" style="text-align:left">음성이든 텍스트든, 질문하면 AI가 공정·설비·원자재 데이터를 자동 연결해 바로 답합니다. 부서별 확인에 2시간 걸리던 일이 15분 안에 끝납니다.</p>
+      </div>
+      <div class="feature-card fade-up stagger-1">
+        <div class="top-row">
+          <div class="icon-circle"><i data-lucide="book-open" style="width:20px;height:20px"></i></div>
+          <span class="l500-14 feature-name">Library — 지식 구조화</span>
+          <span class="l500-12 metric-badge">90% 단축</span>
+        </div>
+        <div class="h700-24 feature-headline" style="text-align:left">과거 불량 사례, SOP, 배치기록을<br>5분 안에 찾습니다</div>
+        <p class="b400-14 feature-desc" style="text-align:left">키워드가 아닌 관계 기반 검색. SOP, 배치기록, 수기 문서, 사진까지 Graph-RAG 기반 온톨로지로 연결합니다.</p>
+      </div>
+      <div class="feature-card fade-up stagger-2">
+        <div class="top-row">
+          <div class="icon-circle"><i data-lucide="bot" style="width:20px;height:20px"></i></div>
+          <span class="l500-14 feature-name">Agent — 업무 자동화</span>
+          <span class="l500-12 metric-badge">80% 단축</span>
+        </div>
+        <div class="h700-24 feature-headline" style="text-align:left">배치기록 자동 생성, 불량 보고서 작성까지<br>AI가 처리합니다</div>
+        <p class="b400-14 feature-desc" style="text-align:left">노코드 빌더로 현장 담당자도 직접 워크플로우를 만들 수 있습니다. 분석→문서→승인→후속조치까지 Multi-Agent가 한 흐름으로 실행합니다.</p>
+      </div>
+      <div class="feature-card fade-up stagger-3">
+        <div class="top-row">
+          <div class="icon-circle"><i data-lucide="shield-check" style="width:20px;height:20px"></i></div>
+          <span class="l500-14 feature-name">Governance — 감사·규제 대응</span>
+          <span class="l500-12 metric-badge">규제 대응 내장</span>
+        </div>
+        <div class="h700-24 feature-headline" style="text-align:left">AI가 한 모든 일에<br>근거와 이력이 남습니다</div>
+        <p class="b400-14 feature-desc" style="text-align:left">GMP·HACCP·ISO·AI기본법·EU AI Act 규제 대응 내장. 판단 근거, 감사 로그, 승인 이력, 킬스위치까지. 사람이 승인 수준을 직접 설정합니다.</p>
+      </div>
+    </div>
+    <a href="demo.html" class="btn btn-solid">데모 체험해보기 →</a>
+    <p class="b400-14" style="color:var(--n500);margin-top:12px">15분이면 귀사에 가장 적합한 워크플로우 1개를 제안드립니다.</p>
+  </div>
+</section>
+
+</div><!-- end .dark-gradient-zone -->
+
+<!-- SOLUTION -->
+<section class="solution section" id="solution">
+  <div class="container text-center">
+    <p class="l500-12 section-label fade-up">Solution</p>
+    <h2 class="h700-40 section-title fade-up stagger-1">AX Flow가 해결합니다</h2>
+    <p class="b400-16 section-desc fade-up stagger-2">기능 추가가 아닌, 운영 방식의 재설계</p>
+    <table class="solution-table fade-up stagger-2">
+      <thead><tr><th>문제</th><th>AX Flow 솔루션</th><th>Before</th><th>After</th></tr></thead>
+      <tbody>
+        <tr><td>긴급 오더 대응</td><td>AI가 자재·라인 현황 자동 연결</td><td>부서별 확인 2시간+</td><td class="after">15분 안에 판단·공유</td></tr>
+        <tr><td>불량 원인 분석</td><td>공정·설비·원자재 이력 동시 연결</td><td>분석~보고서 6시간</td><td class="after">20분 한 흐름 완료</td></tr>
+        <tr><td>배치기록 작성</td><td>자동 생성 + 검토·서명</td><td>수기 작성 3~4시간</td><td class="after">20분 자동 생성 + HITL 검토</td></tr>
+        <tr><td>성과증빙·감사 대응</td><td>자동 KPI 리포트 + 감사 로그</td><td>수작업 증빙 2주+</td><td class="after">실시간 자동 리포트</td></tr>
+      </tbody>
+    </table>
+    <a href="product-ax-flow.html" class="btn btn-solid fade-up">AX Flow 기능 자세히 보기 →</a>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison section" id="comparison">
+  <div class="container text-center">
+    <p class="l500-12 section-label fade-up">Comparison</p>
+    <h2 class="h700-40 section-title fade-up stagger-1">기존 제조 AI 도입과<br>AX Flow는 다릅니다</h2>
+    <p class="b400-16 section-desc fade-up stagger-2">"AI를 빨리 써보는 것"이 아니라 "AI가 빨리 운영에 올라가고 확장되게 만드는 구조"를 제공합니다.</p>
+    <table class="comparison-table fade-up stagger-2">
+      <thead><tr><th>비교 항목</th><th>기존 제조 AI 도입</th><th>AX Flow</th></tr></thead>
+      <tbody>
+        <tr><td>도입속도</td><td class="neg">✗ PoC 3~6개월 (76%가 본사업 전환 실패)</td><td class="pos">✓ PoC 2주 (바로 운영 가능한 구조)</td></tr>
+        <tr><td>모델변경</td><td class="neg">✗ 재구축 반복 (비용 기하급수적)</td><td class="pos">✓ 데이터 구조 유지, 모델만 교체</td></tr>
+        <tr><td>PoC 이후</td><td class="neg">✗ 소모성 검증으로 끝남 (평균 13.7개월 후 폐기)</td><td class="pos">✓ 온톨로지 자산 누적 → 본사업 전환용</td></tr>
+        <tr><td>감사대응</td><td class="neg">✗ 설명불가 (규제 공백 발생)</td><td class="pos">✓ 판단근거 + 감사로그 + 승인이력 내장</td></tr>
+        <tr><td>현장 접근성</td><td class="neg">✗ 개발자 필요</td><td class="pos">✓ 노코드 빌더로 현장 담당자도 구축</td></tr>
+        <tr><td>비용부담</td><td class="neg">✗ 전액 자부담</td><td class="pos">✓ 정부 지원사업 연계 가능 (최대 50% 절감)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- INTEGRATION HUB -->
+<section class="integration section">
+  <div class="container text-center">
+    <p class="l500-12 section-label fade-up">Integration</p>
+    <h2 class="h700-40 section-title fade-up stagger-1">기존 시스템을 바꾸지 않습니다</h2>
+    <p class="b400-16 section-desc fade-up stagger-2">위에 AI 운영 레이어 한층을 깝니다. 모든 데이터를 하나로 연결합니다.</p>
+    <div class="hub-container fade-up stagger-2">
+      <div class="hub-ring ring-3"></div>
+      <div class="hub-ring ring-2"></div>
+      <div class="hub-ring ring-1"></div>
+      <div class="hub-center">AX Flow</div>
+      <!-- Ring 1 labels -->
+      <span class="hub-label label-ring-1 hl hl-mes" style="top:145px;left:130px">MES</span>
+      <span class="hub-label label-ring-1 hl hl-erp" style="top:145px;right:130px">ERP</span>
+      <span class="hub-label label-ring-1 hl hl-qms" style="top:250px;right:95px">QMS</span>
+      <span class="hub-label label-ring-1 hl hl-wms" style="bottom:130px;right:140px">WMS</span>
+      <span class="hub-label label-ring-1 hl hl-plm" style="bottom:130px;left:140px">PLM</span>
+      <span class="hub-label label-ring-1 hl hl-scada" style="top:250px;left:95px">SCADA</span>
+      <!-- Ring 2 labels -->
+      <span class="hub-label label-ring-2 hl hl-excel" style="top:75px;left:90px"><i data-lucide="table" style="width:14px;height:14px"></i> Excel</span>
+      <span class="hub-label label-ring-2 hl hl-pdf" style="top:75px;right:90px"><i data-lucide="file-text" style="width:14px;height:14px"></i> PDF</span>
+      <span class="hub-label label-ring-2 hl hl-doc" style="bottom:60px;left:210px"><i data-lucide="file" style="width:14px;height:14px"></i> 수기문서</span>
+      <!-- Ring 3 labels -->
+      <span class="hub-label label-ring-3 hl hl-katok" style="top:15px;left:40px"><i data-lucide="message-circle" style="width:14px;height:14px"></i> 카톡</span>
+      <span class="hub-label label-ring-3 hl hl-photo" style="top:15px;right:40px"><i data-lucide="camera" style="width:14px;height:14px"></i> 사진</span>
+      <span class="hub-label label-ring-3 hl hl-mic" style="top:240px;right:5px"><i data-lucide="mic" style="width:14px;height:14px"></i> 음성</span>
+      <span class="hub-label label-ring-3 hl hl-image" style="bottom:10px;left:40px"><i data-lucide="image" style="width:14px;height:14px"></i> 이미지</span>
+      <span class="hub-label label-ring-3 hl hl-video" style="bottom:10px;right:40px"><i data-lucide="video" style="width:14px;height:14px"></i> 영상</span>
+      <span class="hub-label label-ring-3 hl hl-brain" style="top:240px;left:5px"><i data-lucide="brain" style="width:14px;height:14px"></i> 암묵지</span>
+    </div>
+    <div class="legend-row fade-up">
+      <div class="legend-item"><div class="legend-dot lv-1"></div><span class="l500-12">기간 시스템</span></div>
+      <div class="legend-item"><div class="legend-dot lv-2"></div><span class="l500-12">문서·파일</span></div>
+      <div class="legend-item"><div class="legend-dot lv-3"></div><span class="l500-12">비정형 데이터</span></div>
+    </div>
+    <p class="b400-14 support-text fade-up">기존 데이터나 시스템(MES, WMS, QMS, ERP 등)에 번들 및 OEM으로 탑재 가능하며,<br>한번 쌓인 데이터 구조·워크플로우는 모델이 바뀌어도 그대로 유지되어 연속성 있는 사업이 가능합니다.</p>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social-proof section" id="results">
+  <div class="container text-center">
+    <p class="l500-12 section-label fade-up">Proven Results</p>
+    <h2 class="h700-40 section-title fade-up stagger-1">이미 평균 생산성 향상 89%를<br>달성했습니다</h2>
+    <p class="b400-16 section-desc fade-up stagger-2">검증은 끝났습니다. 현장의 목소리가 증거입니다.</p>
+    <div class="cases-row">
+      <div class="case-card fade-up">
+        <div class="t600-18 case-title" style="text-align:left">생산 스케줄링 자동화</div>
+        <p class="b400-14 case-desc" style="text-align:left">MES 위 AX Flow 탑재, 생산/영업 정보 통합 조회</p>
+        <div class="metric-row"><span class="l500-14 metric-badge">95% 단축</span><span class="l500-14 metric-detail">1시간 → 5분</span></div>
+      </div>
+      <div class="case-card fade-up stagger-1">
+        <div class="t600-18 case-title" style="text-align:left">불량 원인 분석 + 고객사 대응 보고</div>
+        <p class="b400-14 case-desc" style="text-align:left">공정·설비·원자재 이력 동시 연결, 보고서 자동화</p>
+        <div class="metric-row"><span class="l500-14 metric-badge">90% 단축</span><span class="l500-14 metric-detail">6시간 → 20분</span></div>
+      </div>
+      <div class="case-card fade-up stagger-2">
+        <div class="t600-18 case-title" style="text-align:left">배치기록 자동화 + SOP 영향 분석</div>
+        <p class="b400-14 case-desc" style="text-align:left">자동 생성 + 검토·서명, 규제 변경 시 SOP 당일 식별</p>
+        <div class="metric-row"><span class="l500-14 metric-badge">80% 단축</span><span class="l500-14 metric-detail">4시간 → 20분 이하</span></div>
+      </div>
+    </div>
+    <div class="testimonials-row">
+      <div class="testimonial-card fade-up">
+        <p class="b400-14 quote">"긴급 오더가 들어오면 예전엔 부서별 확인에 2시간 넘게 걸렸습니다. AX Flow 도입 후에는 자재·라인 상황을 바로 연결해 15분 안에 판단과 공유가 가능해졌습니다."</p>
+        <div class="author-row">
+          <div class="avatar">K</div>
+          <div><div class="l500-14 author-role">생산관리부 과장</div><div class="l500-12 author-company">자동차 부품 제조</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up stagger-1">
+        <p class="b400-14 quote">"불량이 생기면 과거 사례를 찾는 데 매번 1시간 이상 걸렸습니다. 지금은 유사 사례와 처리 이력을 바로 찾아 5분 안에 대응 방향을 잡습니다."</p>
+        <div class="author-row">
+          <div class="avatar">P</div>
+          <div><div class="l500-14 author-role">QA팀 사원</div><div class="l500-12 author-company">포장재 제조</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up stagger-2">
+        <p class="b400-14 quote">"배치기록을 사람이 직접 쓰는 구조에선 AI 도입이 오히려 감사 대응에 불안했습니다. AX Flow는 검토·서명·이력 관리까지 함께 설계되어 감사에 대응 가능한 AI로 느꼈습니다."</p>
+        <div class="author-row">
+          <div class="avatar">L</div>
+          <div><div class="l500-14 author-role">제약 QA 팀장</div><div class="l500-12 author-company">제약/GMP 제조</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonials-row testimonials-row-extra">
+      <div class="testimonial-card fade-up">
+        <p class="b400-14 quote">"불량 탐지는 다른 솔루션도 하지만, 원인 분석과 고객사 대응 보고서까지 한 흐름으로 가는 제품은 드뭅니다. AX Flow는 현장 데이터와 문서 작업을 같은 문제로 본다는 점이 달랐습니다."</p>
+        <div class="author-row">
+          <div class="avatar">J</div>
+          <div><div class="l500-14 author-role">품질 책임자</div><div class="l500-12 author-company">포장재 제조</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up stagger-1">
+        <p class="b400-14 quote">"고객은 AI를 원하지만, LLM·RAG·에이전트를 직접 만들기엔 시간과 비용이 부담되었습니다. AX Flow는 기존 MES 위에 얹어 고객 가치를 빠르게 검증할 수 있게 해줬습니다."</p>
+        <div class="author-row">
+          <div class="avatar">S</div>
+          <div><div class="l500-14 author-role">MES 파트너사 대표</div><div class="l500-12 author-company">MES/ERP 솔루션사</div></div>
+        </div>
+      </div>
+    </div>
+    <a href="demo.html" class="btn btn-solid fade-up">우리 공장에도 적용 가능한지 확인하기 →</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section section" id="faq">
+  <div class="container text-center">
+    <p class="l500-12 section-label fade-up">FAQ</p>
+    <h2 class="h700-40 section-title fade-up stagger-1">자주 묻는 질문</h2>
+    <div class="faq-list fade-up stagger-2">
+      <div class="faq-item open">
+        <div class="faq-question"><span class="t600-18">우리 공장에도 도입할 수 있나요?</span><span class="chevron">▾</span></div>
+        <div class="faq-answer"><p class="b400-14">ERP, MES, Excel 등 데이터가 있는 제조 현장이라면 업종 무관 도입 가능합니다. 제약/GMP, 포장재/부품, 식품/HACCP, MES/ERP 파트너사 등 다양한 업종에서 PoC를 완료했습니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="t600-18">PoC 기간과 비용은?</span><span class="chevron">▾</span></div>
+        <div class="faq-answer"><p class="b400-14">PoC는 2주 소요되며, 스마트공장 지원사업 연계 시 비용의 최대 50%를 지원받을 수 있습니다. AI 기반 구축비는 기존 30%에서 50%로 상향 지원됩니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="t600-18">PoC만 하고 끝나면 아깝지 않나요?</span><span class="chevron">▾</span></div>
+        <div class="faq-answer"><p class="b400-14">AX Flow는 PoC 기간에 쌓은 온톨로지(데이터 구조)가 그대로 자산으로 남습니다. 모델이 바뀌어도 데이터 구조는 유지되어, 본사업 전환이나 후속 과제에 연속적으로 활용할 수 있습니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="t600-18">기존 AI 챗봇 도입에 실패했는데, AX Flow는 뭐가 다른가요?</span><span class="chevron">▾</span></div>
+        <div class="faq-answer"><p class="b400-14">AX Flow는 챗봇이 아닌 "운영 레이어"입니다. AI가 직접 데이터를 연결하고 업무를 실행합니다. 분석→문서→승인→후속조치까지 한 흐름으로 처리하여 "더 좋은 AI"가 아닌 "운영에 올라가는 구조"를 제공합니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="t600-18">스마트공장 지원사업과 연계 가능한가요?</span><span class="chevron">▾</span></div>
+        <div class="faq-answer"><p class="b400-14">네, 2026년 중기부 AI 예산 7,992억 원 중 스마트 제조혁신 지원사업 450+과제에 AX Flow 연계 도입이 가능합니다. 기업당 최대 6억 원(자율형공장), 최대 2억 원(정부형 스마트공장) 지원됩니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="t600-18">도입하면 사람을 줄이는 건가요?</span><span class="chevron">▾</span></div>
+        <div class="faq-answer"><p class="b400-14">사람을 줄이는 것이 아닙니다. 핵심 인력의 역할이 바뀝니다. 수기 작성자→검토·승인자, 데이터 수집자→원인 판단자로 역할이 전환됩니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="t600-18">다른 제조 AI 솔루션과 뭐가 다른가요?</span><span class="chevron">▾</span></div>
+        <div class="faq-answer"><p class="b400-14">연결·추론·실행·감사를 하나의 제품에서 동시에 제공하는 솔루션은 현재 AX Flow뿐입니다. 온톨로지+Graph RAG+Multi-Agent+Governance를 결합한 유일한 제조 AI 플랫폼입니다.</p></div>
+      </div>
+    </div>
+    <a href="demo.html" class="btn btn-outlined">15분 무료 상담으로 확인하기 →</a>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="contact">
+  <div class="container text-center">
+    <h2 class="h700-40 fade-up">지금 신청하시면<br>1일 이내 담당자 매칭</h2>
+    <p class="b400-16 subtitle fade-up stagger-1">15분이면 귀사에 가장 적합한 워크플로우 1개를 제안드립니다.</p>
+    <form class="lead-form fade-up stagger-2" id="pocForm">
+      <h3>PoC 신청</h3>
+      <p class="form-sub">영업일 1일 내 담당자가 연락드립니다.</p>
+      <div class="step-indicator">
+        <div class="step-dot active" id="stepDot1"></div>
+        <div class="step-dot" id="stepDot2"></div>
+      </div>
+      <div class="form-step active" id="formStep1">
+        <div class="form-group">
+          <label>어떤 도움이 필요하신가요?</label>
+          <select class="form-select" name="help_type">
+            <option value="" disabled selected>선택하세요</option>
+            <option value="불량 분석 자동화">불량 분석 자동화</option>
+            <option value="배치기록 자동화">배치기록 자동화</option>
+            <option value="생산 스케줄링">생산 스케줄링</option>
+            <option value="지원사업 연계">지원사업 연계</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>업종</label>
+          <select class="form-select" name="industry">
+            <option value="" disabled selected>선택하세요</option>
+            <option value="제약/GMP">제약/GMP</option>
+            <option value="식품/HACCP">식품/HACCP</option>
+            <option value="자동차부품">자동차부품</option>
+            <option value="전자/반도체">전자/반도체</option>
+            <option value="화학/소재">화학/소재</option>
+            <option value="기타 제조">기타 제조</option>
+          </select>
+        </div>
+        <button type="button" class="btn-submit" onclick="goToStep2()">다음 단계 →</button>
+      </div>
+      <div class="form-step" id="formStep2">
+        <div class="form-group"><label>회사명</label><input type="text" placeholder="퓨처워크랩(주)" name="company"></div>
+        <div class="form-group"><label>이름</label><input type="text" placeholder="홍길동" name="firstname"></div>
+        <div class="form-group"><label>이메일</label><input type="email" placeholder="email@company.com" name="email"></div>
+        <div class="form-group"><label>휴대폰</label><input type="tel" placeholder="010-0000-0000" name="phone"></div>
+        <div class="consent" style="margin-top:12px"><input type="checkbox" name="consent_privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--n500)">보기</a></span></div>
+        <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_marketing"><span>[선택] 제품·지원사업 정보를 이메일로 받아보겠습니다.</span></div>
+        <button type="submit" class="btn-submit" style="margin-top:8px">무료 상담 신청하기</button>
+      </div>
+    </form>
+    <div class="trust-badges fade-up stagger-3">
+      <div class="trust-badge"><span class="check l500-12">✓</span><span class="l500-12">개인정보 상담 목적만 사용</span></div>
+      <div class="trust-badge"><span class="check l500-12">✓</span><span class="l500-12">스팸 없음</span></div>
+      <div class="trust-badge"><span class="check l500-12">✓</span><span class="l500-12">24시간 내 응답</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOATING CTA -->
+<a href="demo.html" class="floating-cta" id="floatingCta" style="text-decoration:none">
+  <span class="pulse-dot"></span>
+  무료상담신청
+</a>
+
+<script>
+// Scroll reveal animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Floating CTA show/hide + Nav scroll effect
+window.addEventListener('scroll', () => {
+  const cta = document.getElementById('floatingCta');
+  const nav = document.getElementById('nav');
+  if (window.scrollY > 400) {
+    cta.classList.add('show');
+  } else {
+    cta.classList.remove('show');
+  }
+  if (window.scrollY > 10) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelector('.nav-links').classList.remove('open');
+    }
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    // Toggle clicked
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// Counter animation
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const counters = entry.target.querySelectorAll('.counter[data-target]');
+      counters.forEach(counter => {
+        if (counter.dataset.animated) return;
+        counter.dataset.animated = 'true';
+        const target = parseInt(counter.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        const animate = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          counter.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+      });
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.stats-box, .traction-grid').forEach(el => counterObserver.observe(el));
+
+// PoC form step switching
+document.getElementById('pocForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const f = this;
+  submitToHubSpot(HUBSPOT_FORMS.demo, [
+    { name: 'help_type', value: f.help_type.value },
+    { name: 'company_industry', value: f.industry.value },
+    { name: '0-2/name', value: f.company.value },
+    { name: 'firstname', value: f.firstname.value },
+    { name: 'email', value: f.email.value },
+    { name: 'phone', value: f.phone.value },
+    { name: 'consent_marketing', value: f.consent_marketing.checked ? 'Y' : 'N' },
+  ], 'thank-you.html');
+});
+
+function goToStep2() {
+  document.getElementById('formStep1').classList.remove('active');
+  document.getElementById('formStep2').classList.add('active');
+  document.getElementById('stepDot1').classList.remove('active');
+  document.getElementById('stepDot2').classList.add('active');
+}
+
+// Initialize Lucide icons
+lucide.createIcons();
+</script>
+<div id="page-footer"></div>
+<script src="common.js?v=1777173836"></script>
+<script>
+document.getElementById("page-footer").innerHTML = getFooterHTML();
+initCommon();
+updateThemeIcon();
+</script>
+
+<!-- JSON-LD: Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "FutureWorkLab Inc.",
+  "legalName": "퓨처워크랩 주식회사",
+  "url": "https://futureworklab.co.kr",
+  "logo": "https://futureworklab.co.kr/images/logo.png",
+  "telephone": "+82-50-6779-9071",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "help@futureworklab.co.kr",
+    "telephone": "+82-50-6779-9071",
+    "contactType": "sales",
+    "availableLanguage": "Korean"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "강남대로112길 47, 2층 A1020호",
+    "addressLocality": "강남구",
+    "addressRegion": "서울특별시",
+    "addressCountry": "KR"
+  }
+}
+</script>
+
+<!-- JSON-LD: LocalBusiness -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "퓨처워크랩 주식회사",
+  "image": "https://futureworklab.co.kr/images/logo.png",
+  "url": "https://futureworklab.co.kr",
+  "telephone": "+82-50-6779-9071",
+  "email": "help@futureworklab.co.kr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "강남대로112길 47, 2층 A1020호",
+    "addressLocality": "강남구",
+    "addressRegion": "서울특별시",
+    "postalCode": "06252",
+    "addressCountry": "KR"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  }
+}
+</script>
+
+<!-- JSON-LD: WebSite with SearchAction -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FutureWorkLab",
+  "url": "https://futureworklab.co.kr",
+  "publisher": {
+    "@type": "Organization",
+    "name": "퓨처워크랩 주식회사"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://futureworklab.co.kr/resources.html?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- JSON-LD: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "우리 공장에도 도입할 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ERP, MES, Excel 등 데이터가 있는 제조 현장이라면 업종 무관 도입 가능합니다. 제약/GMP, 포장재/부품, 식품/HACCP, MES/ERP 파트너사 등 다양한 업종에서 PoC를 완료했습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PoC 기간과 비용은?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PoC는 2주 소요되며, 스마트공장 지원사업 연계 시 비용의 최대 50%를 지원받을 수 있습니다. AI 기반 구축비는 기존 30%에서 50%로 상향 지원됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PoC만 하고 끝나면 아깝지 않나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AX Flow는 PoC 기간에 쌓은 온톨로지(데이터 구조)가 그대로 자산으로 남습니다. 모델이 바뀌어도 데이터 구조는 유지되어, 본사업 전환이나 후속 과제에 연속적으로 활용할 수 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "기존 AI 챗봇 도입에 실패했는데, AX Flow는 뭐가 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AX Flow는 챗봇이 아닌 '운영 레이어'입니다. AI가 직접 데이터를 연결하고 업무를 실행합니다. 분석→문서→승인→후속조치까지 한 흐름으로 처리하여 '운영에 올라가는 구조'를 제공합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "스마트공장 지원사업과 연계 가능한가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "네, 2026년 중기부 AI 예산 7,992억 원 중 스마트 제조혁신 지원사업 450+과제에 AX Flow 연계 도입이 가능합니다. 기업당 최대 6억 원(자율형공장), 최대 2억 원(정부형 스마트공장) 지원됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "도입하면 사람을 줄이는 건가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "사람을 줄이는 것이 아닙니다. 핵심 인력의 역할이 바뀝니다. 수기 작성자→검토·승인자, 데이터 수집자→원인 판단자로 역할이 전환됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "다른 제조 AI 솔루션과 뭐가 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "연결·추론·실행·감사를 하나의 제품에서 동시에 제공하는 솔루션은 현재 AX Flow뿐입니다. 온톨로지+Graph RAG+Multi-Agent+Governance를 결합한 유일한 제조 AI 플랫폼입니다."
+      }
+    }
+  ]
+}
+</script>
+</body>
+</html>

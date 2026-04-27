@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+
+# Internal strategy documents (not deployed)
+design/
+marketing/lead-magnets/
+research/
+review/
+fwl-preview-screenshots/

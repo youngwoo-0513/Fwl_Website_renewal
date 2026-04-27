@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>문의하기 | FutureWorkLab</title>
+<meta name="description" content="퓨처워크랩에 문의하세요. 제조업 AI 도입, AX Flow, 스마트공장 지원사업 관련 상담을 도와드립니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="문의하기 | FutureWorkLab">
+<meta property="og:description" content="퓨처워크랩에 문의하세요. 제조업 AI 도입 관련 상담을 도와드립니다.">
+<meta property="og:url" content="https://futureworklab.co.kr/contact.html">
+<meta property="og:image" content="https://futureworklab.co.kr/images/og-image.png">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="FutureWorkLab">
+<meta property="og:image:alt" content="FutureWorkLab 문의하기 — 제조 AI 도입 상담">
+<meta name="keywords" content="퓨처워크랩 문의, AX Flow 문의, 제조 AI 상담, 스마트공장 지원사업 상담">
+<meta name="author" content="FutureWorkLab">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="문의하기 | FutureWorkLab">
+<meta name="twitter:description" content="퓨처워크랩에 문의하세요. 제조업 AI 도입 관련 상담을 도와드립니다.">
+<meta name="twitter:image" content="https://futureworklab.co.kr/images/og-image.png">
+<meta name="twitter:image:alt" content="FutureWorkLab 문의하기 — 제조 AI 도입 상담">
+<link rel="canonical" href="https://futureworklab.co.kr/contact.html">
+<link rel="stylesheet" href="common.css?v=1777173836">
+<script src="https://unpkg.com/lucide@1.11.0/dist/umd/lucide.min.js" integrity="sha384-7PArHXNzg1s/WgbAH9xkBpx4T6MJ0jPAxaEM9yld+zvdFEjSf+wzzv0hDnem/6rw" crossorigin="anonymous"></script>
+<style>
+  /* ===== CONTACT HERO (stone, centered — matches product-hero) ===== */
+  .contact-hero {
+    padding: 184px 0 120px; background: #EAEAEE;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .contact-hero .hero-bg-object {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+    -webkit-mask-image: linear-gradient(135deg, #000 0%, rgba(0,0,0,0.15) 80%, transparent 100%);
+            mask-image: linear-gradient(135deg, #000 0%, rgba(0,0,0,0.15) 80%, transparent 100%);
+  }
+  .contact-hero .hero-bg-object svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .contact-hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,255,255,0.25) 0%, transparent 60%);
+  }
+  .contact-hero .container { position: relative; z-index: 1; }
+  .contact-hero .tag {
+    display: inline-flex; padding: 4px 12px; border-radius: 999px;
+    background: rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.08);
+    color: #4A4A4A; font-size: 13px; font-weight: 500; margin-bottom: 24px;
+  }
+  .contact-hero h1 { font-size: 52px; font-weight: 700; color: #1A1A1A; line-height: 1.3; margin-bottom: 20px; }
+  .contact-hero .desc { font-size: 18px; color: #5A5A5A; max-width: 680px; margin: 0 auto 40px; line-height: 1.7; }
+  .contact-hero .cta-row { display: flex; gap: 16px; justify-content: center; }
+  .contact-hero .btn-white { background: #1A1A1A; color: #FFFFFF; }
+  .contact-hero .btn-white:hover { background: #000000; }
+  .contact-hero .btn-ghost { background: transparent; color: #1A1A1A; border: 1.5px solid rgba(0,0,0,0.25); }
+  .contact-hero .btn-ghost:hover { background: rgba(0,0,0,0.05); }
+
+  /* ===== CONTACT CONTENT SECTION ===== */
+  .contact-content { padding: 80px 0; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .contact-info h2 { font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 16px; }
+  .contact-info .desc { font-size: 16px; color: var(--n500); line-height: 1.7; margin-bottom: 40px; }
+  .info-items { display: flex; flex-direction: column; gap: 24px; }
+  .info-item { display: flex; gap: 16px; align-items: start; }
+  .info-item .icon { width: 40px; height: 40px; border-radius: 10px; background: var(--n50); display: flex; align-items: center; justify-content: center; color: var(--n600); flex-shrink: 0; }
+  .info-item .label { font-size: 13px; color: var(--n400); margin-bottom: 2px; }
+  .info-item .value { font-size: 16px; font-weight: 500; }
+  .info-item a { color: var(--n900); text-decoration: none; }
+
+  .contact-form { padding: 40px; border-radius: 16px; border: 1px solid var(--n100); box-shadow: var(--shadow-100); }
+  .contact-form h3 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .contact-form .form-sub { font-size: 14px; color: var(--n500); margin-bottom: 24px; }
+  .contact-form .btn-solid { width: 100%; justify-content: center; padding: 14px; }
+
+  .map-section { padding: 0 0 80px; }
+  .map-placeholder {
+    max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  }
+  .map-placeholder .map {
+    width: 100%; height: 320px; border-radius: 16px; background: var(--n50);
+    border: 1px solid var(--n100); display: flex; align-items: center; justify-content: center;
+    color: var(--n400); font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .contact-hero { padding: 144px 0 80px; }
+    .contact-hero h1 { font-size: 28px; line-height: 1.4; }
+    .contact-hero .desc { font-size: 14px; margin-bottom: 24px; }
+    .contact-hero .cta-row { flex-direction: column; align-items: center; }
+    .contact-hero .cta-row .btn { width: 100%; }
+
+    .contact-content { padding: 48px 0; }
+    .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+    .contact-info h2 { font-size: 22px; }
+    .contact-info .desc { font-size: 14px; margin-bottom: 24px; }
+    .info-items { gap: 16px; }
+    .info-item .value { font-size: 14px; }
+    .contact-form { padding: 24px 20px; }
+    .contact-form h3 { font-size: 20px; }
+    .map-section { padding: 0 0 48px; }
+    .map-placeholder { padding: 0 20px; }
+    .map-placeholder .map { height: 200px; }
+  }
+
+  /* ===== 다크모드: 페이지 상단(hero) 라이트 모양 유지 ===== */
+  html.dark .contact-hero { background-color: #EAEAEE !important; }
+  html.dark .contact-hero h1 { color: #1A1A1A !important; }
+  html.dark .contact-hero .desc { color: #5A5A5A !important; }
+  html.dark .contact-hero .tag { color: #4A4A4A !important; background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.08) !important; }
+  html.dark .contact-hero .btn-white { background: #1A1A1A !important; color: #FFFFFF !important; }
+  html.dark .contact-hero .btn-ghost { background: transparent !important; color: #1A1A1A !important; border-color: rgba(0,0,0,0.25) !important; }
+</style>
+</head>
+<body>
+<div id="header"></div>
+
+<!-- HERO (dark, centered) -->
+<section class="contact-hero">
+  <div class="hero-bg-object" aria-hidden="true">
+    <svg viewBox="0 0 1400 420" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background dot grid (40px spacing) -->
+      <defs>
+        <pattern id="hero-grid-contact" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#C8C9D0" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="1400" height="420" fill="url(#hero-grid-contact)"/>
+      <!-- Stream Lines: 5 horizontal lines, snapped to 40px grid (y = 240, 280, 320, 360, 400) -->
+      <g stroke="#6E6F7A" fill="none">
+        <line x1="0" y1="240" x2="1400" y2="240" stroke-width="0.6" opacity="0.3"/>
+        <line x1="0" y1="280" x2="1400" y2="280" stroke-width="0.7" opacity="0.4"/>
+        <line x1="0" y1="320" x2="1400" y2="320" stroke-width="0.8" opacity="0.55"/>
+        <line x1="0" y1="360" x2="1400" y2="360" stroke-width="0.8" opacity="0.5"/>
+        <line x1="0" y1="400" x2="1400" y2="400" stroke-width="0.7" opacity="0.4"/>
+      </g>
+      <!-- Nodes sit exactly on grid intersections (x step 120, y ∈ line set) -->
+      <g fill="#6E6F7A">
+        <circle cx="120"  cy="320" r="3"   opacity="0.6"/>
+        <circle cx="240"  cy="240" r="2.8" opacity="0.45"/>
+        <circle cx="360"  cy="400" r="2.8" opacity="0.45"/>
+        <circle cx="480"  cy="280" r="3"   opacity="0.55"/>
+        <circle cx="600"  cy="360" r="3.2" opacity="0.7"/>
+        <circle cx="720"  cy="320" r="3"   opacity="0.6"/>
+        <circle cx="840"  cy="400" r="2.8" opacity="0.45"/>
+        <circle cx="960"  cy="240" r="3"   opacity="0.5"/>
+        <circle cx="1080" cy="320" r="3.8" opacity="0.85"/>
+        <circle cx="1200" cy="400" r="3"   opacity="0.55"/>
+        <circle cx="1320" cy="280" r="2.8" opacity="0.45"/>
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="tag fade-up">Contact Us</div>
+    <h1 class="fade-up stagger-1">문의하기</h1>
+    <p class="desc fade-up stagger-2">제조 AI 도입, 지원사업 연계, 파트너십 등<br>무엇이든 편하게 문의해주세요.</p>
+    <div class="cta-row fade-up stagger-3">
+      <a href="#contact-form" class="btn btn-white">문의 작성하기</a>
+      <a href="demo.html" class="btn btn-ghost">데모 신청하기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CONTENT -->
+<section class="contact-content">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2 class="fade-up">연락처 정보</h2>
+        <p class="desc fade-up stagger-1">영업일 1일 내 답변드립니다.</p>
+        <div class="info-items fade-up stagger-2">
+          <div class="info-item">
+            <div class="icon"><i data-lucide="map-pin"></i></div>
+            <div><div class="label">주소</div><div class="value">서울특별시 강남구 강남대로112길 47, 2층 A1020호</div></div>
+          </div>
+          <div class="info-item">
+            <div class="icon"><i data-lucide="mail"></i></div>
+            <div><div class="label">이메일</div><div class="value"><a href="mailto:help@futureworklab.co.kr">help@futureworklab.co.kr</a></div></div>
+          </div>
+          <div class="info-item">
+            <div class="icon"><i data-lucide="phone"></i></div>
+            <div><div class="label">전화</div><div class="value"><a href="tel:050-6779-9071">050-6779-9071</a></div></div>
+          </div>
+          <div class="info-item">
+            <div class="icon"><i data-lucide="clock"></i></div>
+            <div><div class="label">영업시간</div><div class="value">평일 09:00 - 18:00</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form fade-up stagger-2" id="contact-form">
+        <h3>일반 문의</h3>
+        <p class="form-sub">궁금한 점을 남겨주세요.</p>
+        <form id="contactForm">
+          <div class="form-group"><label>이름</label><input type="text" name="firstname" class="form-input" placeholder="홍길동" required></div>
+          <div class="form-group"><label>이메일</label><input type="email" name="email" class="form-input" placeholder="email@company.com" required></div>
+          <div class="form-group"><label>회사명</label><input type="text" name="company" class="form-input" placeholder="회사명"></div>
+          <div class="form-group"><label>업종</label><select name="industry" class="form-input form-select"><option value="">업종을 선택하세요</option><option>제약바이오</option><option>포장재/부품</option><option>식품·건기식</option><option>화장품/ODM</option><option>반도체/전자부품</option><option>자동차부품</option><option>MES/ERP/WMS/QMS</option><option>기타</option></select></div>
+          <div class="form-group"><label>문의 내용</label><textarea name="message" class="form-input" placeholder="궁금한 점을 자유롭게 작성해주세요." required></textarea></div>
+          <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--n500)">보기</a></span></div>
+          <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_marketing"><span>[선택] 제품·지원사업 정보를 이메일로 받아보겠습니다.</span></div>
+          <button type="submit" class="btn btn-solid" style="margin-top:8px">문의 보내기</button>
+        </form>
+        <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const f = this;
+          submitToHubSpot(HUBSPOT_FORMS.contact, [
+            { name: 'firstname', value: f.firstname.value },
+            { name: 'email', value: f.email.value },
+            { name: '0-2/name', value: f.company.value },
+            { name: 'company_industry', value: f.industry.value },
+            { name: 'message', value: f.message.value },
+            { name: 'consent_marketing', value: f.consent_marketing.checked ? 'Y' : 'N' },
+          ], 'thank-you.html');
+        });
+        </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div id="footer"></div>
+
+<script src="common.js?v=1777173836"></script>
+<script>
+  document.getElementById('header').innerHTML = getNavHTML();
+  document.getElementById('footer').innerHTML = getFooterHTML();
+  initCommon('company');
+  lucide.createIcons();
+</script>
+
+<!-- JSON-LD: LocalBusiness -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "퓨처워크랩 주식회사",
+  "url": "https://futureworklab.co.kr",
+  "email": "help@futureworklab.co.kr",
+  "telephone": "+82-50-6779-9071",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "강남대로112길 47, 2층 A1020호",
+    "addressLocality": "강남구",
+    "addressRegion": "서울특별시",
+    "postalCode": "06252",
+    "addressCountry": "KR"
+  }
+}
+</script>
+
+<!-- JSON-LD: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://futureworklab.co.kr/" },
+    { "@type": "ListItem", "position": 2, "name": "문의하기", "item": "https://futureworklab.co.kr/contact.html" }
+  ]
+}
+</script>
+</body>
+</html>
