@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 기반 공정 조건 최적화 (ABA RSM) — 김 제조 불량률 84% 감소, 포장재 연 9,800만 원 절감 - 퓨처워크랩</title>
+<meta name="description" content="다공정 제조사 프로핸즈와 함께한 AI 공정 조건 최적화 활용사례. RCA Overlay·Process Mapper·Variable Analyzer·Rule Engine + XAI 4계층과 Bayesian Optimization으로 김 제조 불량률 84% 감소, 인쇄 색상 편차 57% 개선, 포장재(PP 필름) 연 9,800만 원 절감을 달성한 구조를 정리했습니다.">
+<meta name="keywords" content="AI 공정 최적화, RSM 공정 조건, ABA Overlay, Bayesian Optimization, MES Read-only, 제조 불량률 감소, 다변량 상관 분석, XAI 제조, 안전 운전 범위 SOR, 김 제조 인쇄 포장재">
+<meta name="author" content="퓨처워크랩 주식회사">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://futureworklab.co.kr/usecases/usecase-03-process-optimization.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="퓨처워크랩">
+<meta property="og:title" content="AI 기반 공정 조건 최적화 (ABA RSM) — 김 제조 불량률 84% 감소, 포장재 연 9,800만 원 절감">
+<meta property="og:description" content="ABA AI-OPT(M) Overlay와 Bayesian Optimization으로 김 제조 불량률 84% 감소, 인쇄 색상 편차 57% 개선, 포장재 연 9,800만 원 절감을 달성한 활용사례.">
+<meta property="og:url" content="https://futureworklab.co.kr/usecases/usecase-03-process-optimization.html">
+<meta property="og:image" content="https://futureworklab.co.kr/usecases/thumbs/usecase-03.png">
+<meta property="og:image:alt" content="AI 기반 공정 조건 최적화 활용사례 - 퓨처워크랩">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+<meta property="article:author" content="퓨처워크랩 주식회사">
+<meta property="article:section" content="활용사례">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI 공정 조건 최적화 — 김 제조 불량률 84% 감소, 연 9,800만 원 절감">
+<meta name="twitter:description" content="Bayesian Optimization으로 안전 운전 범위(SOR)를 산출해 다공정 제조 손실을 줄인 활용사례.">
+<meta name="twitter:image" content="https://futureworklab.co.kr/usecases/thumbs/usecase-03.png">
+<meta name="twitter:image:alt" content="AI 기반 공정 조건 최적화 활용사례 - 퓨처워크랩">
+<meta name="twitter:url" content="https://futureworklab.co.kr/usecases/usecase-03-process-optimization.html">
+<link rel="stylesheet" href="../common.css?v=1777173836">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --n0:#FFF; --n50:#F9F9FB; --n75:#EDEDF3; --n100:#E8E8EE; --n200:#DADAE0; --n300:#C7C7CC; --n400:#AEAEB2; --n500:#8E8E93; --n600:#636366; --n700:#48484A; --n800:#3A3A3C; --n900:#1D1D1F; }
+  body { font-family:'Outfit','Pretendard',-apple-system,sans-serif; color:var(--n900); background:var(--n0); line-height:1.7; }
+
+  .article-thumb { margin-bottom:32px; margin-top:-8px; }
+  .article-thumb img { width:100%; border-radius:12px; display:block; }
+  .article-header { max-width:720px; margin:0 auto; padding:100px 24px 32px; }
+  .article-badge { display:inline-flex; padding:4px 12px; border-radius:999px; background:var(--n75); color:var(--n400); font-size:12px; font-weight:500; margin-bottom:16px; }
+  .article-header h1 { font-size:36px; font-weight:700; line-height:1.4; margin-bottom:16px; }
+  .article-meta { font-size:14px; color:var(--n400); display:flex; gap:12px; align-items:center; padding-bottom:32px; border-bottom:1px solid var(--n100); }
+  .article-meta .dot { width:3px; height:3px; border-radius:50%; background:var(--n300); }
+
+  .article-body { max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+  .article-body h2 { font-size:24px; font-weight:700; margin:48px 0 16px; padding-top:24px; border-top:1px solid var(--n100); }
+  .article-body h3 { font-size:20px; font-weight:600; margin:32px 0 12px; }
+  .article-body p { font-size:16px; line-height:1.8; margin-bottom:16px; color:var(--n700); }
+  .article-body strong { color:var(--n900); }
+  .article-body hr { border:none; border-top:1px solid var(--n100); margin:32px 0; }
+  .article-body blockquote { border-left:3px solid var(--n900); padding:12px 20px; margin:24px 0; background:var(--n50); border-radius:0 8px 8px 0; color:var(--n600); font-size:15px; }
+  .article-body ul, .article-body ol { padding-left:24px; margin-bottom:16px; }
+  .article-body li { font-size:16px; line-height:1.8; margin-bottom:8px; color:var(--n700); }
+  .article-body table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--n100); border-radius:8px; overflow:hidden; margin:24px 0; }
+  .article-body thead th { background:var(--n50); padding:12px 16px; text-align:center; font-size:14px; font-weight:600; color:var(--n600); border-bottom:1px solid var(--n100); }
+  .article-body tbody td { padding:12px 16px; text-align:center; font-size:14px; border-bottom:1px solid var(--n100); }
+  .article-body tbody tr:last-child td { border-bottom:none; }
+  .article-body .internal-link { color:var(--n900); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+  .article-body .internal-link:hover { color:var(--n600); }
+  .article-body .tag-line { color:var(--n400); font-size:14px; line-height:2; }
+  .article-body .source-note { font-size:13px; color:var(--n500); padding:16px 20px; background:var(--n50); border-radius:8px; margin:32px 0 0; }
+
+  .article-footer { max-width:720px; margin:0 auto; padding:0 24px 80px; }
+  .cta-stack { display:flex; flex-direction:column; gap:12px; margin-top:24px; }
+  .cta-stack a { display:inline-flex; justify-content:center; align-items:center; padding:14px 28px; border-radius:8px; font-size:14px; font-weight:600; text-decoration:none; min-width:240px; }
+  .cta-card { background:var(--n900); border-radius:16px; padding:48px; text-align:center; }
+  .cta-card h3 { font-size:24px; font-weight:700; color:var(--n0); margin-bottom:8px; }
+  .cta-card p { font-size:16px; color:var(--n400); margin-bottom:16px; }
+  .cta-card .cta-stack a.primary { background:var(--n0); color:var(--n900); }
+  .cta-card .cta-stack a.primary:hover { background:var(--n75); }
+  .cta-card .cta-stack a.secondary { background:transparent; color:var(--n0); border:1px solid var(--n600); }
+  .cta-card .cta-stack a.secondary:hover { background:var(--n800); }
+
+  @media (max-width:768px) {
+    .article-header h1 { font-size:26px; }
+    .article-header, .article-body, .article-footer { padding-left:20px; padding-right:20px; }
+    .cta-card { padding:32px 20px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AI 기반 공정 조건 최적화 (ABA RSM) — 김 제조 불량률 84% 감소, 포장재 연 9,800만 원 절감",
+  "image": "https://futureworklab.co.kr/usecases/thumbs/usecase-03.png",
+  "datePublished": "2026-04-27",
+  "dateModified": "2026-04-27",
+  "author": { "@type": "Organization", "name": "퓨처워크랩 주식회사", "url": "https://futureworklab.co.kr" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "퓨처워크랩 주식회사",
+    "logo": { "@type": "ImageObject", "url": "https://futureworklab.co.kr/images/logo.png" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://futureworklab.co.kr/usecases/usecase-03-process-optimization.html" },
+  "description": "다공정 제조사와 함께한 AI 공정 조건 최적화 사례. ABA Overlay 4계층과 Bayesian Optimization으로 김 제조 불량률 84% 감소, 인쇄 색상 편차 57% 개선, 포장재 연 9,800만 원 절감을 달성했습니다.",
+  "articleSection": "활용사례",
+  "inLanguage": "ko-KR"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://futureworklab.co.kr/" },
+    { "@type": "ListItem", "position": 2, "name": "리소스", "item": "https://futureworklab.co.kr/resources.html" },
+    { "@type": "ListItem", "position": 3, "name": "활용사례", "item": "https://futureworklab.co.kr/resources.html?category=case-study" },
+    { "@type": "ListItem", "position": 4, "name": "AI 기반 공정 조건 최적화 (ABA RSM) — 김 제조 불량률 84% 감소, 포장재 연 9,800만 원 절감", "item": "https://futureworklab.co.kr/usecases/usecase-03-process-optimization.html" }
+  ]
+}
+</script>
+<script src="https://unpkg.com/lucide@1.11.0/dist/umd/lucide.min.js" integrity="sha384-7PArHXNzg1s/WgbAH9xkBpx4T6MJ0jPAxaEM9yld+zvdFEjSf+wzzv0hDnem/6rw" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="page-nav"></div>
+<article>
+  <header class="article-header">
+    <span class="article-badge">활용사례</span>
+    <h1>AI 기반 공정 조건 최적화 (ABA RSM) — 김 제조 불량률 84% 감소, 포장재 연 9,800만 원 절감</h1>
+    <div class="article-meta">
+      <span>2026. 4. 27</span>
+      <span class="dot"></span>
+      <span>8분 읽기</span>
+      <span class="dot"></span>
+      <span>FutureWorkLab</span>
+    </div>
+  </header>
+  <div class="article-body">
+    <div class="article-thumb">
+      <img src="thumbs/usecase-03.png" alt="AI 기반 공정 조건 최적화 활용사례">
+    </div>
+
+<p>본 사례는 다공정 제조사 <strong>프로핸즈</strong>(주입·사출, 김 제조, 인쇄, 포장재)와 함께 진행한 AI 공정 조건 최적화 프로젝트를 기반으로 정리했습니다. "조건 선택 오류"라는 손실의 진짜 원인을 데이터로 입증하고, 안전 운전 범위(SOR)를 자동으로 계산하는 시스템을 구축한 과정을 공유합니다.</p>
+
+<h2>왜 다공정 제조에 "조건 선택 오류"가 60%인가</h2>
+
+<p>이 회사는 주입(사출), 김 제조, 인쇄, 포장재 등 서로 다른 공정을 동시에 운영합니다. 분석 결과, 다음과 같은 구조적 문제가 드러났습니다.</p>
+
+<ul>
+<li><strong>공정 손실의 60% 이상이 "제어 실패"가 아니라 "조건 선택 오류"에서 발생</strong> → 연 매출 대비 3~8% 손실, EBIT(영업이익)을 2%만 줄여도 30~50% 개선 가능</li>
+<li><strong>주입1호기 실제 데이터 (860배치 분석)</strong>:
+  <ul>
+    <li>세팅구간(경과시간 ≤5분) 불량률 6.22% — 전체 평균의 <strong>44배</strong></li>
+    <li>LOT 변경 직후 + 세팅 미안정 조합 시 불량률 <strong>38.1%</strong></li>
+    <li>불량 원인 1위: MFI(원료 유동성) — p-value 6.34e-08로 통계적 확실성 극히 높음</li>
+  </ul>
+</li>
+<li><strong>포장재(PP 필름)</strong>: 일일 LOSS 1,424.4kg — 연간 약 <strong>6.41억 원</strong> 손실</li>
+<li><strong>의사결정 공백</strong>: 경험·감각 의존 → 재현성 낮고 지식 편차 큼 → "조건 조합을 계산하는 체계"가 부재</li>
+</ul>
+
+<h2>핵심 컨셉 — "AI는 판단하지 않고, 선택지를 계산한다"</h2>
+
+<p>핵심 컨셉은 <strong>ABA AI-OPT(M) Overlay</strong>입니다. 운영 시스템 위에서 작동하는 Read-only 공정 분석·권고 시스템으로, PLC/SCADA(현장 제어 시스템)에 접속하지 않고 권고만 제공합니다. 안전성과 책임 소재가 명확합니다.</p>
+
+<h3>기술 방법론 — 4계층 구조</h3>
+
+<table>
+<thead><tr><th>계층</th><th>이름</th><th>역할</th></tr></thead>
+<tbody>
+<tr><td>L1</td><td>RCA Overlay</td><td>원인 구조 고정 — 불량 원인을 7단계로 추적</td></tr>
+<tr><td>L2</td><td>Process Mapper</td><td>문제 구간 한정 — 위험 구간 자동 발견</td></tr>
+<tr><td>L3</td><td>Variable Analyzer</td><td>영향 변수 분해 — 다변량 상관 분석 + 기여도 산출</td></tr>
+<tr><td>L4</td><td>Rule Engine + XAI</td><td>위험 조건 조합 정의 — AI 의사결정 추적성 보장</td></tr>
+</tbody>
+</table>
+
+<p><strong>Bayesian Optimization으로 SOR(Safe Operating Range, 안전 운전 범위) 산출</strong>: 단일 최적값이 아닌 안전 운전 범위(상한·하한·신뢰구간·회피영역)를 제시합니다. 소량 데이터(200~2,000 배치)에서도 작동합니다.</p>
+
+<h2>4가지 허들과 해결 과정</h2>
+
+<table>
+<thead><tr><th>허들</th><th>문제점</th><th>해결</th></tr></thead>
+<tbody>
+<tr><td><strong>① 도메인 일반화 문제</strong></td><td>각 산업(주입·김 제조·인쇄·필름)의 엔티티·변수가 완전히 다름</td><td>가설 기반 요구사항 정리 → 도메인 맥락 후조정. 주입1호기 860배치 데이터로 검증된 L2~L4 구조 확보</td></tr>
+<tr><td><strong>② 소량 데이터에서의 신뢰성</strong></td><td>PoC 단계에서 200~2,000개 배치 수준 데이터만 확보 가능</td><td>Bayesian Optimization이 소량 데이터에 특화된 점 활용. 주입1호기 860배치(4개월) 데이터로 R² > 0.95 달성</td></tr>
+<tr><td><strong>③ MES 연동 복잡도</strong></td><td>운영 시스템·공급사별 스키마 상이</td><td>MES Read-only Connector 표준화 (API/MCP 기반), MES 측 미팅을 통해 DB 테이블 확정</td></tr>
+<tr><td><strong>④ BPM vs RSM 내부 논쟁</strong></td><td>BPM 기반 RSM 구현(템플릿 복제·확장) vs RSM 순서 고정·도메인별 엔티티 차이로 단순 복제 불가, 두 의견 충돌</td><td>BPM은 내부 제품용으로만 인정, 사업 수행 시 RSM 프로세스 우선</td></tr>
+</tbody>
+</table>
+
+<h2>결과 — 주입1호기 실증 (860배치, 364,777개 생산)</h2>
+
+<table>
+<thead><tr><th>분석 항목</th><th>결과</th></tr></thead>
+<tbody>
+<tr><td>불량 기여도 1위 변수</td><td>MFI(g/10min), p-value = 6.34e-08</td></tr>
+<tr><td>위험 규칙 도출</td><td>10개 L4 규칙 (R1~R11)</td></tr>
+<tr><td>가장 위험한 조합</td><td>LOT변경직후 + 경과시간≤5분 → 불량률 38.1%</td></tr>
+<tr><td>SOR (주입압력)</td><td>82.78~106.5 bar</td></tr>
+<tr><td>SOR (배럴온도 1존)</td><td>190.78~214.2°C</td></tr>
+<tr><td>SOR (금형온도)</td><td>27.48~49.5°C</td></tr>
+<tr><td>MFI 안전 범위</td><td>18.4~24.0 g/10min (24 초과 LOT는 위험 분류)</td></tr>
+</tbody>
+</table>
+
+<h3>시나리오별 개선 효과</h3>
+
+<table>
+<thead><tr><th>지표</th><th>기존</th><th>개선</th><th>비고</th></tr></thead>
+<tbody>
+<tr><td>김 제조 불량률</td><td>18.5%</td><td>3%</td><td><strong>84% 감소</strong></td></tr>
+<tr><td>김 제조 최적 조건 도출 시간</td><td>30~60분</td><td>1~2분</td><td><strong>29배 단축</strong></td></tr>
+<tr><td>김 제조 시행착오 횟수</td><td>5~10회</td><td>1~2회</td><td><strong>80% 감소</strong></td></tr>
+<tr><td>인쇄 색상 편차 (Delta-E)</td><td>3.5</td><td>1.5</td><td><strong>57% 개선</strong></td></tr>
+<tr><td>포장재(PP 필름) 연간 LOSS 비용</td><td>6.41억 원</td><td>5.61억 원</td><td><strong>연 9,800만 원 절감</strong></td></tr>
+</tbody>
+</table>
+
+<h2>AX Flow와의 연결 — Govern · Structure · Execute 레이어</h2>
+
+<p>본 사례는 AX Flow의 4-Layer 운영 구조 중 <strong>Govern</strong>과 <strong>Structure</strong> 레이어의 역할이 가장 두드러진 사례입니다. Govern 레이어의 Read-only 원칙이 PLC·SCADA 직접 제어로 인한 사고 책임 부담을 차단하고, AI는 권고만 제공해 사람이 실행하는 거버넌스 구조를 확립했습니다. Structure 레이어는 RCA Overlay부터 Variable Analyzer까지 4계층(L1~L4) 도메인 온톨로지를 정의해, 김 제조·인쇄·포장재 등 공정이 달라도 같은 구조 위에서 분석을 재사용할 수 있게 했습니다. Execute 레이어의 Bayesian Optimization 모듈이 소량 데이터(860배치)에서도 SOR을 계산해 즉시 운영 가능한 규칙을 도출합니다.</p>
+
+<h2>해당 사례 시사점 3가지 — 공정 최적화</h2>
+
+<p>첫째, <strong>"제어 실패"가 아니라 "조건 선택 오류"가 손실의 본질입니다</strong>. 같은 설비, 같은 원료, 같은 작업자라도 조건 조합에 따라 불량률이 6배 이상 차이 납니다. 손실의 60%는 여기서 나옵니다.</p>
+
+<p>둘째, <strong>"단일 최적값"이 아니라 "안전 운전 범위(SOR)"가 실용적입니다</strong>. 현장에서는 정확한 한 값이 아니라 "이 범위 안이면 안전하다"는 가이드라인이 즉시 쓸 수 있는 정보입니다.</p>
+
+<p>셋째, <strong>Read-only가 책임 소재를 정리합니다</strong>. AI가 PLC를 직접 제어하면 사고 시 책임이 모호해집니다. 권고만 제공하고 실행은 사람이 하면, AI는 자유롭게 실험할 수 있습니다.</p>
+
+<blockquote>
+EBIT 2% 개선이 영업이익 30~50% 개선으로 직결됩니다. 공정 최적화는 "신기술 도입"이 아니라 "기존 손실의 회수"입니다.
+</blockquote>
+
+<hr>
+
+<h3>함께 읽으면 좋은 글</h3>
+
+<ul>
+<li><a href="usecase-01-scheduling.html" class="internal-link">AI 기반 생산 스케줄 자동 추천 — 우선순위 배정 60배 단축</a></li>
+<li><a href="usecase-02-document-review.html" class="internal-link">AI 문서 검토·교정·비교 — PM 월간 검토 시간 85% 감소</a></li>
+<li><a href="usecase-04-rag-knowledge-graph.html" class="internal-link">제조 특화 RAG 지식 그래프 — 비정형 문서를 검색 가능한 지식으로</a></li>
+<li><a href="../blog/blog-02.html" class="internal-link">제조AI특화 스마트공장 완벽 가이드 — 800억 원, 400개 기업 선정 전략</a></li>
+</ul>
+
+<p class="source-note">본 사례는 AX Flow Usecase 자료 p.4~6 (Case 3) 기반으로 작성되었습니다.</p>
+
+<p class="tag-line">#AI공정최적화 #RSM공정조건 #ABAOverlay #BayesianOptimization #MESReadOnly #제조불량률감소 #다변량상관분석 #XAI제조 #안전운전범위 #김제조인쇄포장재</p>
+  </div>
+  <footer class="article-footer">
+    <div class="cta-card">
+      <h3>우리 공정에도 적용 가능한지 확인하고 싶다면</h3>
+      <p>AX Flow는 운영 시스템 위에서 작동하는 Read-only 공정 분석·권고 시스템입니다.</p>
+      <div class="cta-stack">
+        <a href="https://41h2yp.share-na2.hsforms.com/27Gch195jTO2MAE176IfYyw" class="primary">무료 컨설팅 신청 →</a>
+      </div>
+    </div>
+  </footer>
+</article>
+
+<div id="pdf-modal-root"></div>
+<script src="../common.js?v=1777173836"></script>
+<script>
+if (typeof getNavHTML === 'function') {
+  document.getElementById('page-nav').innerHTML = getNavHTML('../');
+  if (typeof initCommon === 'function') initCommon('resources');
+  if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+}
+</script>
+<script>
+if (typeof getPdfModalHTML === 'function') {
+  document.getElementById('pdf-modal-root').innerHTML = getPdfModalHTML('../');
+  initPdfModal();
+}
+</script>
+</body>
+</html>

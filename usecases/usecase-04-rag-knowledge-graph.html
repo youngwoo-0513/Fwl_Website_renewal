@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>제조 특화 RAG 지식 그래프 — 비정형 문서를 검색 가능한 지식으로, OCR 한국어 95% 이상 - 퓨처워크랩</title>
+<meta name="description" content="산업단지 제조 기업 스파이어스테크놀로지와 함께한 제조 특화 RAG 지식 그래프 활용사례. PDF·DOCX·HWP·XLSX·CSV 멀티 포맷 자동 처리, 동의어 해소 5단계 매칭, Neo4j GDS Leiden 알고리즘 기반 커뮤니티 감지로 비정형 문서를 그래프로 변환한 구조와 4가지 허들 해결 과정을 정리했습니다.">
+<meta name="keywords" content="제조 RAG, 지식 그래프, Neo4j 제조, 온톨로지 6엔티티, OCR 한국어 95%, 동의어 해소, HWP 파싱, 멀티 포맷 문서 처리, 하이브리드 검색, Leiden 커뮤니티 감지">
+<meta name="author" content="퓨처워크랩 주식회사">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://futureworklab.co.kr/usecases/usecase-04-rag-knowledge-graph.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="퓨처워크랩">
+<meta property="og:title" content="제조 특화 RAG 지식 그래프 — 비정형 문서를 검색 가능한 지식으로, OCR 한국어 95% 이상">
+<meta property="og:description" content="멀티 포맷 자동 처리, 동의어 해소 5단계, Neo4j Leiden 커뮤니티 감지로 비정형 문서를 그래프로 변환한 활용사례.">
+<meta property="og:url" content="https://futureworklab.co.kr/usecases/usecase-04-rag-knowledge-graph.html">
+<meta property="og:image" content="https://futureworklab.co.kr/usecases/thumbs/usecase-04.png">
+<meta property="og:image:alt" content="제조 특화 RAG 지식 그래프 활용사례 - 퓨처워크랩">
+<meta property="article:published_time" content="2026-04-27">
+<meta property="article:modified_time" content="2026-04-27">
+<meta property="article:author" content="퓨처워크랩 주식회사">
+<meta property="article:section" content="활용사례">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="제조 특화 RAG 지식 그래프 — OCR 한국어 95% 이상">
+<meta name="twitter:description" content="PDF·DOCX·HWP·XLSX·CSV 멀티 포맷 자동 처리, 동의어 해소 5단계로 비정형 문서를 검색 가능한 지식으로 만든 활용사례.">
+<meta name="twitter:image" content="https://futureworklab.co.kr/usecases/thumbs/usecase-04.png">
+<meta name="twitter:image:alt" content="제조 특화 RAG 지식 그래프 활용사례 - 퓨처워크랩">
+<meta name="twitter:url" content="https://futureworklab.co.kr/usecases/usecase-04-rag-knowledge-graph.html">
+<link rel="stylesheet" href="../common.css?v=1777173836">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --n0:#FFF; --n50:#F9F9FB; --n75:#EDEDF3; --n100:#E8E8EE; --n200:#DADAE0; --n300:#C7C7CC; --n400:#AEAEB2; --n500:#8E8E93; --n600:#636366; --n700:#48484A; --n800:#3A3A3C; --n900:#1D1D1F; }
+  body { font-family:'Outfit','Pretendard',-apple-system,sans-serif; color:var(--n900); background:var(--n0); line-height:1.7; }
+
+  .article-thumb { margin-bottom:32px; margin-top:-8px; }
+  .article-thumb img { width:100%; border-radius:12px; display:block; }
+  .article-header { max-width:720px; margin:0 auto; padding:100px 24px 32px; }
+  .article-badge { display:inline-flex; padding:4px 12px; border-radius:999px; background:var(--n75); color:var(--n400); font-size:12px; font-weight:500; margin-bottom:16px; }
+  .article-header h1 { font-size:36px; font-weight:700; line-height:1.4; margin-bottom:16px; }
+  .article-meta { font-size:14px; color:var(--n400); display:flex; gap:12px; align-items:center; padding-bottom:32px; border-bottom:1px solid var(--n100); }
+  .article-meta .dot { width:3px; height:3px; border-radius:50%; background:var(--n300); }
+
+  .article-body { max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+  .article-body h2 { font-size:24px; font-weight:700; margin:48px 0 16px; padding-top:24px; border-top:1px solid var(--n100); }
+  .article-body h3 { font-size:20px; font-weight:600; margin:32px 0 12px; }
+  .article-body p { font-size:16px; line-height:1.8; margin-bottom:16px; color:var(--n700); }
+  .article-body strong { color:var(--n900); }
+  .article-body hr { border:none; border-top:1px solid var(--n100); margin:32px 0; }
+  .article-body blockquote { border-left:3px solid var(--n900); padding:12px 20px; margin:24px 0; background:var(--n50); border-radius:0 8px 8px 0; color:var(--n600); font-size:15px; }
+  .article-body ul, .article-body ol { padding-left:24px; margin-bottom:16px; }
+  .article-body li { font-size:16px; line-height:1.8; margin-bottom:8px; color:var(--n700); }
+  .article-body table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--n100); border-radius:8px; overflow:hidden; margin:24px 0; }
+  .article-body thead th { background:var(--n50); padding:12px 16px; text-align:center; font-size:14px; font-weight:600; color:var(--n600); border-bottom:1px solid var(--n100); }
+  .article-body tbody td { padding:12px 16px; text-align:center; font-size:14px; border-bottom:1px solid var(--n100); }
+  .article-body tbody tr:last-child td { border-bottom:none; }
+  .article-body .internal-link { color:var(--n900); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+  .article-body .internal-link:hover { color:var(--n600); }
+  .article-body .tag-line { color:var(--n400); font-size:14px; line-height:2; }
+  .article-body .source-note { font-size:13px; color:var(--n500); padding:16px 20px; background:var(--n50); border-radius:8px; margin:32px 0 0; }
+
+  .article-footer { max-width:720px; margin:0 auto; padding:0 24px 80px; }
+  .cta-stack { display:flex; flex-direction:column; gap:12px; margin-top:24px; }
+  .cta-stack a { display:inline-flex; justify-content:center; align-items:center; padding:14px 28px; border-radius:8px; font-size:14px; font-weight:600; text-decoration:none; min-width:240px; }
+  .cta-card { background:var(--n900); border-radius:16px; padding:48px; text-align:center; }
+  .cta-card h3 { font-size:24px; font-weight:700; color:var(--n0); margin-bottom:8px; }
+  .cta-card p { font-size:16px; color:var(--n400); margin-bottom:16px; }
+  .cta-card .cta-stack a.primary { background:var(--n0); color:var(--n900); }
+  .cta-card .cta-stack a.primary:hover { background:var(--n75); }
+  .cta-card .cta-stack a.secondary { background:transparent; color:var(--n0); border:1px solid var(--n600); }
+  .cta-card .cta-stack a.secondary:hover { background:var(--n800); }
+
+  @media (max-width:768px) {
+    .article-header h1 { font-size:26px; }
+    .article-header, .article-body, .article-footer { padding-left:20px; padding-right:20px; }
+    .cta-card { padding:32px 20px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "제조 특화 RAG 지식 그래프 — 비정형 문서를 검색 가능한 지식으로, OCR 한국어 95% 이상",
+  "image": "https://futureworklab.co.kr/usecases/thumbs/usecase-04.png",
+  "datePublished": "2026-04-27",
+  "dateModified": "2026-04-27",
+  "author": { "@type": "Organization", "name": "퓨처워크랩 주식회사", "url": "https://futureworklab.co.kr" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "퓨처워크랩 주식회사",
+    "logo": { "@type": "ImageObject", "url": "https://futureworklab.co.kr/images/logo.png" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://futureworklab.co.kr/usecases/usecase-04-rag-knowledge-graph.html" },
+  "description": "산업단지 제조 기업과 함께한 제조 특화 RAG 지식 그래프 사례. 멀티 포맷 자동 처리, 동의어 해소 5단계 매칭, Neo4j Leiden 커뮤니티 감지로 비정형 문서를 그래프로 변환한 구조와 4가지 허들 해결 과정을 정리했습니다.",
+  "articleSection": "활용사례",
+  "inLanguage": "ko-KR"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://futureworklab.co.kr/" },
+    { "@type": "ListItem", "position": 2, "name": "리소스", "item": "https://futureworklab.co.kr/resources.html" },
+    { "@type": "ListItem", "position": 3, "name": "활용사례", "item": "https://futureworklab.co.kr/resources.html?category=case-study" },
+    { "@type": "ListItem", "position": 4, "name": "제조 특화 RAG 지식 그래프 — 비정형 문서를 검색 가능한 지식으로, OCR 한국어 95% 이상", "item": "https://futureworklab.co.kr/usecases/usecase-04-rag-knowledge-graph.html" }
+  ]
+}
+</script>
+<script src="https://unpkg.com/lucide@1.11.0/dist/umd/lucide.min.js" integrity="sha384-7PArHXNzg1s/WgbAH9xkBpx4T6MJ0jPAxaEM9yld+zvdFEjSf+wzzv0hDnem/6rw" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="page-nav"></div>
+<article>
+  <header class="article-header">
+    <span class="article-badge">활용사례</span>
+    <h1>제조 특화 RAG 지식 그래프 — 비정형 문서를 검색 가능한 지식으로, OCR 한국어 95% 이상</h1>
+    <div class="article-meta">
+      <span>2026. 4. 27</span>
+      <span class="dot"></span>
+      <span>8분 읽기</span>
+      <span class="dot"></span>
+      <span>FutureWorkLab</span>
+    </div>
+  </header>
+  <div class="article-body">
+    <div class="article-thumb">
+      <img src="thumbs/usecase-04.png" alt="제조 특화 RAG 지식 그래프 활용사례">
+    </div>
+
+<p>본 사례는 산업단지 제조 기업 <strong>스파이어스테크놀로지</strong>와 함께 진행한 제조 특화 RAG(검색 증강 생성) 지식 그래프 프로젝트를 기반으로 정리했습니다. 다양한 포맷의 비정형 문서를 그래프로 변환하고, 동일 장비를 다섯 가지 다른 이름으로 부르는 현장 지식 분절 문제를 해소한 과정을 공유합니다.</p>
+
+<h2>왜 비정형 문서가 활용되지 못하는가</h2>
+
+<p>이 회사는 PDF, DOCX, HWP, XLSX, CSV 등 다양한 포맷의 문서를 보유하고 있었지만, 실제 업무에 활용하지 못하고 있었습니다. 다음 3가지 문제가 동시에 발생했습니다.</p>
+
+<ul>
+<li><strong>문서 자동 처리 불가</strong>: 스캔 문서에 OCR(광학 문자 인식) 처리가 안 되어 있어 검색이 불가능했습니다. 표·이미지 등 구조화된 정보 활용도 어려웠습니다.</li>
+<li><strong>동의어 해소 불가</strong>: 같은 장비를 "프린터_01", "PT-01", "1번 인쇄기", "Printer Unit 1" 등으로 다양하게 표기합니다. 제조 현장 지식이 분절되어 맥락 기반 검색이 불가능했습니다.</li>
+<li><strong>의사결정 지원 부족</strong>: 장비 스펙, 공정 파라미터, 불량 원인 등이 문서에 산재되어 있어, 문제 해결에 오래 걸리고 반복되는 불량의 근본 원인 파악이 어려웠습니다.</li>
+</ul>
+
+<h2>해결 핵심 — 3단계 파이프라인으로 비정형 문서를 그래프로 변환</h2>
+
+<h3>1단계 — 수집·전처리</h3>
+
+<table>
+<thead><tr><th>기능</th><th>상세</th></tr></thead>
+<tbody>
+<tr><td>멀티 포맷 파싱</td><td>PDF, DOCX, HWP, XLSX, CSV 자동 감지 + 텍스트·표·이미지 캡션 추출</td></tr>
+<tr><td>의미론적 청킹</td><td>고정 길이 분할 대신 문맥 기반 분할 (300~800 토큰)</td></tr>
+<tr><td>메타데이터 추출</td><td>파일 속성 자동 추출 + LLM 기반 자동 분류 (문서 유형, 키워드, 요약)</td></tr>
+<tr><td>OCR</td><td>한국어 95% 이상 인식률, 스캔 문서 자동 처리</td></tr>
+</tbody>
+</table>
+
+<h3>2단계 — 지식 그래프 구축</h3>
+
+<table>
+<thead><tr><th>기능</th><th>상세</th></tr></thead>
+<tbody>
+<tr><td>온톨로지 정의</td><td>제조 도메인 특화 엔티티 6종 (장비, 공정, 부품, 불량, 규정, 작업자) + 13개 관계 유형</td></tr>
+<tr><td>엔티티/관계 추출</td><td>온톨로지 스키마 기반 LLM 추출 + Gleaning(2차 검증) + 신뢰도 점수</td></tr>
+<tr><td>동의어 해소</td><td>5단계 매칭 전략 (정확매칭 → 동의어사전 → 규칙 → 임베딩유사도 → LLM판단)</td></tr>
+<tr><td>커뮤니티 감지</td><td>Neo4j GDS Leiden 알고리즘 — 계층적 커뮤니티 구축 (3 레벨)</td></tr>
+</tbody>
+</table>
+
+<h3>3단계 — 하이브리드 검색</h3>
+
+<p>벡터 검색과 그래프 기반 검색을 결합하고, 모든 답변에 원본 추적을 지원합니다. 답을 보여줄 뿐만 아니라 어떤 문서의 어떤 청크에서 나왔는지를 함께 제시합니다.</p>
+
+<p><strong>기술 스택</strong>: Neo4j(그래프 데이터베이스) / GPT-4o·Claude Sonnet(LLM) / text-embedding-3-large(임베딩) / Python(파이프라인)</p>
+
+<h2>4가지 허들과 해결 과정</h2>
+
+<table>
+<thead><tr><th>허들</th><th>문제점</th><th>해결</th></tr></thead>
+<tbody>
+<tr><td><strong>① HWP 파싱 라이브러리 성숙도 부족</strong></td><td>표·글상자 등 복잡 구조 파싱이 실패하는 경우</td><td>한컴 공식 API 또는 hwp5 오픈소스 라이브러리 사전 검증, 필요 시 HWP → PDF 변환 후 파싱 병행</td></tr>
+<tr><td><strong>② 스캔 품질 저하로 OCR 인식률 저하</strong></td><td>OCR 인식률이 낮으면 이후 전체 처리 오류로 전파</td><td>이미지 전처리(디스큐·노이즈 제거) 파이프라인 추가, 신뢰도 임계값 미만 시 수동 검수 큐 전달</td></tr>
+<tr><td><strong>③ 대용량 문서 처리 지연</strong></td><td>사용자 대기 시간 증가</td><td>비동기 처리 + 진행률 표시, 완료 시 알림 발송</td></tr>
+<tr><td><strong>④ LLM 기반 메타데이터 추출 비용 증가</strong></td><td>대량 문서 처리 시 토큰 비용 급증 위험</td><td>규칙 기반 추출 우선, LLM은 보완용으로 활용, 토큰 모니터링 상시 운영</td></tr>
+</tbody>
+</table>
+
+<h2>결과 — 정량 개선 수치</h2>
+
+<table>
+<thead><tr><th>지표</th><th>개선</th></tr></thead>
+<tbody>
+<tr><td>파싱 성공률</td><td>정상 파일 기준 99% 이상</td></tr>
+<tr><td>단일 문서 파싱 시간 (50페이지)</td><td>OCR 미포함 30초 이내 / OCR 포함 120초 이내</td></tr>
+<tr><td>엔티티 추출 Precision</td><td>85% 이상</td></tr>
+<tr><td>엔티티 추출 Recall</td><td>75% 이상</td></tr>
+<tr><td>동의어 해소 정확도</td><td>90% 이상</td></tr>
+<tr><td>OCR 한국어 인식률</td><td>95% 이상</td></tr>
+<tr><td>문서 유형 분류 정확도 (LLM)</td><td>85% 이상</td></tr>
+<tr><td>100페이지 문서 그래프 구축</td><td>30분 이내</td></tr>
+<tr><td>파이프라인 가용성</td><td>99.5% 이상 (월 다운타임 3.6시간 이내)</td></tr>
+<tr><td>문서 1건당 LLM 토큰 비용</td><td>$2 이내</td></tr>
+<tr><td>요약 품질 (전문가 평가)</td><td>4.0/5.0 이상</td></tr>
+</tbody>
+</table>
+
+<h3>정성적 개선</h3>
+
+<ul>
+<li>문서 업로드 → 파싱 → 청킹 → OCR → 그래프 구축 <strong>전 과정 자동화</strong></li>
+<li>동의어 자동 병합으로 <strong>지식 분절 해소</strong></li>
+<li>모든 노드/엣지에 출처 청크 ID 기록 → <strong>원본 문서까지 한 번에 추적</strong></li>
+<li>커뮤니티 자동 감지로 <strong>주제별 그룹화</strong> → 맥락 기반 검색 가능</li>
+</ul>
+
+<h2>AX Flow와의 연결 — Structure 레이어 (Triple-GraphRAG)</h2>
+
+<p>본 사례는 AX Flow의 4-Layer 운영 구조 중 <strong>Structure</strong> 레이어가 정면으로 작동한 사례입니다. Structure 레이어는 온톨로지·Graph-RAG·Vector DB로 구성되며, 본 사례의 제조 도메인 특화 엔티티 6종과 13개 관계 유형, 5단계 동의어 해소, Neo4j GDS Leiden 알고리즘 기반 커뮤니티 감지가 모두 이 레이어에서 이루어집니다. Connect 레이어는 PDF·DOCX·HWP·XLSX·CSV 등 5포맷을 단일 입력으로 통합하고, Execute 레이어의 3단계 파이프라인이 수집부터 그래프 구축까지 순차 실행합니다. 새 포맷이나 도메인이 추가되어도 같은 Structure 레이어 위에서 확장 가능한 구조입니다.</p>
+
+<h2>해당 사례 시사점 3가지 — 제조 RAG</h2>
+
+<p>첫째, <strong>제조 RAG는 일반 RAG가 아닙니다</strong>. 제조 도메인 특화 엔티티(장비·공정·부품·불량·규정·작업자) 6종과 13개 관계 유형을 미리 정의해야 의미 있는 검색이 가능합니다.</p>
+
+<p>둘째, <strong>동의어 해소가 정확도를 좌우합니다</strong>. 정확매칭만으로는 90% 정확도 달성이 불가능합니다. 동의어사전·규칙·임베딩 유사도·LLM 판단을 5단계로 결합해야 현장 표기 분절을 흡수할 수 있습니다.</p>
+
+<p>셋째, <strong>비용은 규칙 기반 우선, LLM 보완용</strong>입니다. 모든 메타데이터 추출에 LLM을 쓰면 토큰 비용이 폭증합니다. 규칙으로 70%를 잡고 LLM으로 30%를 보완하는 구조가 운영 가능한 비용 곡선을 만듭니다.</p>
+
+<blockquote>
+지식이 그래프에 축적되면 검색 한 번이 아니라 자산이 남습니다. 새 직원 온보딩, 사고 원인 추적, 규정 변경 영향 분석이 모두 같은 그래프 위에서 이루어집니다.
+</blockquote>
+
+<hr>
+
+<h3>함께 읽으면 좋은 글</h3>
+
+<ul>
+<li><a href="usecase-01-scheduling.html" class="internal-link">AI 기반 생산 스케줄 자동 추천 — 우선순위 배정 60배 단축</a></li>
+<li><a href="usecase-02-document-review.html" class="internal-link">AI 문서 검토·교정·비교 — PM 월간 검토 시간 85% 감소</a></li>
+<li><a href="usecase-03-process-optimization.html" class="internal-link">제조 공정 조건 최적화 — 김 제조 불량률 84% 감소, 연 9,800만 원 절감</a></li>
+<li><a href="../blog/blog-02.html" class="internal-link">제조AI특화 스마트공장 완벽 가이드 — 800억 원, 400개 기업 선정 전략</a></li>
+</ul>
+
+<p class="source-note">본 사례는 AX Flow Usecase 자료 p.7~8 (Case 4) 기반으로 작성되었습니다.</p>
+
+<p class="tag-line">#제조RAG #지식그래프 #Neo4j제조 #온톨로지6엔티티 #OCR한국어 #동의어해소 #HWP파싱 #멀티포맷문서 #하이브리드검색 #Leiden커뮤니티</p>
+  </div>
+  <footer class="article-footer">
+    <div class="cta-card">
+      <h3>우리 회사 문서 자산도 검색 가능한 지식으로 만들고 싶다면</h3>
+      <p>AX Flow는 제조 도메인 특화 온톨로지와 5단계 동의어 해소로 분절된 지식을 통합합니다.</p>
+      <div class="cta-stack">
+        <a href="https://41h2yp.share-na2.hsforms.com/27Gch195jTO2MAE176IfYyw" class="primary">무료 컨설팅 신청 →</a>
+      </div>
+    </div>
+  </footer>
+</article>
+
+<div id="pdf-modal-root"></div>
+<script src="../common.js?v=1777173836"></script>
+<script>
+if (typeof getNavHTML === 'function') {
+  document.getElementById('page-nav').innerHTML = getNavHTML('../');
+  if (typeof initCommon === 'function') initCommon('resources');
+  if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+}
+</script>
+<script>
+if (typeof getPdfModalHTML === 'function') {
+  document.getElementById('pdf-modal-root').innerHTML = getPdfModalHTML('../');
+  initPdfModal();
+}
+</script>
+</body>
+</html>
