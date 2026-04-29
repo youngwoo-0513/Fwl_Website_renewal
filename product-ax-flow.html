@@ -28,7 +28,9 @@
   /* ===== PRODUCT HERO ===== */
   .product-hero {
     padding: 184px 0 120px; background: #EAEAEE;
+    min-height: 624px;
     text-align: center; position: relative; overflow: hidden;
+    box-sizing: border-box;
   }
   .product-hero::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -53,8 +55,8 @@
   .product-hero .cta-row { display: flex; gap: 16px; justify-content: center; }
   .product-hero .btn-white { background: #1A1A1A; color: #FFFFFF; }
   .product-hero .btn-white:hover { background: #000000; }
-  .product-hero .btn-ghost { background: transparent; color: #1A1A1A; border: 1.5px solid rgba(0,0,0,0.25); }
-  .product-hero .btn-ghost:hover { background: rgba(0,0,0,0.05); }
+  .product-hero .btn-ghost { background: #FFFFFF; color: #1A1A1A; border: 1.5px solid #1A1A1A; font-weight: 600; }
+  .product-hero .btn-ghost:hover { background: #F4F4F5; color: #000000; }
 
   /* ===== FEATURES TABS ===== */
   .features { padding: 80px 0; }
@@ -407,6 +409,12 @@
       border-bottom: 1px solid var(--n100);
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
+    /* Dark mode 모바일: 다크 페이지 위 흰 띠 + 흰 inactive 텍스트로 안 보이는 현상 fix */
+    html.dark .features-nav {
+      background: #09090B;
+      border-bottom-color: rgba(255,255,255,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
     .features-nav-item { padding: 10px 4px; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
     .features-nav-item .nav-icon { width: 32px; height: 32px; }
     .features-nav-item .nav-icon svg { width: 16px; height: 16px; }
@@ -479,7 +487,7 @@
   html.dark .product-hero h1 { color: #1A1A1A !important; }
   html.dark .product-hero .desc { color: #5A5A5A !important; }
   html.dark .product-hero .btn-white { background: #1A1A1A !important; color: #FFFFFF !important; }
-  html.dark .product-hero .btn-ghost { background: transparent !important; color: #1A1A1A !important; border-color: rgba(0,0,0,0.25) !important; }
+  html.dark .product-hero .btn-ghost { background: #FFFFFF !important; color: #1A1A1A !important; border-color: #1A1A1A !important; }
 
   /* Features section: dark theme in dark mode (cards have dark bg, white text) */
   html.dark .features { background: #09090B; }

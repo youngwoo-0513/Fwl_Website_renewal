@@ -128,10 +128,12 @@
 <link rel="stylesheet" href="common.css?v=1777173836">
 <script src="https://unpkg.com/lucide@1.11.0/dist/umd/lucide.min.js" integrity="sha384-7PArHXNzg1s/WgbAH9xkBpx4T6MJ0jPAxaEM9yld+zvdFEjSf+wzzv0hDnem/6rw" crossorigin="anonymous"></script>
 <style>
-  /* ===== SUBSIDY HERO (stone, centered — matches product-hero) ===== */
+  /* ===== SUBSIDY HERO (stone, centered — product-hero와 동일 높이 624px) ===== */
   .subsidy-hero {
-    padding: 184px 0 120px; background: #EAEAEE;
+    padding: 124px 0 76px; background: #EAEAEE;
+    min-height: 624px;
     text-align: center; position: relative; overflow: hidden;
+    box-sizing: border-box;
   }
   .subsidy-hero .hero-bg-object {
     position: absolute; inset: 0; overflow: hidden; pointer-events: none;
@@ -154,8 +156,8 @@
   .subsidy-hero .cta-row { display: flex; gap: 16px; justify-content: center; }
   .subsidy-hero .btn-white { background: #1A1A1A; color: #FFFFFF; }
   .subsidy-hero .btn-white:hover { background: #000000; }
-  .subsidy-hero .btn-ghost { background: transparent; color: #1A1A1A; border: 1.5px solid rgba(0,0,0,0.25); }
-  .subsidy-hero .btn-ghost:hover { background: rgba(0,0,0,0.05); }
+  .subsidy-hero .btn-ghost { background: #FFFFFF; color: #1A1A1A; border: 1.5px solid #1A1A1A; font-weight: 600; }
+  .subsidy-hero .btn-ghost:hover { background: #F4F4F5; color: #000000; }
 
   /* ===== HIGHLIGHTS + FORM SECTION ===== */
   .subsidy-form-section { padding: 80px 0; background: var(--n50); }
@@ -234,34 +236,47 @@
     .subsidy-cta h2 { font-size: 24px; }
   }
 
-  /* ===== 다크모드: 본 페이지는 라이트 톤 강제 유지 (2026-04-29 사용자 요청) ===== */
-  /* 카드 SVG 패턴(=card-bo)은 디자이너 작업 그대로 보존, 그 외는 원래 라이트 디자인으로 */
-  html.dark {
-    --n0: #FFFFFF; --n50: #F8F8FA; --n75: #F4F4F5; --n100: #E4E4E7;
-    --n200: #C8C9D0; --n300: #A1A1AA; --n400: #71717A; --n500: #5A5A5A;
-    --n600: #3F3F46; --n700: #27272A; --n800: #1F1F23; --n900: #1A1A1A;
-  }
+  /* ===== 다크모드: 전 페이지 라이트 모양 강제 (사용자 요청 — 항상 화이트 배경) ===== */
+  html.dark { color-scheme: light; }
   html.dark body { background: #FFFFFF !important; color: #1A1A1A !important; }
   html.dark .subsidy-hero { background-color: #EAEAEE !important; }
   html.dark .subsidy-hero h1 { color: #1A1A1A !important; }
   html.dark .subsidy-hero .desc { color: #5A5A5A !important; }
   html.dark .subsidy-hero .tag { color: #4A4A4A !important; background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.08) !important; }
   html.dark .subsidy-hero .btn-white { background: #1A1A1A !important; color: #FFFFFF !important; }
-  html.dark .subsidy-hero .btn-ghost { background: transparent !important; color: #1A1A1A !important; border-color: rgba(0,0,0,0.25) !important; }
-  html.dark .subsidy-form-section { background: #FFFFFF !important; }
+  html.dark .subsidy-hero .btn-ghost { background: #FFFFFF !important; color: #1A1A1A !important; border-color: #1A1A1A !important; }
+  html.dark .subsidy-form-section { background: #F8F8FA !important; }
+  html.dark .subsidy-form-section h2 { color: #1A1A1A !important; }
+  html.dark .subsidy-form-section .desc { color: #5A5A5A !important; }
+  html.dark .highlight-item .value { color: #1A1A1A !important; }
+  html.dark .highlight-item .label { color: #5A5A5A !important; }
+  html.dark .pdf-form { background: #FFFFFF !important; border-color: #E4E4E7 !important; }
+  html.dark .pdf-form h3 { color: #1A1A1A !important; }
+  html.dark .pdf-form .form-sub { color: #5A5A5A !important; }
+  html.dark .pdf-form .consent { color: #71717A !important; }
+  html.dark .pdf-form .form-input { background: #FFFFFF !important; border-color: #E4E4E7 !important; color: #1A1A1A !important; }
+  html.dark .pdf-form .form-input::placeholder { color: #A1A1AA !important; }
   html.dark .subsidy-content { background: #FFFFFF !important; }
+  html.dark .subsidy-content .section-label { color: #5A5A5A !important; }
+  html.dark .subsidy-content .section-title { color: #1A1A1A !important; }
   html.dark .content-card { background: #FFFFFF !important; border-color: #E4E4E7 !important; }
   html.dark .content-card h4 { color: #1A1A1A !important; }
   html.dark .content-card p { color: #5A5A5A !important; }
   html.dark .content-card li { color: #3F3F46 !important; }
   html.dark .content-card .card-icon { background: #F8F8FA !important; color: #5A5A5A !important; }
   html.dark .timeline { background: #F8F8FA !important; }
+  html.dark .timeline h2 { color: #1A1A1A !important; }
   html.dark .timeline-step { border-bottom-color: #E4E4E7 !important; }
   html.dark .timeline-step h4 { color: #1A1A1A !important; }
   html.dark .timeline-step p { color: #5A5A5A !important; }
+  html.dark .subsidy-faq { background: #F8F8FA !important; }
+  html.dark .subsidy-faq h2 { color: #1A1A1A !important; }
+  html.dark .subsidy-faq h3 { color: #1A1A1A !important; }
+  html.dark .subsidy-faq p { color: #5A5A5A !important; }
   html.dark .subsidy-cta .cta-card { background: #1A1A1A !important; }
   html.dark .subsidy-cta h2 { color: #FFFFFF !important; }
   html.dark .subsidy-cta p { color: #A1A1AA !important; }
+  html.dark .subsidy-cta .btn-white { background: #FFFFFF !important; color: #1A1A1A !important; }
   @media (max-width: 768px) {
     /* keep mobile rules unchanged */
     .subsidy-cta p { font-size: 14px; margin-bottom: 24px; }
@@ -309,7 +324,7 @@
     <p class="desc fade-up stagger-2">2026 하반기 제조 AI 지원사업 9개 공고를 자율형공장·벤더·바우처 3개 카테고리로 정리.<br>중소·중견 제조기업(제약 GMP·식품 HACCP·포장재·자동차부품)이 기업당 최대 30억, 보조율 80%까지 받을 수 있도록 신청 타이밍과 매칭 기준을 담았습니다.</p>
     <div class="cta-row fade-up stagger-3">
       <a href="#subsidy-download" class="btn btn-white">무료 PDF 가이드 받기</a>
-      <a href="solutions-subsidy-check.html" class="btn btn-ghost">자가진단 2분 해보기 →</a>
+      <a href="solutions-subsidy-check.html" class="btn btn-ghost">자가진단 →</a>
     </div>
     <p class="fade-up stagger-4" style="font-size:12px;color:#8A8A8A;margin-top:16px">공식 공고 9건 기반 · 중기부·NIPA·KEIT 출처 · AX Flow 도입 여부와 무관하게 활용 가능</p>
   </div>
@@ -331,8 +346,49 @@
       <div class="pdf-form fade-up stagger-3">
         <h3>PDF 가이드 무료 다운로드</h3>
         <p class="form-sub">7~8월 5개 공고 동시 접수 · 지금 이메일로 바로 받기</p>
-        <!-- HubSpot embed (UUID 02e5985f — calendar) — 2026-04-29 contact 생성 보장 위해 hbspt.forms.create 전환 -->
-        <div id="hubspot-form-subsidy" style="max-width: 100%;"></div>
+        <form id="subsidyForm">
+          <div class="form-group"><label>이름</label><input type="text" name="firstname" class="form-input" placeholder="홍길동" required></div>
+          <div class="form-group"><label>이메일</label><input type="email" name="email" class="form-input" placeholder="email@company.com" required></div>
+          <div class="form-group"><label>회사명</label><input type="text" name="company" class="form-input" placeholder="회사명"></div>
+          <div class="form-group"><label>업종</label><select name="industry" class="form-input form-select" required><option value="">업종을 선택하세요</option><option>제약·바이오 (GMP)</option><option>식품·건기식 (HACCP)</option><option>포장재·부품</option><option>화장품·ODM</option><option>반도체·전자부품</option><option>자동차 부품</option><option>MES/ERP/WMS/QMS (IT 시스템 운영)</option><option>기타 제조업</option></select></div>
+          <div class="consent"><input type="checkbox" name="consent_privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--n500)">보기</a></span></div>
+          <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_marketing"><span>[선택] 제품·지원사업 정보를 이메일로 받아보겠습니다.</span></div>
+          <button type="submit" class="btn btn-solid" style="margin-top:16px">무료 PDF 가이드 지금 받기 →</button>
+        </form>
+        <script>
+        (function() {
+          const DRAFT_KEY = 'fwl_subsidy_guide_draft_v1';
+          const form = document.getElementById('subsidyForm');
+          const fields = ['firstname', 'email', 'company', 'industry'];
+          // 복원
+          try {
+            const saved = JSON.parse(localStorage.getItem(DRAFT_KEY) || '{}');
+            fields.forEach(name => { if (saved[name] && form[name]) form[name].value = saved[name]; });
+          } catch (_) { /* ignore */ }
+          // 자동 저장 (input/change 시점)
+          fields.forEach(name => {
+            if (!form[name]) return;
+            form[name].addEventListener('input', () => {
+              const draft = {};
+              fields.forEach(n => { if (form[n]) draft[n] = form[n].value; });
+              try { localStorage.setItem(DRAFT_KEY, JSON.stringify(draft)); } catch (_) {}
+            });
+          });
+          // 제출
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const f = this;
+            submitToHubSpot(HUBSPOT_FORMS.calendar, [
+              { name: 'firstname', value: f.firstname.value },
+              { name: 'email', value: f.email.value },
+              { name: '0-2/name', value: f.company.value },
+              { name: 'company_industry', value: f.industry.value },
+              { name: 'consent_marketing', value: f.consent_marketing.checked ? 'Y' : 'N' },
+            ], 'thank-you.html');
+            try { localStorage.removeItem(DRAFT_KEY); } catch (_) {}
+          });
+        })();
+        </script>
       </div>
     </div>
   </div>
@@ -591,22 +647,6 @@
   document.getElementById('footer').innerHTML = getFooterHTML();
   initCommon('solutions');
   lucide.createIcons();
-</script>
-
-<!-- HubSpot Forms embed (region: na2) — subsidy PDF gate = calendar formId 02e5985f -->
-<script charset="utf-8" type="text/javascript" src="https://js-na2.hsforms.net/forms/embed/v2.js"></script>
-<script>
-  if (window.hbspt) {
-    hbspt.forms.create({
-      region: 'na2',
-      portalId: '244341313',
-      formId: '02e5985f-ab91-4e1d-8dfc-29fa510aee8d',
-      target: '#hubspot-form-subsidy',
-      onFormSubmitted: function() {
-        window.location.href = 'thank-you.html';
-      }
-    });
-  }
 </script>
 </body>
 </html>

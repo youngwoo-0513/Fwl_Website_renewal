@@ -170,7 +170,7 @@ html.dark .floating-cta { background: #FAFAFA; color: #09090B; }
 
 /* ===== FORM COMMON ===== */
 .form-group { margin-bottom: 16px; }
-.form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--n600); margin-bottom: 6px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--n900); margin-bottom: 6px; }
 .form-input {
   width: 100%; padding: 12px 16px; border-radius: 8px;
   background: var(--n0); border: 1px solid var(--n200);
@@ -203,11 +203,12 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   position: absolute; top: calc(100% + 4px); left: 0; right: 0;
   background: var(--n0); border: 1px solid var(--n200); border-radius: 8px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  z-index: 100; overflow: hidden;
+  z-index: 1000; overflow: hidden;
   max-height: 0; opacity: 0; transform: translateY(-4px);
   transition: max-height 0.25s ease, opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none;
 }
+.custom-select.open { position: relative; z-index: 1001; }
 .custom-select.open .custom-select-dropdown {
   max-height: 280px; opacity: 1; transform: translateY(0);
   pointer-events: auto; overflow-y: auto;
