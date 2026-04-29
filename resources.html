@@ -50,19 +50,46 @@
     .nav-links { display: none; }
   }
 
-  /* ===== PAGE HERO ===== */
+  /* ===== PAGE HERO (matches product-hero / subsidy-hero) ===== */
   .page-hero {
-    padding: 160px 0 60px;
-    background: var(--n0);
-    text-align: center;
+    padding: 184px 0 120px; background: #EAEAEE;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,255,255,0.25) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .page-hero .hero-bg-object {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 70% 100% at 50% 55%, rgba(0,0,0,0.3) 0%, #000 65%);
+            mask-image: radial-gradient(ellipse 70% 100% at 50% 55%, rgba(0,0,0,0.3) 0%, #000 65%);
+  }
+  .page-hero .hero-bg-object svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .page-hero::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 35% 55% at 50% 50%, rgba(234,234,238,0.55) 0%, rgba(234,234,238,0.2) 50%, transparent 85%);
+  }
+  .page-hero > .container, .page-hero > div { position: relative; z-index: 1; }
+  .page-hero .tag {
+    display: inline-flex; padding: 4px 12px; border-radius: 999px;
+    background: rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.08);
+    color: #4A4A4A; font-size: 13px; font-weight: 500; margin-bottom: 24px;
   }
   .page-hero h1 {
-    font-size: 48px; font-weight: 700; line-height: 1.3;
-    margin-bottom: 16px;
+    font-size: 52px; font-weight: 700; color: #1A1A1A; line-height: 1.3;
+    margin-bottom: 20px;
   }
   .page-hero .desc {
-    font-size: 18px; color: var(--n500); max-width: 560px; margin: 0 auto;
+    font-size: 18px; color: #5A5A5A; max-width: 680px; margin: 0 auto;
+    line-height: 1.7;
   }
+
+  /* Dark mode: keep light hero look (matches product/subsidy) */
+  html.dark .page-hero { background: #EAEAEE !important; }
+  html.dark .page-hero h1 { color: #1A1A1A !important; }
+  html.dark .page-hero .desc { color: #5A5A5A !important; }
+  html.dark .page-hero .tag { color: #4A4A4A !important; background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.08) !important; }
 
   /* ===== FILTER TABS ===== */
   .filter-section {
@@ -226,8 +253,8 @@
     .featured-thumb { min-height: 200px; }
   }
   @media (max-width: 768px) {
-    .page-hero { padding: 120px 0 40px; }
-    .page-hero h1 { font-size: 28px; }
+    .page-hero { padding: 144px 0 80px; }
+    .page-hero h1 { font-size: 28px; line-height: 1.4; }
     .page-hero .desc { font-size: 15px; }
 
     .filter-inner { padding: 0 16px; gap: 4px; }
@@ -265,9 +292,55 @@
 
 <!-- PAGE HERO -->
 <section class="page-hero">
-  <div>
-    <h1 class="fade-up">리소스</h1>
-    <p class="desc fade-up stagger-1">제조 AI 도입에 필요한 인사이트와 가이드를 정리했습니다</p>
+  <div class="hero-bg-object" aria-hidden="true">
+    <!-- Brand Object: Hub Radial — 중심에서 8방향 + 16개 아우터 노드 (리소스 허브) -->
+    <svg viewBox="0 0 1400 420" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="hero-grid-resources" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#C8C9D0" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="1400" height="420" fill="url(#hero-grid-resources)"/>
+      <!-- Hub Radial: 중심 (700, 200) 에서 8방향 라디얼 + 그리드 정렬 노드 -->
+      <g stroke="#6E6F7A" fill="none">
+        <!-- 4 cardinal axes (long, prominent) -->
+        <line x1="700" y1="200" x2="100"  y2="200" stroke-width="0.9" opacity="0.45"/>
+        <line x1="700" y1="200" x2="1300" y2="200" stroke-width="0.9" opacity="0.45"/>
+        <line x1="700" y1="200" x2="700"  y2="40"  stroke-width="0.8" opacity="0.38"/>
+        <line x1="700" y1="200" x2="700"  y2="360" stroke-width="0.8" opacity="0.38"/>
+        <!-- 4 diagonals (medium) -->
+        <line x1="700" y1="200" x2="380"  y2="40"  stroke-width="0.7" opacity="0.3"/>
+        <line x1="700" y1="200" x2="1020" y2="40"  stroke-width="0.7" opacity="0.3"/>
+        <line x1="700" y1="200" x2="380"  y2="360" stroke-width="0.7" opacity="0.3"/>
+        <line x1="700" y1="200" x2="1020" y2="360" stroke-width="0.7" opacity="0.3"/>
+        <!-- mid-orbit ring (subtle) -->
+        <circle cx="700" cy="200" r="160" stroke-width="0.5" opacity="0.18"/>
+        <circle cx="700" cy="200" r="280" stroke-width="0.4" opacity="0.12"/>
+      </g>
+      <!-- outer endpoint nodes (on grid) -->
+      <g fill="#6E6F7A">
+        <circle cx="100"  cy="200" r="3"   opacity="0.55"/>
+        <circle cx="1300" cy="200" r="3"   opacity="0.55"/>
+        <circle cx="700"  cy="40"  r="3"   opacity="0.5"/>
+        <circle cx="700"  cy="360" r="3"   opacity="0.5"/>
+        <circle cx="380"  cy="40"  r="2.5" opacity="0.4"/>
+        <circle cx="1020" cy="40"  r="2.5" opacity="0.4"/>
+        <circle cx="380"  cy="360" r="2.5" opacity="0.4"/>
+        <circle cx="1020" cy="360" r="2.5" opacity="0.4"/>
+        <!-- mid-axis dots (rhythm) -->
+        <circle cx="380"  cy="200" r="2"   opacity="0.35"/>
+        <circle cx="540"  cy="200" r="2"   opacity="0.4"/>
+        <circle cx="860"  cy="200" r="2"   opacity="0.4"/>
+        <circle cx="1020" cy="200" r="2"   opacity="0.35"/>
+      </g>
+      <!-- center hub -->
+      <circle cx="700" cy="200" r="5" fill="#6E6F7A" opacity="0.9"/>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="tag fade-up">리소스 허브</div>
+    <h1 class="fade-up stagger-1">제조 AI 인사이트 한눈에</h1>
+    <p class="desc fade-up stagger-2">제조 AI 도입에 필요한 인사이트와 가이드를 한곳에 모았습니다.<br>고객사례·블로그·지원사업 — 필요한 단계의 자료를 골라보세요.</p>
   </div>
 </section>
 

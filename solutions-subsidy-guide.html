@@ -367,7 +367,7 @@
     <div class="content-grid">
       <div class="content-card fade-up">
         <div class="card-bo" aria-hidden="true">
-          <!-- Hub-radial (통일) — 8방향 방사선 + 끝 노드 + 중심 노드 -->
+          <!-- Pattern 1: Hub Radial — 8방향 방사선 (자율형공장: 중심 트랙) -->
           <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
             <g stroke="#6E6F7A" fill="none">
               <line x1="80" y1="80" x2="10"  y2="80"  stroke-width="0.8" opacity="0.38"/>
@@ -399,28 +399,24 @@
       </div>
       <div class="content-card fade-up stagger-1">
         <div class="card-bo" aria-hidden="true">
+          <!-- Pattern 2: Stream Lines — 수요·공급 흐름 (좌→우 흐름선 + 노드) -->
           <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
             <g stroke="#6E6F7A" fill="none">
-              <line x1="80" y1="80" x2="10"  y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="150" y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="80"  y2="10"  stroke-width="0.8" opacity="0.32"/>
-              <line x1="80" y1="80" x2="80"  y2="150" stroke-width="0.8" opacity="0.32"/>
-              <line x1="80" y1="80" x2="30"  y2="30"  stroke-width="0.7" opacity="0.25"/>
-              <line x1="80" y1="80" x2="130" y2="30"  stroke-width="0.7" opacity="0.25"/>
-              <line x1="80" y1="80" x2="30"  y2="130" stroke-width="0.7" opacity="0.25"/>
-              <line x1="80" y1="80" x2="130" y2="130" stroke-width="0.7" opacity="0.25"/>
+              <path d="M 0 40 Q 50 40 80 60 T 160 80" stroke-width="0.8" opacity="0.4"/>
+              <path d="M 0 80 Q 50 80 80 80 T 160 80" stroke-width="0.8" opacity="0.45"/>
+              <path d="M 0 120 Q 50 120 80 100 T 160 80" stroke-width="0.8" opacity="0.4"/>
+              <line x1="0" y1="60" x2="160" y2="60" stroke-width="0.5" opacity="0.18" stroke-dasharray="2 4"/>
+              <line x1="0" y1="100" x2="160" y2="100" stroke-width="0.5" opacity="0.18" stroke-dasharray="2 4"/>
             </g>
-            <g fill="#6E6F7A" opacity="0.5">
-              <circle cx="10"  cy="80"  r="2.2"/>
-              <circle cx="150" cy="80"  r="2.2"/>
-              <circle cx="80"  cy="10"  r="2.2"/>
-              <circle cx="80"  cy="150" r="2.2"/>
-              <circle cx="30"  cy="30"  r="1.8"/>
-              <circle cx="130" cy="30"  r="1.8"/>
-              <circle cx="30"  cy="130" r="1.8"/>
-              <circle cx="130" cy="130" r="1.8"/>
+            <g fill="#6E6F7A">
+              <circle cx="0"   cy="40"  r="2"   opacity="0.55"/>
+              <circle cx="0"   cy="80"  r="2.2" opacity="0.6"/>
+              <circle cx="0"   cy="120" r="2"   opacity="0.55"/>
+              <circle cx="80"  cy="60"  r="1.8" opacity="0.5"/>
+              <circle cx="80"  cy="80"  r="2.2" opacity="0.7"/>
+              <circle cx="80"  cy="100" r="1.8" opacity="0.5"/>
+              <circle cx="160" cy="80"  r="3"   opacity="0.85"/>
             </g>
-            <circle cx="80" cy="80" r="5" fill="#6E6F7A" opacity="0.9"/>
           </svg>
         </div>
         <div class="card-icon"><i data-lucide="handshake"></i></div>
@@ -430,28 +426,30 @@
       </div>
       <div class="content-card fade-up stagger-2">
         <div class="card-bo" aria-hidden="true">
+          <!-- Pattern 3: Process Grid — 격자 + 활성 노드 (바우처 3종 = 3개 활성 노드) -->
           <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-            <g stroke="#6E6F7A" fill="none">
-              <line x1="80" y1="80" x2="10"  y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="150" y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="80"  y2="10"  stroke-width="0.8" opacity="0.32"/>
-              <line x1="80" y1="80" x2="80"  y2="150" stroke-width="0.8" opacity="0.32"/>
-              <line x1="80" y1="80" x2="30"  y2="30"  stroke-width="0.7" opacity="0.25"/>
-              <line x1="80" y1="80" x2="130" y2="30"  stroke-width="0.7" opacity="0.25"/>
-              <line x1="80" y1="80" x2="30"  y2="130" stroke-width="0.7" opacity="0.25"/>
-              <line x1="80" y1="80" x2="130" y2="130" stroke-width="0.7" opacity="0.25"/>
+            <defs>
+              <pattern id="card-grid-vouchers" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#6E6F7A" stroke-width="0.5" opacity="0.18"/>
+              </pattern>
+            </defs>
+            <rect width="160" height="160" fill="url(#card-grid-vouchers)"/>
+            <g fill="#6E6F7A" opacity="0.3">
+              <circle cx="20"  cy="20"  r="1.5"/><circle cx="60"  cy="20"  r="1.5"/><circle cx="100" cy="20"  r="1.5"/><circle cx="140" cy="20"  r="1.5"/>
+              <circle cx="20"  cy="60"  r="1.5"/><circle cx="60"  cy="60"  r="1.5"/><circle cx="100" cy="60"  r="1.5"/><circle cx="140" cy="60"  r="1.5"/>
+              <circle cx="20"  cy="100" r="1.5"/><circle cx="60"  cy="100" r="1.5"/><circle cx="100" cy="100" r="1.5"/><circle cx="140" cy="100" r="1.5"/>
+              <circle cx="20"  cy="140" r="1.5"/><circle cx="60"  cy="140" r="1.5"/><circle cx="100" cy="140" r="1.5"/><circle cx="140" cy="140" r="1.5"/>
             </g>
-            <g fill="#6E6F7A" opacity="0.5">
-              <circle cx="10"  cy="80"  r="2.2"/>
-              <circle cx="150" cy="80"  r="2.2"/>
-              <circle cx="80"  cy="10"  r="2.2"/>
-              <circle cx="80"  cy="150" r="2.2"/>
-              <circle cx="30"  cy="30"  r="1.8"/>
-              <circle cx="130" cy="30"  r="1.8"/>
-              <circle cx="30"  cy="130" r="1.8"/>
-              <circle cx="130" cy="130" r="1.8"/>
+            <g stroke="#6E6F7A" fill="none" stroke-width="0.7" opacity="0.4">
+              <line x1="60" y1="60" x2="100" y2="60"/>
+              <line x1="100" y1="60" x2="100" y2="100"/>
+              <line x1="100" y1="100" x2="60" y2="100"/>
             </g>
-            <circle cx="80" cy="80" r="5" fill="#6E6F7A" opacity="0.9"/>
+            <g fill="#6E6F7A">
+              <circle cx="60"  cy="60"  r="3.2" opacity="0.85"/>
+              <circle cx="100" cy="60"  r="3.2" opacity="0.85"/>
+              <circle cx="100" cy="100" r="3.2" opacity="0.85"/>
+            </g>
           </svg>
         </div>
         <div class="card-icon"><i data-lucide="ticket"></i></div>
@@ -473,20 +471,22 @@
     <div class="content-grid">
       <div class="content-card fade-up">
         <div class="card-bo" aria-hidden="true">
+          <!-- Pattern 4: Orbital Nodes — 동심원 궤도 (규제: 다층 컴플라이언스) -->
           <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
             <g stroke="#6E6F7A" fill="none">
-              <line x1="80" y1="80" x2="10"  y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="150" y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="80"  y2="10"  stroke-width="0.8" opacity="0.32"/>
-              <line x1="80" y1="80" x2="80"  y2="150" stroke-width="0.8" opacity="0.32"/>
+              <circle cx="80" cy="80" r="20" stroke-width="0.8" opacity="0.55"/>
+              <circle cx="80" cy="80" r="42" stroke-width="0.7" opacity="0.4"/>
+              <circle cx="80" cy="80" r="64" stroke-width="0.6" opacity="0.28"/>
+              <circle cx="80" cy="80" r="86" stroke-width="0.5" opacity="0.18"/>
             </g>
-            <g fill="#6E6F7A" opacity="0.5">
-              <circle cx="10"  cy="80"  r="2.2"/>
-              <circle cx="150" cy="80"  r="2.2"/>
-              <circle cx="80"  cy="10"  r="2.2"/>
-              <circle cx="80"  cy="150" r="2.2"/>
+            <g fill="#6E6F7A">
+              <circle cx="80"  cy="60"  r="2.4" opacity="0.7"/>
+              <circle cx="122" cy="80"  r="2.4" opacity="0.7"/>
+              <circle cx="80"  cy="144" r="2"   opacity="0.55"/>
+              <circle cx="16"  cy="80"  r="2"   opacity="0.5"/>
+              <circle cx="38"  cy="38"  r="1.8" opacity="0.45"/>
+              <circle cx="80"  cy="80"  r="4"   opacity="0.9"/>
             </g>
-            <circle cx="80" cy="80" r="5" fill="#6E6F7A" opacity="0.9"/>
           </svg>
         </div>
         <div class="card-icon"><i data-lucide="shield-check"></i></div>
@@ -496,20 +496,22 @@
       </div>
       <div class="content-card fade-up stagger-1">
         <div class="card-bo" aria-hidden="true">
+          <!-- Pattern 5: Stream Lines (vertical branches) — 벤더가 다수 고객에 공급 -->
           <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
             <g stroke="#6E6F7A" fill="none">
-              <line x1="80" y1="80" x2="10"  y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="150" y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="80"  y2="10"  stroke-width="0.8" opacity="0.32"/>
-              <line x1="80" y1="80" x2="80"  y2="150" stroke-width="0.8" opacity="0.32"/>
+              <line x1="80" y1="0"   x2="80"  y2="60"  stroke-width="1"   opacity="0.55"/>
+              <path d="M 80 60 Q 80 80 30 100 L 30 150" stroke-width="0.8" opacity="0.4"/>
+              <path d="M 80 60 Q 80 80 80 100 L 80 150" stroke-width="0.8" opacity="0.45"/>
+              <path d="M 80 60 Q 80 80 130 100 L 130 150" stroke-width="0.8" opacity="0.4"/>
+              <line x1="20" y1="60"  x2="140" y2="60"  stroke-width="0.5" opacity="0.18" stroke-dasharray="2 4"/>
             </g>
-            <g fill="#6E6F7A" opacity="0.5">
-              <circle cx="10"  cy="80"  r="2.2"/>
-              <circle cx="150" cy="80"  r="2.2"/>
-              <circle cx="80"  cy="10"  r="2.2"/>
-              <circle cx="80"  cy="150" r="2.2"/>
+            <g fill="#6E6F7A">
+              <circle cx="80"  cy="0"   r="2.5" opacity="0.7"/>
+              <circle cx="80"  cy="60"  r="3.5" opacity="0.85"/>
+              <circle cx="30"  cy="150" r="2.4" opacity="0.65"/>
+              <circle cx="80"  cy="150" r="2.4" opacity="0.7"/>
+              <circle cx="130" cy="150" r="2.4" opacity="0.65"/>
             </g>
-            <circle cx="80" cy="80" r="5" fill="#6E6F7A" opacity="0.9"/>
           </svg>
         </div>
         <div class="card-icon"><i data-lucide="network"></i></div>
@@ -519,20 +521,29 @@
       </div>
       <div class="content-card fade-up stagger-2">
         <div class="card-bo" aria-hidden="true">
+          <!-- Pattern 6: Process Grid (sparse + diagonal step) — 단계별 0원 워밍업 -->
           <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-            <g stroke="#6E6F7A" fill="none">
-              <line x1="80" y1="80" x2="10"  y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="150" y2="80"  stroke-width="0.8" opacity="0.38"/>
-              <line x1="80" y1="80" x2="80"  y2="10"  stroke-width="0.8" opacity="0.32"/>
-              <line x1="80" y1="80" x2="80"  y2="150" stroke-width="0.8" opacity="0.32"/>
+            <defs>
+              <pattern id="card-grid-starter" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+                <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#6E6F7A" stroke-width="0.4" opacity="0.16"/>
+              </pattern>
+            </defs>
+            <rect width="160" height="160" fill="url(#card-grid-starter)"/>
+            <g stroke="#6E6F7A" fill="none" stroke-width="0.7" opacity="0.4">
+              <path d="M 32 128 L 64 96 L 96 64 L 128 32"/>
             </g>
-            <g fill="#6E6F7A" opacity="0.5">
-              <circle cx="10"  cy="80"  r="2.2"/>
-              <circle cx="150" cy="80"  r="2.2"/>
-              <circle cx="80"  cy="10"  r="2.2"/>
-              <circle cx="80"  cy="150" r="2.2"/>
+            <g fill="#6E6F7A" opacity="0.28">
+              <circle cx="32"  cy="32"  r="1.5"/><circle cx="64"  cy="32"  r="1.5"/><circle cx="96"  cy="32"  r="1.5"/><circle cx="128" cy="32"  r="1.5"/>
+              <circle cx="32"  cy="64"  r="1.5"/><circle cx="64"  cy="64"  r="1.5"/><circle cx="96"  cy="64"  r="1.5"/><circle cx="128" cy="64"  r="1.5"/>
+              <circle cx="32"  cy="96"  r="1.5"/><circle cx="64"  cy="96"  r="1.5"/><circle cx="96"  cy="96"  r="1.5"/><circle cx="128" cy="96"  r="1.5"/>
+              <circle cx="32"  cy="128" r="1.5"/><circle cx="64"  cy="128" r="1.5"/><circle cx="96"  cy="128" r="1.5"/><circle cx="128" cy="128" r="1.5"/>
             </g>
-            <circle cx="80" cy="80" r="5" fill="#6E6F7A" opacity="0.9"/>
+            <g fill="#6E6F7A">
+              <circle cx="32"  cy="128" r="3"   opacity="0.55"/>
+              <circle cx="64"  cy="96"  r="3"   opacity="0.65"/>
+              <circle cx="96"  cy="64"  r="3"   opacity="0.75"/>
+              <circle cx="128" cy="32"  r="3.6" opacity="0.9"/>
+            </g>
           </svg>
         </div>
         <div class="card-icon"><i data-lucide="sprout"></i></div>
