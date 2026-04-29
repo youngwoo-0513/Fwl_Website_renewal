@@ -126,12 +126,16 @@ function initPdfModal() {
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+    // HubSpot calendar form (UUID 02e5985f) 실제 internal field name 매핑 (2026-04-29 ground truth):
+    //   gaeinjeongbo_sujibdongui (개인정보 수집동의) / 0-2/name / company_industry / firstname / email
+    // consent_privacy 는 UI 필수 → 동의시 'Y' 로 gaeinjeongbo_sujibdongui 매핑.
+    // consent_marketing 은 폼 정의에 없어 422 방지 차원에서 제외.
     submitToHubSpot(HUBSPOT_FORMS.calendar, [
       { name: 'firstname', value: form.firstname.value },
       { name: 'email', value: form.email.value },
       { name: '0-2/name', value: form.company.value },
       { name: 'company_industry', value: form.industry.value },
-      { name: 'consent_marketing', value: form.consent_marketing.checked ? 'Y' : 'N' },
+      { name: 'gaeinjeongbo_sujibdongui', value: form.consent_privacy.checked ? 'Y' : 'N' },
     ], '../thank-you.html');
   });
 }
@@ -228,12 +232,12 @@ function initCustomSelects() {
 }
 
 // ===== HubSpot Forms API v3 =====
-// 5폼 분리 (2026-04-25 C 단계 · 하반기 캠페인 퍼널 라우팅):
+// 4폼 분리 (2026-04-29 갱신):
 //   - contact    : 일반 문의하기
-//   - demo       : 데모·PoC 신청
-//   - consulting : 지원사업 컨설팅 신청 (CTA-3)
-//   - calendar   : LM1 — 하반기 지원사업 캘린더 PDF 다운로드
-//   - diagnosis  : LM2 — 자가진단 SPA 결과 제출
+//   - demo       : 데모 신청 (PoC 포함)
+//   - consulting : 지원사업 컨설팅 신청 (자가진단 결과 외부 share URL 별도)
+//   - calendar   : LM1 — 하반기 지원사업 캘린더 PDF / 캘린더 미팅 예약
+//   - diagnosis  : (deprecated 2026-04-29) HubSpot에서 폼 삭제됨. 호출 차단.
 const HUBSPOT_PORTAL_ID = '244341313';
 const HUBSPOT_REGION = 'na2';
 const HUBSPOT_FORMS = {
@@ -241,7 +245,7 @@ const HUBSPOT_FORMS = {
   demo:       'f786d94e-ce68-43e4-85f2-d4b2c631f948',
   consulting: 'ec6721d7-de63-4ced-8c00-4d7be887d8cb',
   calendar:   '02e5985f-ab91-4e1d-8dfc-29fa510aee8d',
-  diagnosis:  'fa7a3f59-a3a6-443a-a36a-acc2b5027026',
+  diagnosis:  null,  /* deprecated · 2026-04-29 — HubSpot에서 폼 삭제됨 */
 };
 
 // 성공 시만 redirect · 실패 시 onError 콜백(없으면 inline alert) · 리드 유실 방지

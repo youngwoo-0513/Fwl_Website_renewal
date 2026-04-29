@@ -989,7 +989,7 @@
     <h2 class="h700-40 fade-up">지금 신청하시면<br>1일 이내 담당자 매칭</h2>
     <p class="b400-16 subtitle fade-up stagger-1">15분이면 귀사에 가장 적합한 워크플로우 1개를 제안드립니다.</p>
     <form class="lead-form fade-up stagger-2" id="pocForm">
-      <h3>PoC 신청</h3>
+      <h3>데모 신청</h3>
       <p class="form-sub">영업일 1일 내 담당자가 연락드립니다.</p>
       <div class="step-indicator">
         <div class="step-dot active" id="stepDot1"></div>
@@ -1028,7 +1028,7 @@
         <div class="form-group"><label>휴대폰</label><input type="tel" placeholder="010-0000-0000" name="phone"></div>
         <div class="consent" style="margin-top:12px"><input type="checkbox" name="consent_privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--n500)">보기</a></span></div>
         <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_marketing"><span>[선택] 제품·지원사업 정보를 이메일로 받아보겠습니다.</span></div>
-        <button type="submit" class="btn-submit" style="margin-top:8px">무료 상담 신청하기</button>
+        <button type="submit" class="btn-submit" style="margin-top:8px">데모 신청하기</button>
       </div>
     </form>
     <div class="trust-badges fade-up stagger-3">
@@ -1042,7 +1042,7 @@
 <!-- FLOATING CTA -->
 <a href="demo.html" class="floating-cta" id="floatingCta" style="text-decoration:none">
   <span class="pulse-dot"></span>
-  무료상담신청
+  데모 신청
 </a>
 
 <script>
@@ -1123,18 +1123,19 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.stats-box, .traction-grid').forEach(el => counterObserver.observe(el));
 
-// PoC form step switching
+// Demo form submit (HubSpot demo form UUID f786d94e — ground truth field names)
 document.getElementById('pocForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const f = this;
+  // 실제 HubSpot internal field name 매핑 (2026-04-29):
+  //   firstname / email / mobilephone / 0-2/name / company_industry / demomichmulyosangdamyuhyeong
   submitToHubSpot(HUBSPOT_FORMS.demo, [
-    { name: 'help_type', value: f.help_type.value },
-    { name: 'company_industry', value: f.industry.value },
-    { name: '0-2/name', value: f.company.value },
     { name: 'firstname', value: f.firstname.value },
     { name: 'email', value: f.email.value },
-    { name: 'phone', value: f.phone.value },
-    { name: 'consent_marketing', value: f.consent_marketing.checked ? 'Y' : 'N' },
+    { name: 'mobilephone', value: f.phone.value },
+    { name: '0-2/name', value: f.company.value },
+    { name: 'company_industry', value: f.industry.value },
+    { name: 'demomichmulyosangdamyuhyeong', value: f.help_type.value },
   ], 'thank-you.html');
 });
 
