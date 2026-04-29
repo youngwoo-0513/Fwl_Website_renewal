@@ -79,29 +79,17 @@ function getNavHTML(rootPath = '') {
   </nav>`;
 }
 
+// PDF modal — 2026-04-29 hbspt.forms.create 로 전환 (HubSpot calendar form UUID 02e5985f)
+// rootPath 인자는 thank-you redirect 경로 결정용 (blog/usecase 하위에서 호출 시 '../')
 function getPdfModalHTML(rootPath = '') {
   return `
-  <div class="pdf-modal-overlay" id="pdfModalOverlay">
+  <div class="pdf-modal-overlay" id="pdfModalOverlay" data-root-path="${rootPath}">
     <div class="pdf-modal">
       <button class="pdf-modal-close" id="pdfModalClose">&times;</button>
       <h3>PDF 가이드 무료 다운로드</h3>
       <p class="sub">이메일로 가이드 PDF를 보내드립니다.</p>
-      <form id="pdfModalForm">
-        <div class="form-group"><label>이름</label><input type="text" name="firstname" class="form-input" placeholder="홍길동" required></div>
-        <div class="form-group"><label>이메일</label><input type="email" name="email" class="form-input" placeholder="email@company.com" required></div>
-        <div class="form-group"><label>회사명</label><input type="text" name="company" class="form-input" placeholder="회사명"></div>
-        <div class="form-group"><label>업종</label>
-          <select name="industry" class="form-input form-select" required>
-            <option value="">업종을 선택하세요</option>
-            <option>제약바이오</option><option>포장재/부품</option><option>식품·건기식</option>
-            <option>화장품/ODM</option><option>반도체/전자부품</option><option>자동차부품</option>
-            <option>MES/ERP/WMS/QMS</option><option>기타</option>
-          </select>
-        </div>
-        <div class="consent"><input type="checkbox" name="consent_privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="${rootPath}privacy.html" target="_blank" rel="noopener" style="color:var(--n500)">보기</a></span></div>
-        <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_marketing"><span>[선택] 제품·지원사업 정보를 이메일로 받아보겠습니다.</span></div>
-        <button type="submit" class="submit-btn">PDF 가이드 받기</button>
-      </form>
+      <!-- HubSpot embed lazy-mount -->
+      <div id="hubspot-form-modal-calendar"></div>
     </div>
   </div>`;
 }
@@ -110,33 +98,49 @@ function initPdfModal() {
   const overlay = document.getElementById('pdfModalOverlay');
   if (!overlay) return;
   const closeBtn = document.getElementById('pdfModalClose');
-  const form = document.getElementById('pdfModalForm');
+  const rootPath = overlay.dataset.rootPath || '';
 
   function close() { overlay.classList.remove('show'); }
   closeBtn.addEventListener('click', close);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
 
-  // 모든 guide-btn, .open-pdf-modal에서 모달 열기
+  // HubSpot embed 1회 mount (모달 첫 오픈 시점에 lazy-load)
+  let hubspotFormMounted = false;
+  function ensureHubspotForm() {
+    if (hubspotFormMounted) return;
+    const target = overlay.querySelector('#hubspot-form-modal-calendar');
+    if (!target) return;
+    // 이미 hbspt 로드되어있는지 확인 — index/contact/demo/subsidy 페이지에서 미리 로드된 경우 재사용
+    function mount() {
+      if (!window.hbspt || !window.hbspt.forms) return false;
+      window.hbspt.forms.create({
+        region: 'na2',
+        portalId: '244341313',
+        formId: '02e5985f-ab91-4e1d-8dfc-29fa510aee8d',
+        target: '#hubspot-form-modal-calendar',
+        onFormSubmitted: function() {
+          window.location.href = rootPath + 'thank-you.html';
+        },
+      });
+      hubspotFormMounted = true;
+      return true;
+    }
+    if (mount()) return;
+    // hbspt 미로드 페이지 (blog/usecase 등) → 스크립트 동적 삽입
+    const s = document.createElement('script');
+    s.src = 'https://js-na2.hsforms.net/forms/embed/v2.js';
+    s.async = true;
+    s.onload = mount;
+    document.head.appendChild(s);
+  }
+
+  // 모든 .open-pdf-modal 에서 모달 열기 + 폼 lazy-mount
   document.querySelectorAll('.open-pdf-modal').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       overlay.classList.add('show');
+      ensureHubspotForm();
     });
-  });
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    // HubSpot calendar form (UUID 02e5985f) 실제 internal field name 매핑 (2026-04-29 ground truth):
-    //   gaeinjeongbo_sujibdongui (개인정보 수집동의) / 0-2/name / company_industry / firstname / email
-    // consent_privacy 는 UI 필수 → 동의시 'Y' 로 gaeinjeongbo_sujibdongui 매핑.
-    // consent_marketing 은 폼 정의에 없어 422 방지 차원에서 제외.
-    submitToHubSpot(HUBSPOT_FORMS.calendar, [
-      { name: 'firstname', value: form.firstname.value },
-      { name: 'email', value: form.email.value },
-      { name: '0-2/name', value: form.company.value },
-      { name: 'company_industry', value: form.industry.value },
-      { name: 'gaeinjeongbo_sujibdongui', value: form.consent_privacy.checked ? 'Y' : 'N' },
-    ], '../thank-you.html');
   });
 }
 
@@ -248,7 +252,11 @@ const HUBSPOT_FORMS = {
   diagnosis:  null,  /* deprecated · 2026-04-29 — HubSpot에서 폼 삭제됨 */
 };
 
-// 성공 시만 redirect · 실패 시 onError 콜백(없으면 inline alert) · 리드 유실 방지
+// @deprecated 2026-04-29 — 메인 5폼은 hbspt.forms.create (forms-embed v2) 로 전환됨.
+// Forms v3 Non-HubSpot Forms API 는 form analytics 만 기록하고 contact 생성은 form별
+// "Always create contact" 설정에 의존하는데 우리 폼들이 OFF 상태였기 때문에 contact 0건 적재 사고 발생.
+// 이 함수는 solutions-subsidy-check.html consulting-inline 등 일부 잔여 호출처와의
+// 컴파일 타임 컨플릭트 방지를 위해 보존만 함. 신규 호출 금지.
 function submitToHubSpot(formId, fields, redirectUrl, onError) {
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}`;
   const data = {

@@ -188,35 +188,8 @@
       <div class="contact-form fade-up stagger-2" id="contact-form">
         <h3>일반 문의</h3>
         <p class="form-sub">궁금한 점을 남겨주세요.</p>
-        <form id="contactForm">
-          <div class="form-group"><label>이름</label><input type="text" name="firstname" class="form-input" placeholder="홍길동" required></div>
-          <div class="form-group"><label>이메일</label><input type="email" name="email" class="form-input" placeholder="email@company.com" required></div>
-          <div class="form-group"><label>연락처</label><input type="tel" name="phone" class="form-input" placeholder="010-0000-0000" required></div>
-          <div class="form-group"><label>회사명</label><input type="text" name="company" class="form-input" placeholder="회사명" required></div>
-          <div class="form-group"><label>업종</label><select name="industry" class="form-input form-select" required><option value="">업종을 선택하세요</option><option>제약바이오</option><option>포장재/부품</option><option>식품·건기식</option><option>화장품/ODM</option><option>반도체/전자부품</option><option>자동차부품</option><option>MES/ERP/WMS/QMS</option><option>기타</option></select></div>
-          <div class="form-group"><label>문의 내용</label><textarea name="message" class="form-input" placeholder="궁금한 점을 자유롭게 작성해주세요." required></textarea></div>
-          <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--n500)">보기</a></span></div>
-          <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_marketing"><span>[선택] 제품·지원사업 정보를 이메일로 받아보겠습니다.</span></div>
-          <button type="submit" class="btn btn-solid" style="margin-top:8px">문의 보내기</button>
-        </form>
-        <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-          e.preventDefault();
-          const f = this;
-          // HubSpot contact form (UUID b8dff54f) 실제 internal field name 매핑 (2026-04-29 ground truth):
-          //   mobilephone / pain_pointmunui_naeyong / firstname / email / 0-2/name / company_industry
-          // consent_privacy 는 UI 필수(PIPA)이지만 HubSpot 폼 필드에 없어 전송 X.
-          // consent_marketing 도 폼 정의에 없어 422 방지 차원에서 제외.
-          submitToHubSpot(HUBSPOT_FORMS.contact, [
-            { name: 'firstname', value: f.firstname.value },
-            { name: 'email', value: f.email.value },
-            { name: 'mobilephone', value: f.phone.value },
-            { name: '0-2/name', value: f.company.value },
-            { name: 'company_industry', value: f.industry.value },
-            { name: 'pain_pointmunui_naeyong', value: f.message.value },
-          ], 'thank-you.html');
-        });
-        </script>
+        <!-- HubSpot embed (UUID b8dff54f) — 2026-04-29 contact 생성 보장 위해 hbspt.forms.create 전환 -->
+        <div id="hubspot-form-contact" style="max-width: 100%;"></div>
       </div>
     </div>
   </div>
@@ -231,6 +204,22 @@
   document.getElementById('footer').innerHTML = getFooterHTML();
   initCommon('company');
   lucide.createIcons();
+</script>
+
+<!-- HubSpot Forms embed (region: na2) -->
+<script charset="utf-8" type="text/javascript" src="https://js-na2.hsforms.net/forms/embed/v2.js"></script>
+<script>
+  if (window.hbspt) {
+    hbspt.forms.create({
+      region: 'na2',
+      portalId: '244341313',
+      formId: 'b8dff54f-8dea-4d44-a228-b4caf67cc53d',
+      target: '#hubspot-form-contact',
+      onFormSubmitted: function() {
+        window.location.href = 'thank-you.html';
+      }
+    });
+  }
 </script>
 
 <!-- JSON-LD: LocalBusiness -->

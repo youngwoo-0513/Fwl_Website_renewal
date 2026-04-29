@@ -234,13 +234,34 @@
     .subsidy-cta h2 { font-size: 24px; }
   }
 
-  /* ===== 다크모드: 페이지 상단(hero) 라이트 모양 유지 ===== */
+  /* ===== 다크모드: 본 페이지는 라이트 톤 강제 유지 (2026-04-29 사용자 요청) ===== */
+  /* 카드 SVG 패턴(=card-bo)은 디자이너 작업 그대로 보존, 그 외는 원래 라이트 디자인으로 */
+  html.dark {
+    --n0: #FFFFFF; --n50: #F8F8FA; --n75: #F4F4F5; --n100: #E4E4E7;
+    --n200: #C8C9D0; --n300: #A1A1AA; --n400: #71717A; --n500: #5A5A5A;
+    --n600: #3F3F46; --n700: #27272A; --n800: #1F1F23; --n900: #1A1A1A;
+  }
+  html.dark body { background: #FFFFFF !important; color: #1A1A1A !important; }
   html.dark .subsidy-hero { background-color: #EAEAEE !important; }
   html.dark .subsidy-hero h1 { color: #1A1A1A !important; }
   html.dark .subsidy-hero .desc { color: #5A5A5A !important; }
   html.dark .subsidy-hero .tag { color: #4A4A4A !important; background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.08) !important; }
   html.dark .subsidy-hero .btn-white { background: #1A1A1A !important; color: #FFFFFF !important; }
   html.dark .subsidy-hero .btn-ghost { background: transparent !important; color: #1A1A1A !important; border-color: rgba(0,0,0,0.25) !important; }
+  html.dark .subsidy-form-section { background: #FFFFFF !important; }
+  html.dark .subsidy-content { background: #FFFFFF !important; }
+  html.dark .content-card { background: #FFFFFF !important; border-color: #E4E4E7 !important; }
+  html.dark .content-card h4 { color: #1A1A1A !important; }
+  html.dark .content-card p { color: #5A5A5A !important; }
+  html.dark .content-card li { color: #3F3F46 !important; }
+  html.dark .content-card .card-icon { background: #F8F8FA !important; color: #5A5A5A !important; }
+  html.dark .timeline { background: #F8F8FA !important; }
+  html.dark .timeline-step { border-bottom-color: #E4E4E7 !important; }
+  html.dark .timeline-step h4 { color: #1A1A1A !important; }
+  html.dark .timeline-step p { color: #5A5A5A !important; }
+  html.dark .subsidy-cta .cta-card { background: #1A1A1A !important; }
+  html.dark .subsidy-cta h2 { color: #FFFFFF !important; }
+  html.dark .subsidy-cta p { color: #A1A1AA !important; }
   @media (max-width: 768px) {
     /* keep mobile rules unchanged */
     .subsidy-cta p { font-size: 14px; margin-bottom: 24px; }
@@ -310,49 +331,8 @@
       <div class="pdf-form fade-up stagger-3">
         <h3>PDF 가이드 무료 다운로드</h3>
         <p class="form-sub">7~8월 5개 공고 동시 접수 · 지금 이메일로 바로 받기</p>
-        <form id="subsidyForm">
-          <div class="form-group"><label>이름</label><input type="text" name="firstname" class="form-input" placeholder="홍길동" required></div>
-          <div class="form-group"><label>이메일</label><input type="email" name="email" class="form-input" placeholder="email@company.com" required></div>
-          <div class="form-group"><label>회사명</label><input type="text" name="company" class="form-input" placeholder="회사명"></div>
-          <div class="form-group"><label>업종</label><select name="industry" class="form-input form-select" required><option value="">업종을 선택하세요</option><option>제약·바이오 (GMP)</option><option>식품·건기식 (HACCP)</option><option>포장재·부품</option><option>화장품·ODM</option><option>반도체·전자부품</option><option>자동차 부품</option><option>MES/ERP/WMS/QMS (IT 시스템 운영)</option><option>기타 제조업</option></select></div>
-          <div class="consent"><input type="checkbox" name="consent_privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--n500)">보기</a></span></div>
-          <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_marketing"><span>[선택] 제품·지원사업 정보를 이메일로 받아보겠습니다.</span></div>
-          <button type="submit" class="btn btn-solid" style="margin-top:16px">무료 PDF 가이드 지금 받기 →</button>
-        </form>
-        <script>
-        (function() {
-          const DRAFT_KEY = 'fwl_subsidy_guide_draft_v1';
-          const form = document.getElementById('subsidyForm');
-          const fields = ['firstname', 'email', 'company', 'industry'];
-          // 복원
-          try {
-            const saved = JSON.parse(localStorage.getItem(DRAFT_KEY) || '{}');
-            fields.forEach(name => { if (saved[name] && form[name]) form[name].value = saved[name]; });
-          } catch (_) { /* ignore */ }
-          // 자동 저장 (input/change 시점)
-          fields.forEach(name => {
-            if (!form[name]) return;
-            form[name].addEventListener('input', () => {
-              const draft = {};
-              fields.forEach(n => { if (form[n]) draft[n] = form[n].value; });
-              try { localStorage.setItem(DRAFT_KEY, JSON.stringify(draft)); } catch (_) {}
-            });
-          });
-          // 제출
-          form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const f = this;
-            submitToHubSpot(HUBSPOT_FORMS.calendar, [
-              { name: 'firstname', value: f.firstname.value },
-              { name: 'email', value: f.email.value },
-              { name: '0-2/name', value: f.company.value },
-              { name: 'company_industry', value: f.industry.value },
-              { name: 'consent_marketing', value: f.consent_marketing.checked ? 'Y' : 'N' },
-            ], 'thank-you.html');
-            try { localStorage.removeItem(DRAFT_KEY); } catch (_) {}
-          });
-        })();
-        </script>
+        <!-- HubSpot embed (UUID 02e5985f — calendar) — 2026-04-29 contact 생성 보장 위해 hbspt.forms.create 전환 -->
+        <div id="hubspot-form-subsidy" style="max-width: 100%;"></div>
       </div>
     </div>
   </div>
@@ -611,6 +591,22 @@
   document.getElementById('footer').innerHTML = getFooterHTML();
   initCommon('solutions');
   lucide.createIcons();
+</script>
+
+<!-- HubSpot Forms embed (region: na2) — subsidy PDF gate = calendar formId 02e5985f -->
+<script charset="utf-8" type="text/javascript" src="https://js-na2.hsforms.net/forms/embed/v2.js"></script>
+<script>
+  if (window.hbspt) {
+    hbspt.forms.create({
+      region: 'na2',
+      portalId: '244341313',
+      formId: '02e5985f-ab91-4e1d-8dfc-29fa510aee8d',
+      target: '#hubspot-form-subsidy',
+      onFormSubmitted: function() {
+        window.location.href = 'thank-you.html';
+      }
+    });
+  }
 </script>
 </body>
 </html>

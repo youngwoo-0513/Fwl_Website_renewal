@@ -988,49 +988,12 @@
   <div class="container text-center">
     <h2 class="h700-40 fade-up">지금 신청하시면<br>1일 이내 담당자 매칭</h2>
     <p class="b400-16 subtitle fade-up stagger-1">15분이면 귀사에 가장 적합한 워크플로우 1개를 제안드립니다.</p>
-    <form class="lead-form fade-up stagger-2" id="pocForm">
+    <div class="lead-form fade-up stagger-2">
       <h3>데모 신청</h3>
       <p class="form-sub">영업일 1일 내 담당자가 연락드립니다.</p>
-      <div class="step-indicator">
-        <div class="step-dot active" id="stepDot1"></div>
-        <div class="step-dot" id="stepDot2"></div>
-      </div>
-      <div class="form-step active" id="formStep1">
-        <div class="form-group">
-          <label>어떤 도움이 필요하신가요?</label>
-          <select class="form-select" name="help_type">
-            <option value="" disabled selected>선택하세요</option>
-            <option value="불량 분석 자동화">불량 분석 자동화</option>
-            <option value="배치기록 자동화">배치기록 자동화</option>
-            <option value="생산 스케줄링">생산 스케줄링</option>
-            <option value="지원사업 연계">지원사업 연계</option>
-            <option value="기타">기타</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>업종</label>
-          <select class="form-select" name="industry">
-            <option value="" disabled selected>선택하세요</option>
-            <option value="제약/GMP">제약/GMP</option>
-            <option value="식품/HACCP">식품/HACCP</option>
-            <option value="자동차부품">자동차부품</option>
-            <option value="전자/반도체">전자/반도체</option>
-            <option value="화학/소재">화학/소재</option>
-            <option value="기타 제조">기타 제조</option>
-          </select>
-        </div>
-        <button type="button" class="btn-submit" onclick="goToStep2()">다음 단계 →</button>
-      </div>
-      <div class="form-step" id="formStep2">
-        <div class="form-group"><label>회사명</label><input type="text" placeholder="퓨처워크랩(주)" name="company"></div>
-        <div class="form-group"><label>이름</label><input type="text" placeholder="홍길동" name="firstname"></div>
-        <div class="form-group"><label>이메일</label><input type="email" placeholder="email@company.com" name="email"></div>
-        <div class="form-group"><label>휴대폰</label><input type="tel" placeholder="010-0000-0000" name="phone"></div>
-        <div class="consent" style="margin-top:12px"><input type="checkbox" name="consent_privacy" required><span>[필수] 개인정보 수집·이용에 동의합니다. <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--n500)">보기</a></span></div>
-        <div class="consent" style="margin-top:8px"><input type="checkbox" name="consent_marketing"><span>[선택] 제품·지원사업 정보를 이메일로 받아보겠습니다.</span></div>
-        <button type="submit" class="btn-submit" style="margin-top:8px">데모 신청하기</button>
-      </div>
-    </form>
+      <!-- HubSpot embed (UUID f786d94e — demo) — 2026-04-29 contact 생성 보장 위해 hbspt.forms.create 전환 -->
+      <div id="hubspot-form-poc" style="max-width: 480px; margin: 0 auto;"></div>
+    </div>
     <div class="trust-badges fade-up stagger-3">
       <div class="trust-badge"><span class="check l500-12">✓</span><span class="l500-12">개인정보 상담 목적만 사용</span></div>
       <div class="trust-badge"><span class="check l500-12">✓</span><span class="l500-12">스팸 없음</span></div>
@@ -1123,28 +1086,7 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.stats-box, .traction-grid').forEach(el => counterObserver.observe(el));
 
-// Demo form submit (HubSpot demo form UUID f786d94e — ground truth field names)
-document.getElementById('pocForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const f = this;
-  // 실제 HubSpot internal field name 매핑 (2026-04-29):
-  //   firstname / email / mobilephone / 0-2/name / company_industry / demomichmulyosangdamyuhyeong
-  submitToHubSpot(HUBSPOT_FORMS.demo, [
-    { name: 'firstname', value: f.firstname.value },
-    { name: 'email', value: f.email.value },
-    { name: 'mobilephone', value: f.phone.value },
-    { name: '0-2/name', value: f.company.value },
-    { name: 'company_industry', value: f.industry.value },
-    { name: 'demomichmulyosangdamyuhyeong', value: f.help_type.value },
-  ], 'thank-you.html');
-});
-
-function goToStep2() {
-  document.getElementById('formStep1').classList.remove('active');
-  document.getElementById('formStep2').classList.add('active');
-  document.getElementById('stepDot1').classList.remove('active');
-  document.getElementById('stepDot2').classList.add('active');
-}
+// Demo form (HubSpot embed — UUID f786d94e) — 2026-04-29 hbspt.forms.create 로 전환됨, JS handler 불필요
 
 // Initialize Lucide icons
 lucide.createIcons();
@@ -1155,6 +1097,22 @@ lucide.createIcons();
 document.getElementById("page-footer").innerHTML = getFooterHTML();
 initCommon();
 updateThemeIcon();
+</script>
+
+<!-- HubSpot Forms embed (region: na2) — pocForm = demo formId f786d94e -->
+<script charset="utf-8" type="text/javascript" src="https://js-na2.hsforms.net/forms/embed/v2.js"></script>
+<script>
+  if (window.hbspt) {
+    hbspt.forms.create({
+      region: 'na2',
+      portalId: '244341313',
+      formId: 'f786d94e-ce68-43e4-85f2-d4b2c631f948',
+      target: '#hubspot-form-poc',
+      onFormSubmitted: function() {
+        window.location.href = 'thank-you.html';
+      }
+    });
+  }
 </script>
 
 <!-- JSON-LD: Organization -->
